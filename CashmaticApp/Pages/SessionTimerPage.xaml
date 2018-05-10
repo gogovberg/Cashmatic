@@ -1,0 +1,35 @@
+﻿<Page x:Class="CashmaticApp.Pages.SessionTimerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CashmaticApp.Pages"
+      mc:Ignorable="d" 
+       d:DesignHeight="900" d:DesignWidth="1200"  Style="{StaticResource CashierPageStyle}"
+      Title="SessionTimerPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="60*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"></RowDefinition>
+            <RowDefinition Height="20*" ></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="40*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="tblCheck"  FontSize="30" Text="Are you still there ?" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Grid x:Name="gdrChoice" Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnBackToScan" Content="Back to scan" Grid.Column="0" Margin="10" ></Button>
+            <Button x:Name="btnContinuePaying" Content="Continue with paying" Grid.Column="1" Margin="10"></Button>
+        </Grid>
+        <TextBlock x:Name="tblSessionTimer" FontSize="30" Text="Application will cancel in 1min 18seconds and save the money." Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    </Grid>
+</Page>
