@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="220">
     <Grid>
-        <Border Background="#FFFFFFFF" CornerRadius="8">
+        <Border MouseUp="EventBorder_MouseUp" MouseDown="EventBorder_MouseDown"  Background="#FFFFFFFF" CornerRadius="8">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="1" Direction="315" BlurRadius="15" Color="#1C000000" />
             </Border.Effect>

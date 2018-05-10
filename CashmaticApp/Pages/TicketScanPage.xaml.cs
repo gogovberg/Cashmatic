@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CashmaticApp.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,11 +87,6 @@ namespace CashmaticApp.Pages
           
         }
 
-        private void Language_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox cb = sender as CheckBox;
-            MutualyExclusiveCheckboxes(cb.Name);
-        }
         private void MutualyExclusiveCheckboxes(string cbName)
         {
             if(!en.Name.Equals(cbName))
@@ -120,5 +116,12 @@ namespace CashmaticApp.Pages
             Application.Current.MainWindow.Content = new PaymentSummaryPage();
         }
 
+        private void Control_Click(object sender, EventArgs e)
+        {
+            CheckBoxImage cb = sender as CheckBoxImage;
+            MutualyExclusiveCheckboxes(cb.Name);
+        }
+
+      
     }
 }
