@@ -30,12 +30,24 @@
                     <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
                 </Button.BitmapEffect>
             </Button>
-            <CheckBox x:Name="en"  Style="{StaticResource ChecBoxLanguageImgStyle}"></CheckBox>
-            <CheckBox x:Name="de"  Style="{StaticResource ChecBoxLanguageImgStyle}"></CheckBox>
-            <CheckBox x:Name="slo" Style="{StaticResource ChecBoxLanguageImgStyle}"></CheckBox>
-            <CheckBox x:Name="hu"  Style="{StaticResource ChecBoxLanguageImgStyle}"></CheckBox>
-            <CheckBox x:Name="cz"  Style="{StaticResource ChecBoxLanguageImgStyle}"></CheckBox>
-            <CheckBox x:Name="sk"  Style="{StaticResource ChecBoxLanguageImgStyle}"></CheckBox>
+            <CheckBox x:Name="en"  Style="{StaticResource ChecBoxLanguageImgStyle}">
+                <Image Source="/Images/gb.png"></Image>
+            </CheckBox>
+            <CheckBox x:Name="de"  Style="{StaticResource ChecBoxLanguageImgStyle}">
+                <Image Source="/Images/de.png"></Image>
+            </CheckBox>
+            <CheckBox x:Name="slo" Style="{StaticResource ChecBoxLanguageImgStyle}">
+                <Image Source="/Images/si.png"></Image>
+            </CheckBox>
+            <CheckBox x:Name="hu"  Style="{StaticResource ChecBoxLanguageImgStyle}">
+                <Image Source="/Images/hu.png"></Image>
+            </CheckBox>
+            <CheckBox x:Name="cz"  Style="{StaticResource ChecBoxLanguageImgStyle}">
+                <Image Source="/Images/cz.png"></Image>
+            </CheckBox>
+            <CheckBox x:Name="sk"  Style="{StaticResource ChecBoxLanguageImgStyle}">
+                <Image Source="/Images/sk.png"></Image>
+            </CheckBox>
         </WrapPanel>
         <Border Grid.RowSpan="2" Grid.Column="1" x:Name="bdrPrice" Style="{StaticResource PriceSummaryStyle}" >
             <Border.Effect>
@@ -44,7 +56,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80*"></RowDefinition>
-                    <RowDefinition Height="20*"></RowDefinition>
+                    <RowDefinition Height="40*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
                     <Border BorderBrush="White" BorderThickness="0,0,0,2" Margin="10" >
@@ -70,15 +82,9 @@
                     </Border>
                 </StackPanel>
                 <StackPanel Grid.Row="1">
-                    <Button Background="#FF29A26A" Content="Pay with cash" >
-                        <Button.BitmapEffect>
-                            <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
-                        </Button.BitmapEffect>
+                    <Button x:Name="btnPayCash" Background="#FF29A26A" Content="Pay with cash"  Style="{StaticResource PaymentButtons}" Click="btnPayCash_Click" >
                     </Button>
-                    <Button Background="#FF2576F1"   Content="Pay with card" >
-                        <Button.BitmapEffect>
-                            <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
-                        </Button.BitmapEffect>
+                    <Button x:Name="btnPayCard" Background="#FF2576F1"   Content="Pay with card" Style="{StaticResource PaymentButtons}" Click="btnPayCard_Click" >
                     </Button>
                 </StackPanel>
             </Grid>

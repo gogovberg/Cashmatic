@@ -32,6 +32,6 @@
         <CheckBox Margin="60,15" x:Name="cz"  Content="Czech"   Grid.Column="2" Grid.Row="3" Style="{StaticResource ChecBoxLanguageStyle}" Checked="Language_Checked" ></CheckBox>
         <CheckBox Margin="60,15" x:Name="sk"  Content="Slovak"  Grid.Column="2" Grid.Row="4" Style="{StaticResource ChecBoxLanguageStyle}" Checked="Language_Checked" ></CheckBox>
         <TextBox x:Name="tbBarCode" Grid.Row="5" Grid.Column="0" Visibility="Hidden" TextChanged="tbBarCode_TextChanged" KeyDown="tbBarCode_KeyDown"  ></TextBox>
-        <!--<Image x:Name="imgAppLogo" Source="/Images/applogo.jpg" Grid.Row="5"  Grid.Column="1"></Image>-->
+   
     </Grid>
 </Page>

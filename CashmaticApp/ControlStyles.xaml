@@ -52,7 +52,7 @@
                             <DropShadowEffect ShadowDepth="1" Direction="315" BlurRadius="15" Color="#1C000000" />
                         </Border.Effect>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <ContentControl   Content="{StaticResource SettingsIcon}"  Margin="10" VerticalAlignment="Center" />
+                            <ContentPresenter  x:Name="contentPresenter" />
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -110,16 +110,25 @@
         <Setter Property="Margin" Value="10"/>
     </Style>
 
-    <!--Margin="10" FontSize="24" Foreground="White"-->
-    <Style TargetType="Button" x:Key="PaymentButtons">
+
+    <Style  x:Key="PaymentButtons" TargetType="Button">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Margin" Value="10"/>
         <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Height" Value="70"/>
+        <Setter Property="Button.Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="#10000000" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="3,0,0,0" Background="White" BorderBrush="#ccc" BorderThickness="0,1,1,0" >
-                        <ContentPresenter x:Name="contentPresenter" />
+                    <Border CornerRadius="8"  Background="{TemplateBinding Background}" BorderThickness="1" >
+                        <Grid>
+                            <ContentPresenter  x:Name="contentPresenter"  ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="Left" Margin="10" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Image x:Name="imgPayment" HorizontalAlignment="Right" Margin="10" Source="Images/cz.png" ></Image>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

@@ -43,5 +43,15 @@ namespace CashmaticApp.Pages
         {
             Application.Current.MainWindow.Content = new TicketScanPage();
         }
+
+        private void btnPayCash_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPayCard_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

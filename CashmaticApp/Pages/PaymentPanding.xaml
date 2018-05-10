@@ -1,0 +1,31 @@
+﻿<Page x:Class="CashmaticApp.Pages.PaymentPanding"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CashmaticApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1024"  Style="{StaticResource CashierPageStyle}"
+      Title="PaymentPanding">
+
+    <Grid Background="#FFFEFEFE">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="40*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="tblRemaining" Text="Remaining to pay:" FontSize="34" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Medium" Foreground="#FF29A26A" Grid.Row="1"></TextBlock>
+            <TextBlock x:Name="tblPrice"  Text="132.00$" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="top" Foreground="#FF29A26A" FontWeight="SemiBold" Grid.Row="2"></TextBlock>
+            <Image x:Name="imgPaymentType" Source="/Images/payment_cash.png" Grid.Row="3"></Image>
+            <TextBlock x:Name="tblReminder" Foreground="#FFC1C1C1" FontSize="20" FontWeight="Regular" Text="Please insert cash into slot" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Page>

@@ -91,6 +91,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\PaymentPanding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PaymentSummaryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +105,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\PaymentPanding.xaml.cs">
+      <DependentUpon>PaymentPanding.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PaymentSummaryPage.xaml.cs">
       <DependentUpon>PaymentSummaryPage.xaml</DependentUpon>
     </Compile>
@@ -136,9 +143,6 @@
     <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\applogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -149,6 +153,26 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\applogo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cz.png" />
+    <Resource Include="Images\cz_bw.png" />
+    <Resource Include="Images\de.png" />
+    <Resource Include="Images\de_bw.png" />
+    <Resource Include="Images\gb.png" />
+    <Resource Include="Images\gb_bw.png" />
+    <Resource Include="Images\hu.png" />
+    <Resource Include="Images\hu_bw.png" />
+    <Resource Include="Images\si.png" />
+    <Resource Include="Images\si_bw.png" />
+    <Resource Include="Images\sk.png" />
+    <Resource Include="Images\sk_bw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\payment_cash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
