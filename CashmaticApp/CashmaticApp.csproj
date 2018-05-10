@@ -91,7 +91,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\PaymentPanding.xaml">
+    <Page Include="Pages\PaymentPandingCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PaymentPandingCash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -99,17 +103,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\RefoundPending.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SessionTimerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\TicketScanPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\PaymentPanding.xaml.cs">
-      <DependentUpon>PaymentPanding.xaml</DependentUpon>
+    <Compile Include="Pages\PaymentPandingCard.xaml.cs">
+      <DependentUpon>PaymentPandingCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PaymentPandingCash.xaml.cs">
+      <DependentUpon>PaymentPandingCash.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PaymentSummaryPage.xaml.cs">
       <DependentUpon>PaymentSummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RefoundPending.xaml.cs">
+      <DependentUpon>RefoundPending.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SessionTimerPage.xaml.cs">
+      <DependentUpon>SessionTimerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TicketScanPage.xaml.cs">
       <DependentUpon>TicketScanPage.xaml</DependentUpon>
@@ -173,6 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\payment_cash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\refund.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\payment_card.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

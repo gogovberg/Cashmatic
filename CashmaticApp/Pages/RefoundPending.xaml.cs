@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace CashmaticApp.Pages
 {
     /// <summary>
-    /// Interaction logic for PaymentPanding.xaml
+    /// Interaction logic for RefoundPending.xaml
     /// </summary>
-    public partial class PaymentPanding : Page
+    public partial class RefoundPending : Page
     {
-        public PaymentPanding()
+        public RefoundPending()
         {
             InitializeComponent();
+        }
+
+        private void btnContinue_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Content = new PaymentPandingCash();
+        }
+
+        private void btnRefund_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

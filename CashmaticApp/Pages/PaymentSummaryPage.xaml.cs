@@ -46,12 +46,12 @@ namespace CashmaticApp.Pages
 
         private void btnPayCash_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.MainWindow.Content = new PaymentPandingCash();
         }
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.MainWindow.Content = new PaymentPandingCard();
         }
     }
 }
