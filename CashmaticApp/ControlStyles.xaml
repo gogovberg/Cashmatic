@@ -17,32 +17,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ChecBoxLanguageStyle" TargetType="{x:Type CheckBox}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type CheckBox}">
-                    <Border x:Name="bdrOutside" Background="White" BorderBrush="Transparent" CornerRadius="8"  BorderThickness="2">
-                        <Border.Effect>
-                            <DropShadowEffect ShadowDepth="1" Direction="315" BlurRadius="15" Color="#1C000000" />
-                        </Border.Effect>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <ContentControl   Content="{StaticResource SettingsIcon}"  Margin="10" VerticalAlignment="Center" />
-                            <ContentPresenter VerticalAlignment="Center" Margin="10"  />
-                        </StackPanel>
-                    </Border> 
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF0B8FE8" />
-                            <Setter Property="Foreground" Value="#FF0B8FE8" /> 
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="FontSize" Value="26" />
-        <Setter Property="Margin" Value="10"/>
-        <Setter Property="Foreground" Value="#FFB3B3B3"/>
-    </Style>
+
+    
     <Style x:Key="ChecBoxLanguageImgStyle" TargetType="{x:Type CheckBox}">
         <Setter Property="Template">
             <Setter.Value>
@@ -168,4 +144,49 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="BlueButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#FF2EA6FC"/>
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="5"  Background="{TemplateBinding Background}" BorderThickness="1" >
+                        <Grid>
+                            <ContentPresenter   x:Name="contentPresenter"  ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChecBoxLanguageStyle" TargetType="{x:Type CheckBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border x:Name="bdrOutside" Background="White" BorderBrush="Transparent" CornerRadius="8"  BorderThickness="2">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="1" Direction="315" BlurRadius="15" Color="#1C000000" />
+                        </Border.Effect>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <Image   Source="/Images/gb.png" Margin="10" VerticalAlignment="Center" />
+                            <ContentPresenter VerticalAlignment="Center" Margin="10"  />
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="bdrOutside" Property="BorderBrush" Value="#FF0B8FE8" />
+                            <Setter Property="Foreground" Value="#FF0B8FE8" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Foreground" Value="#FFB3B3B3"/>
+    </Style>
+    
 </ResourceDictionary>

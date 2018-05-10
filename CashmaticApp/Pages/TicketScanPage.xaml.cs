@@ -95,29 +95,30 @@ namespace CashmaticApp.Pages
         {
             if(!en.Name.Equals(cbName))
             {
-                en.IsChecked = false;
+                en.IsSelected = false;
             }
             if (!de.Name.Equals(cbName))
             {
-                de.IsChecked = false;
+                de.IsSelected = false;
             }
             if (!slo.Name.Equals(cbName))
             {
-                slo.IsChecked = false;
+                slo.IsSelected = false;
             }
             if (!hu.Name.Equals(cbName))
             {
-                hu.IsChecked = false;
+                hu.IsSelected = false;
             }
             if (!cz.Name.Equals(cbName))
             {
-                cz.IsChecked = false;
+                cz.IsSelected = false;
             }
             if (!sk.Name.Equals(cbName))
             {
-                sk.IsChecked = false;
+                sk.IsSelected = false;
             }
             Application.Current.MainWindow.Content = new PaymentSummaryPage();
         }
+
     }
 }

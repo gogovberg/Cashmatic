@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\CheckBoxImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,12 +89,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\CheckBoxImage.xaml.cs">
+      <DependentUpon>CheckBoxImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataObjects.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\PayingProblemCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PaymentPandingCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,16 +118,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\RefundingProces.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SessionTimerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ThankYouCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ThankYouCash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TicketScanPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\TransactionWait.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\PayingProblemCard.xaml.cs">
+      <DependentUpon>PayingProblemCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PaymentPandingCard.xaml.cs">
       <DependentUpon>PaymentPandingCard.xaml</DependentUpon>
     </Compile>
@@ -129,11 +159,23 @@
     <Compile Include="Pages\RefoundPending.xaml.cs">
       <DependentUpon>RefoundPending.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RefundingProces.xaml.cs">
+      <DependentUpon>RefundingProces.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SessionTimerPage.xaml.cs">
       <DependentUpon>SessionTimerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ThankYouCard.xaml.cs">
+      <DependentUpon>ThankYouCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ThankYouCash.xaml.cs">
+      <DependentUpon>ThankYouCash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TicketScanPage.xaml.cs">
       <DependentUpon>TicketScanPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TransactionWait.xaml.cs">
+      <DependentUpon>TransactionWait.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -160,9 +202,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
@@ -200,6 +240,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\payment_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\half_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wait_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\refund_process.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\thankyou_cash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\thankyou_card.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

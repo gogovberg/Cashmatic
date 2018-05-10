@@ -1,4 +1,4 @@
-﻿<Page x:Class="CashmaticApp.Pages.PaymentPandingCard"
+﻿<Page x:Class="CashmaticApp.Pages.RefundingProces"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CashmaticApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1024"  Style="{StaticResource CashierPageStyle}"
-      Title="PaymentPandingCard">
+      Title="RefundingProcessxaml">
 
     <Grid Background="#FFFEFEFE">
         <Grid >
@@ -20,22 +20,14 @@
                     <RowDefinition Height="10*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
-                    <RowDefinition Height="40*"></RowDefinition>
+                    <RowDefinition Height="20*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
+                    <RowDefinition Height="20*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="tblRemaining" Text="Insert Your Bank Card" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Regular" Foreground="#FF707070" Grid.Row="1"></TextBlock>
-               
-                <Image x:Name="imgPaymentType" Source="/Images/payment_card.png" Grid.Row="3"></Image>
-                <TextBlock x:Name="tblReminder" Foreground="#FF026FE4" FontSize="20" FontWeight="SemiBold" Text="Amount to pay 132.00$" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Name="tblRefunding" Text="Refunding in process" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Regular" Foreground="#FF707070" Grid.Row="2"></TextBlock>
+                <TextBlock x:Name="tblReminder" Foreground="#FFC1C1C1" FontSize="20" FontWeight="Regular" Text="Don't forget to take your money!" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image x:Name="imgPaymentType" Source="/Images/refund_process.png" Grid.Row="5"></Image>
             </Grid>
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70*"></RowDefinition>
-                    <RowDefinition Height="10*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button x:Name="btnCancel" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" FontSize="20" Margin="10" Click="btnCancel_Click"></Button>
-            </Grid>
-
         </Grid>
     </Grid>
 </Page>
