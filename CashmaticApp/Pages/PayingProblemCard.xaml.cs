@@ -34,7 +34,7 @@ namespace CashmaticApp.Pages
 
         private void btnRetry_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new RefoundPending();
+            Application.Current.MainWindow.Content = new RefoundPending(_ob);
         }
     }
 }

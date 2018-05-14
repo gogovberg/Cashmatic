@@ -20,13 +20,15 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class PaymentPandingCard : Page
     {
-        public PaymentPandingCard()
+        private RootObject _ob;
+        public PaymentPandingCard(RootObject ob)
         {
             InitializeComponent();
+            _ob = ob;
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new RefoundPending();
+            Application.Current.MainWindow.Content = new RefoundPending(_ob);
         }
     }
 }

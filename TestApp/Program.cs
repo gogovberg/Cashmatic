@@ -23,35 +23,36 @@ namespace TestApp
             //CashmaticCommands.WriteAnnulla();
 
             //CashmaticCommands.WriteSubtotale(50);
-            //int saldato = CashmaticCommands.ReadSaldato();
-            //int pagato = CashmaticCommands.ReadPagato();
-            //int erogato = CashmaticCommands.ReadErogato();
-            //int nonerogato = CashmaticCommands.ReadNonerogato();
+            
+            int saldato = CashmaticCommands.ReadSaldato();
+            int pagato = CashmaticCommands.ReadPagato();
+            int erogato = CashmaticCommands.ReadErogato();
+            int nonerogato = CashmaticCommands.ReadNonerogato();
 
 
-            //Console.WriteLine("Saldato: " + saldato);
-            //Console.WriteLine("Pagato: " + pagato);
-            //Console.WriteLine("Erogato: " + erogato);
-            //Console.WriteLine("Nonerogato: " + nonerogato);
+            Console.WriteLine("Saldato: " + saldato);
+            Console.WriteLine("Pagato: " + pagato);
+            Console.WriteLine("Erogato: " + erogato);
+            Console.WriteLine("Nonerogato: " + nonerogato);
 
 
 
-            //#if DEBUG
-            //Console.WriteLine("Press enter to close...");
-            //        Console.ReadLine();
-            //#endif
+#if DEBUG
+            Console.WriteLine("Press enter to close...");
+            Console.ReadLine();
+#endif
 
-            string line = Console.ReadLine(); // Read string from console
-            int value;
-            if (int.TryParse(line, out value)) // Try to parse the string as an integer
-            {
-                Console.Write("Multiply integer by 10: ");
-                Console.WriteLine(value * 10); // Multiply the integer and display it
-            }
-            else
-            {
-                Console.WriteLine("Not an integer!");
-            }
+            //string line = Console.ReadLine(); // Read string from console
+            //int value;
+            //if (int.TryParse(line, out value)) // Try to parse the string as an integer
+            //{
+            //    Console.Write("Multiply integer by 10: ");
+            //    Console.WriteLine(value * 10); // Multiply the integer and display it
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Not an integer!");
+            //}
         }
 
 

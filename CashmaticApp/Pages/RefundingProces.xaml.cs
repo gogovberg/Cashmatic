@@ -22,10 +22,11 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class RefundingProces : Page
     {
-        System.Timers.Timer _timer;
+  
         public RefundingProces()
         {
             InitializeComponent();
+            CashmaticCommands.WriteAnnulla();
             Application.Current.MainWindow.Content = new ThankYouCash();
         }
 

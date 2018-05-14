@@ -32,7 +32,10 @@
         <controls:CheckBoxImage Margin="60,15" x:Name="hu"  FlagSource="/Images/hu.png"  LanguageBox="Hungary" Grid.Column="2" Grid.Row="2"  Control_Click="Control_Click" ></controls:CheckBoxImage>
         <controls:CheckBoxImage Margin="60,15" x:Name="cz"  FlagSource="/Images/cz.png"  LanguageBox="Czech"  Grid.Column="2" Grid.Row="3"  Control_Click="Control_Click" ></controls:CheckBoxImage>
         <controls:CheckBoxImage Margin="60,15" x:Name="sk"  FlagSource="/Images/sk.png"  LanguageBox="Slovak"  Grid.Column="2" Grid.Row="4" Control_Click="Control_Click" ></controls:CheckBoxImage>
-        <TextBox x:Name="tbBarCode" Grid.Row="5" Grid.Column="0" Visibility="Hidden" TextChanged="tbBarCode_TextChanged" KeyDown="tbBarCode_KeyDown"  ></TextBox>
+        <StackPanel FocusManager.FocusedElement="{Binding ElementName=tbBarCode}">
+            <TextBox x:Name="tbBarCode"  Grid.Row="5" Grid.Column="0"  TextChanged="tbBarCode_TextChanged" KeyDown="tbBarCode_KeyDown"  ></TextBox>
+        </StackPanel>
+       
    
     </Grid>
 </Page>

@@ -29,10 +29,10 @@ namespace CashmaticApp
     {
         public string checkin { get; set; }
         public string checkout { get; set; }
-        public string basePrice { get; set; }
+        public int basePrice { get; set; }
         public string vat1 { get; set; }
         public string vat2 { get; set; }
-        public string total { get; set; }
+        public int total { get; set; }
     }
 
     public class Item

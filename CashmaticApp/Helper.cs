@@ -1,4 +1,4 @@
-﻿using hgi.Environment;
+﻿//using hgi.Environment;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace CashmaticApp
 {
     public static class Helper
     {
+        public static string base_path = @"C:\Cashmatic\";
         private static Newtonsoft.Json.Formatting indented = Newtonsoft.Json.Formatting.Indented;
         private static JsonSerializerSettings settings = new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.All };
         public static string ObjectToXml(object o)
@@ -29,7 +30,7 @@ namespace CashmaticApp
             }
             catch (Exception e)
             {
-                Debug.Log("Cashmatic", e.ToString());
+                //Debug.Log("Cashmatic", e.ToString());
             }
             finally
             {
@@ -56,7 +57,7 @@ namespace CashmaticApp
             }
             catch (Exception e)
             {
-                Debug.Log("Cashmatic", e.ToString());
+                //Debug.Log("Cashmatic", e.ToString());
             }
             finally
             {
@@ -81,7 +82,7 @@ namespace CashmaticApp
             }
             catch(Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                //Debug.Log("Cashmatic", ex.ToString());
             }
          
             return result;
@@ -98,7 +99,7 @@ namespace CashmaticApp
             catch(Exception ex)
             {
                 
-                Debug.Log("Cashmatic", ex.ToString());
+                //Debug.Log("Cashmatic", ex.ToString());
             }
 
             return obj;

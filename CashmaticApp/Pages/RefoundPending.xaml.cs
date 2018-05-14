@@ -20,19 +20,22 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class RefoundPending : Page
     {
-        public RefoundPending()
+        private RootObject _ob;
+        public RefoundPending(RootObject ob)
         {
             InitializeComponent();
+            _ob = ob;
         }
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new PaymentPandingCash();
+            Application.Current.MainWindow.Content = new PaymentPandingCash(_ob);
         }
 
         private void btnRefund_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new ThankYouCash();
+            
+            Application.Current.MainWindow.Content = new RefundingProces();
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CashmaticApp.Pages
 {
@@ -27,7 +28,7 @@ namespace CashmaticApp.Pages
         public TicketScanPage()
         {
             InitializeComponent();
-            //en.IsChecked = true;
+            en.IsSelected = true;
         }
 
         private void tbBarCode_TextChanged(object sender, TextChangedEventArgs e)
@@ -67,7 +68,16 @@ namespace CashmaticApp.Pages
             if(!string.IsNullOrEmpty(_barCode) && _barCode.Length==36)
             {
                 DisposeTimer();
-              
+
+                var json = "{ 	'payment': {	'paymentSummary': {	'checkin': '3.2.2018 14:30 ',	'checkout': '8.2.2018 01:16',	'basePrice': '1',	'vat1': '2',	'vat2': '3',	'total': '500'	},	'item': [{	'name': 'item1',	'qty': '3',	'price': '5'	},	{	'name': 'item2',	'qty': '4',	'price': '2'	},	{	'name': 'item3',	'qty': '2',	'price': '4'	}] 	} }";
+
+                RootObject ob = Helper.JSONToObject<RootObject>(json);
+                if (ob != null)
+                {
+
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                        new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
+                }
 
                 //TODO: send hash to server 
                 //TODO: go to next page
@@ -115,14 +125,7 @@ namespace CashmaticApp.Pages
             {
                 sk.IsSelected = false;
             }
-            var json = "{ 	'payment': {	'paymentSummary': {	'checkin': '3.2.2018 14:30 ',	'checkout': '8.2.2018 01:16',	'basePrice': '1',	'vat1': '2',	'vat2': '3',	'total': '13200'	},	'item': [{	'name': 'item1',	'qty': '3',	'price': '5'	},	{	'name': 'item2',	'qty': '4',	'price': '2'	},	{	'name': 'item3',	'qty': '2',	'price': '4'	}] 	} }";
- 
-            RootObject ob = Helper.JSONToObject<RootObject>(json);
-            if(ob!=null)
-            {
-                Application.Current.MainWindow.Content = new PaymentSummaryPage(ob);
-
-            }
+    
             
         }
 

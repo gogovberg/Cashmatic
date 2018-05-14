@@ -20,10 +20,12 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class PaymentSummaryPage : Page
     {
-        public PaymentSummaryPage(RootObject data)
+        RootObject _ob;
+        public PaymentSummaryPage(RootObject ob)
         {
+            _ob = ob;
             InitializeComponent();
-            dtSummary.ItemsSource = LoadSummaryItems(data.payment.item);
+            dtSummary.ItemsSource = LoadSummaryItems(_ob.payment.item);
             dtSummary.AutoGenerateColumns = false;
         }
         private List<SummaryItem> LoadSummaryItems(List<Item> itm)
@@ -46,12 +48,12 @@ namespace CashmaticApp.Pages
 
         private void btnPayCash_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new PaymentPandingCash();
+            Application.Current.MainWindow.Content = new PaymentPandingCash(_ob);
         }
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new PaymentPandingCard();
+            Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
         }
     }
 }
