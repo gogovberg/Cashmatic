@@ -23,6 +23,7 @@ namespace CashmaticApp.Pages
         public TransactionWait()
         {
             InitializeComponent();
+            Application.Current.MainWindow.Content = new ThankYouCash();
         }
     }
 }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,9 +22,12 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class RefundingProces : Page
     {
+        System.Timers.Timer _timer;
         public RefundingProces()
         {
             InitializeComponent();
+            Application.Current.MainWindow.Content = new ThankYouCash();
         }
+
     }
 }

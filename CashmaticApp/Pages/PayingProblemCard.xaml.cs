@@ -20,14 +20,16 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class PayingProblemCard : Page
     {
-        public PayingProblemCard()
+        RootObject _ob;
+        public PayingProblemCard(RootObject ob)
         {
             InitializeComponent();
+            _ob = ob;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new PaymentSummaryPage();
+            Application.Current.MainWindow.Content = new PaymentSummaryPage(_ob);
         }
 
         private void btnRetry_Click(object sender, RoutedEventArgs e)

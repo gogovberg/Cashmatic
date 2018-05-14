@@ -41,6 +41,7 @@ namespace CashmaticApp.Pages
             timer = new System.Threading.Timer(TimerElapsed, null, VALIDATION_DELAY, VALIDATION_DELAY);
 
         }
+
         private void TimerElapsed(Object obj)
         {
             CheckSyntaxAndReport();
@@ -66,8 +67,9 @@ namespace CashmaticApp.Pages
             if(!string.IsNullOrEmpty(_barCode) && _barCode.Length==36)
             {
                 DisposeTimer();
+              
 
-                //TODO: send has to server 
+                //TODO: send hash to server 
                 //TODO: go to next page
 
             }
@@ -113,7 +115,15 @@ namespace CashmaticApp.Pages
             {
                 sk.IsSelected = false;
             }
-            Application.Current.MainWindow.Content = new PaymentSummaryPage();
+            var json = "{ 	'payment': {	'paymentSummary': {	'checkin': '3.2.2018 14:30 ',	'checkout': '8.2.2018 01:16',	'basePrice': '1',	'vat1': '2',	'vat2': '3',	'total': '13200'	},	'item': [{	'name': 'item1',	'qty': '3',	'price': '5'	},	{	'name': 'item2',	'qty': '4',	'price': '2'	},	{	'name': 'item3',	'qty': '2',	'price': '4'	}] 	} }";
+ 
+            RootObject ob = Helper.JSONToObject<RootObject>(json);
+            if(ob!=null)
+            {
+                Application.Current.MainWindow.Content = new PaymentSummaryPage(ob);
+
+            }
+            
         }
 
         private void Control_Click(object sender, EventArgs e)
