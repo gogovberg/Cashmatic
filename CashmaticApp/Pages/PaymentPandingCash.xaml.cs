@@ -25,7 +25,9 @@ namespace CashmaticApp.Pages
     {
         private RootObject _ob;
         private FileSystemWatcher _dirWatcher = null;
-        private FileSystemWatcher _fileWatcher = null;
+        private FileSystemWatcher _saldatoWatcher = null;
+        private FileSystemWatcher _pagatoWatcher = null;
+
         public PaymentPandingCash(RootObject ob)
         {
             InitializeComponent();
@@ -37,52 +39,81 @@ namespace CashmaticApp.Pages
         {
             Application.Current.MainWindow.Content = new RefoundPending(_ob);
         }
+
         private void InitPayment()
         {
- 
-            CashmaticCommands.WriteSubtotale(_ob.payment.paymentSummary.total);
-            tblPrice.Text = String.Format("{0:0.00}€", _ob.payment.paymentSummary.total / 100);
+            int amountLeft = _ob.payment.paymentSummary.total;
 
-            if(!File.Exists(Helper.base_path + "saldato.txt"))
+            if(_ob.payment.paymentSummary.OnPayment)
             {
-                _dirWatcher = new FileSystemWatcher();
-                _dirWatcher.Path = Helper.base_path;
-                _dirWatcher.Filter = "*.txt*";
-                _dirWatcher.Changed += new FileSystemEventHandler(OnChangedDir);
-       
+                int saldato = CashmaticCommands.ReadSaldato();
+                amountLeft = _ob.payment.paymentSummary.total - saldato;
             }
             else
             {
-                SetSaldatoChangeListener();
+                CashmaticCommands.WriteSubtotale(_ob.payment.paymentSummary.total);
+                _ob.payment.paymentSummary.OnPayment = true;
             }
+            
+            tblPrice.Text = String.Format("{0:0.00}€", amountLeft /(double) 100);
+
+            SetSaldatoChangeListener();
+            SetPagatoChangeListener();
         }
+
         private void OnChangedDir(object source, FileSystemEventArgs e)
         {
-            if (File.Exists(Helper.base_path + "pagato.txt") && _fileWatcher==null)
+            if (File.Exists(Helper.base_path + "saldato.txt") && _saldatoWatcher == null)
             {
                 SetSaldatoChangeListener();
             }
         }
-        private void OnChange(object source, FileSystemEventArgs e)
+
+        private void OnChangeSaldato(object source, FileSystemEventArgs e)
         {
             int saldato = CashmaticCommands.ReadSaldato();
+            saldato = _ob.payment.paymentSummary.total - saldato;
             Application.Current.Dispatcher.BeginInvoke(
-                DispatcherPriority.Background, new Action(() => String.Format("{0:0.00}€", saldato / 100)));
+                DispatcherPriority.Background, new Action(() => tblPrice.Text = String.Format("{0:0.00}€", saldato /(double) 100)));
         }
+
+        private void OnChangedPagato(object source, FileSystemEventArgs e)
+        {
+            int pagato = CashmaticCommands.ReadPagato();
+            int saldato = CashmaticCommands.ReadPagato();
+            int erogato = CashmaticCommands.ReadErogato();
+            int nonerogat = CashmaticCommands.ReadNonerogato();
+
+            if(pagato==_ob.payment.paymentSummary.total && saldato==_ob.payment.paymentSummary.total)
+            {
+                
+                Application.Current.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash()));
+            }
+          
+        }
+
         private void SetSaldatoChangeListener()
         {
-            _fileWatcher = new FileSystemWatcher();
-            _fileWatcher.Path = Helper.base_path;
-            _fileWatcher.Filter = Helper.base_path + "saldato.txt";
-            _fileWatcher.EnableRaisingEvents = true;
-            _fileWatcher.NotifyFilter = NotifyFilters.Attributes |
-                                        NotifyFilters.CreationTime |
-                                        NotifyFilters.FileName |
-                                        NotifyFilters.LastAccess |
-                                        NotifyFilters.LastWrite |
-                                        NotifyFilters.Size |
-                                        NotifyFilters.Security;
-            _fileWatcher.Changed += new FileSystemEventHandler(OnChange);
+            _saldatoWatcher = new FileSystemWatcher();
+            _saldatoWatcher.Path = Helper.base_path;
+            _saldatoWatcher.Filter ="saldato.txt";
+            _saldatoWatcher.EnableRaisingEvents = true;
+            _saldatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            _saldatoWatcher.Changed += new FileSystemEventHandler(OnChangeSaldato);
+            _saldatoWatcher.EnableRaisingEvents = true;
+        }
+
+        private void SetPagatoChangeListener()
+        {
+            _pagatoWatcher = new FileSystemWatcher();
+            _pagatoWatcher.Path = Helper.base_path;
+            _pagatoWatcher.Filter = "pagato.txt";
+            _pagatoWatcher.EnableRaisingEvents = true;
+            _pagatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            _pagatoWatcher.Created += new FileSystemEventHandler(OnChangedPagato);
+            _pagatoWatcher.Changed += new FileSystemEventHandler(OnChangedPagato);
+            _pagatoWatcher.EnableRaisingEvents = true;
         }
     }
 }

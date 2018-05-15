@@ -33,6 +33,7 @@ namespace CashmaticApp
         public string vat1 { get; set; }
         public string vat2 { get; set; }
         public int total { get; set; }
+        public bool OnPayment { set; get; }
     }
 
     public class Item

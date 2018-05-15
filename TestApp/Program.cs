@@ -23,24 +23,28 @@ namespace TestApp
             //CashmaticCommands.WriteAnnulla();
 
             //CashmaticCommands.WriteSubtotale(50);
-            
-            int saldato = CashmaticCommands.ReadSaldato();
-            int pagato = CashmaticCommands.ReadPagato();
-            int erogato = CashmaticCommands.ReadErogato();
-            int nonerogato = CashmaticCommands.ReadNonerogato();
+            while(true)
+            {
+                int saldato = CashmaticCommands.ReadSaldato();
+                int pagato = CashmaticCommands.ReadPagato();
+                int erogato = CashmaticCommands.ReadErogato();
+                int nonerogato = CashmaticCommands.ReadNonerogato();
+                int erogazione = CashmaticCommands.ReadFile("erogazione.txt");
 
 
-            Console.WriteLine("Saldato: " + saldato);
-            Console.WriteLine("Pagato: " + pagato);
-            Console.WriteLine("Erogato: " + erogato);
-            Console.WriteLine("Nonerogato: " + nonerogato);
-
+                Console.WriteLine("Saldato: " + saldato);
+                Console.WriteLine("Pagato: " + pagato);
+                Console.WriteLine("Erogato: " + erogato);
+                Console.WriteLine("Nonerogato: " + nonerogato);
+                Console.WriteLine("Erogazione: " + erogazione);
 
 
 #if DEBUG
-            Console.WriteLine("Press enter to close...");
-            Console.ReadLine();
+                Console.WriteLine("Press enter to close...");
+                Console.ReadLine();
 #endif
+
+            }
 
             //string line = Console.ReadLine(); // Read string from console
             //int value;

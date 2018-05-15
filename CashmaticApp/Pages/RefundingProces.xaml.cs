@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CashmaticApp.Pages
 {
@@ -22,13 +24,26 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class RefundingProces : Page
     {
-  
-        public RefundingProces()
+        private FileSystemWatcher _fileWatcher = null;
+        private RootObject _ob;
+        public RefundingProces(RootObject ob)
         {
             InitializeComponent();
-            CashmaticCommands.WriteAnnulla();
-            Application.Current.MainWindow.Content = new ThankYouCash();
-        }
+            _ob = ob;
+            _fileWatcher = new FileSystemWatcher();
+            _fileWatcher.Path = Helper.base_path;
+            _fileWatcher.Filter = "annulla.txt";
+            _fileWatcher.Deleted += new FileSystemEventHandler(OnDeleted);
+            _fileWatcher.EnableRaisingEvents = true;
 
+            CashmaticCommands.WriteAnnulla();
+
+        }
+        private void OnDeleted(object source, FileSystemEventArgs e)
+        {
+   
+            Application.Current.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
+        }
     }
 }

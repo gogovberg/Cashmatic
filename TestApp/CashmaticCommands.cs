@@ -420,7 +420,7 @@ namespace TestApp
         }
 
 
-        private static int ReadFile(string file_name)
+        public static int ReadFile(string file_name)
         {
             int amount = 0;
             try

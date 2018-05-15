@@ -35,7 +35,7 @@ namespace CashmaticApp.Pages
         private void btnRefund_Click(object sender, RoutedEventArgs e)
         {
             
-            Application.Current.MainWindow.Content = new RefundingProces();
+            Application.Current.MainWindow.Content = new RefundingProces(_ob);
         }
     }
 }
