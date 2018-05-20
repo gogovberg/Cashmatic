@@ -24,9 +24,10 @@ namespace CashmaticApp.Pages
     public partial class PaymentPandingCash : Page
     {
         private RootObject _ob;
-        private FileSystemWatcher _dirWatcher = null;
+      
         private FileSystemWatcher _saldatoWatcher = null;
         private FileSystemWatcher _pagatoWatcher = null;
+        private FileSystemWatcher _erogatoWatcher = null;
 
         public PaymentPandingCash(RootObject ob)
         {
@@ -59,6 +60,7 @@ namespace CashmaticApp.Pages
 
             SetSaldatoChangeListener();
             SetPagatoChangeListener();
+            SetErogatoChangeListener();
         }
 
         private void OnChangedDir(object source, FileSystemEventArgs e)
@@ -90,7 +92,26 @@ namespace CashmaticApp.Pages
                 Application.Current.Dispatcher.BeginInvoke(
                 DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash()));
             }
-          
+            if(nonerogat>0)
+            {
+                Application.Current.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new RefundingProces(_ob,true)));
+            }
+        }
+        private void OnChangedErogato(object source, FileSystemEventArgs e)
+        {
+            int pagato = CashmaticCommands.ReadPagato();
+            int saldato = CashmaticCommands.ReadPagato();
+            int erogato = CashmaticCommands.ReadErogato();
+            int nonerogat = CashmaticCommands.ReadNonerogato();
+
+            int erogato_real = saldato - _ob.payment.paymentSummary.total;
+
+            if (erogato== erogato_real)
+            {
+                Application.Current.Dispatcher.BeginInvoke(
+                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash()));
+            }
         }
 
         private void SetSaldatoChangeListener()
@@ -112,8 +133,18 @@ namespace CashmaticApp.Pages
             _pagatoWatcher.EnableRaisingEvents = true;
             _pagatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
             _pagatoWatcher.Created += new FileSystemEventHandler(OnChangedPagato);
-            _pagatoWatcher.Changed += new FileSystemEventHandler(OnChangedPagato);
             _pagatoWatcher.EnableRaisingEvents = true;
+        }
+
+        private void SetErogatoChangeListener()
+        {
+            _erogatoWatcher = new FileSystemWatcher();
+            _erogatoWatcher.Path = Helper.base_path;
+            _erogatoWatcher.Filter = "erogato.txt";
+            _erogatoWatcher.EnableRaisingEvents = true;
+            _erogatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            _erogatoWatcher.Changed += new FileSystemEventHandler(OnChangedErogato);
+            _erogatoWatcher.EnableRaisingEvents = true;
         }
     }
 }

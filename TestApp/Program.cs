@@ -22,14 +22,17 @@ namespace TestApp
             //Helper.PartialCoinWithdrowal();
             //CashmaticCommands.WriteAnnulla();
 
-            //CashmaticCommands.WriteSubtotale(50);
-            while(true)
+            CashmaticCommands.WriteSubtotale(100);
+
+            //CashmaticCommands.WriteSubtotale(-200);
+            while (true)
             {
                 int saldato = CashmaticCommands.ReadSaldato();
                 int pagato = CashmaticCommands.ReadPagato();
                 int erogato = CashmaticCommands.ReadErogato();
                 int nonerogato = CashmaticCommands.ReadNonerogato();
                 int erogazione = CashmaticCommands.ReadFile("erogazione.txt");
+                int subtotale = CashmaticCommands.ReadFile("subtotale.txt");
 
 
                 Console.WriteLine("Saldato: " + saldato);
@@ -37,6 +40,7 @@ namespace TestApp
                 Console.WriteLine("Erogato: " + erogato);
                 Console.WriteLine("Nonerogato: " + nonerogato);
                 Console.WriteLine("Erogazione: " + erogazione);
+                Console.WriteLine("Subtotale: " + subtotale);
 
 
 #if DEBUG
@@ -45,6 +49,8 @@ namespace TestApp
 #endif
 
             }
+
+
 
             //string line = Console.ReadLine(); // Read string from console
             //int value;

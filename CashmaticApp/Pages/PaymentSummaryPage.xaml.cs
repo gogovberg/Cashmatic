@@ -27,6 +27,12 @@ namespace CashmaticApp.Pages
             InitializeComponent();
             dtSummary.ItemsSource = LoadSummaryItems(_ob.payment.item);
             dtSummary.AutoGenerateColumns = false;
+            tblTotalValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.total / (double)100);
+            tblBasePriceValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.basePrice / (double)100);
+            tblVatOneValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.vat1 / (double)100);
+            tblVatTwoValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.vat2 / (double)100);
+            tblDateTimeInValue.Text = ob.payment.paymentSummary.checkin;
+            tblDateTimeOutValue.Text = ob.payment.paymentSummary.checkout;
         }
         private List<SummaryItem> LoadSummaryItems(List<Item> itm)
         {

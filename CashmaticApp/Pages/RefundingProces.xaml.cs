@@ -26,17 +26,26 @@ namespace CashmaticApp.Pages
     {
         private FileSystemWatcher _fileWatcher = null;
         private RootObject _ob;
-        public RefundingProces(RootObject ob)
+        public RefundingProces(RootObject ob, bool CannotDispense)
         {
             InitializeComponent();
             _ob = ob;
             _fileWatcher = new FileSystemWatcher();
             _fileWatcher.Path = Helper.base_path;
-            _fileWatcher.Filter = "annulla.txt";
+
+            _fileWatcher.Filter = !CannotDispense ? "annulla.txt" : "subtotale.txt";
+
             _fileWatcher.Deleted += new FileSystemEventHandler(OnDeleted);
             _fileWatcher.EnableRaisingEvents = true;
-
-            CashmaticCommands.WriteAnnulla();
+            if(!CannotDispense)
+            {
+                CashmaticCommands.WriteAnnulla();
+            }
+            else
+            {
+                int pagato = CashmaticCommands.ReadPagato();
+                CashmaticCommands.WriteSubtotale(pagato*(-1));
+            }
 
         }
         private void OnDeleted(object source, FileSystemEventArgs e)
