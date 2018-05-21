@@ -26,7 +26,7 @@
                 <TextBlock x:Name="tblTitle" Text="Waiting For Transaction" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="1"></TextBlock>
                 <TextBlock x:Name="tblSubtitle" Text="to Complete" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="2"></TextBlock>
                 <Image x:Name="imgRefund" Source="/Images/wait_card.png" Grid.Row="3" />
-                <TextBlock x:Name="tbAmount" Text="Paying amount of 132.00$" FontSize="20" Foreground="#FF44A267" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4"></TextBlock>
+                <TextBlock x:Name="tbAmount" Text="Paying amount of 132.00$" FontSize="20" Foreground="#FF026FE4" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4"></TextBlock>
             </Grid>
         </Grid>
     </Grid>

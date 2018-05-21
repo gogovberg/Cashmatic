@@ -32,7 +32,7 @@
                 <RowDefinition Height="70*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button x:Name="btnCancel" Content="Cancel and refund money"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Style="{StaticResource GrayButtonStyle}" Click="btnCancel_Click"></Button>
+            <Button x:Name="btnCancel" Content="Cancel and refund money"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="50" Grid.Row="1" Style="{StaticResource GrayButtonStyle}" Click="btnCancel_Click"></Button>
         </Grid>
         
     </Grid>

@@ -25,10 +25,13 @@ namespace CashmaticApp.Pages
         private string _barCode = string.Empty;
         static int VALIDATION_DELAY = 350;
         System.Threading.Timer timer = null;
+        private string _language = null;
+
         public TicketScanPage()
         {
             InitializeComponent();
             en.IsSelected = true;
+            _language = en.Name;
             FocusManager.SetFocusedElement(gdrScanGrid, tbBarCode);
         }
 
@@ -75,7 +78,7 @@ namespace CashmaticApp.Pages
                 RootObject ob = Helper.JSONToObject<RootObject>(json);
                 if (ob != null)
                 {
-
+                    ob.payment.paymentSummary.Language = _language;
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
                 }
@@ -98,9 +101,9 @@ namespace CashmaticApp.Pages
                 de.IsSelected = false;
              
             }
-            if (!slo.Name.Equals(cbName))
+            if (!si.Name.Equals(cbName))
             {
-                slo.IsSelected = false;
+                si.IsSelected = false;
                 
             }
             if (!hu.Name.Equals(cbName))
@@ -126,6 +129,7 @@ namespace CashmaticApp.Pages
         {
             CheckBoxImage cb = sender as CheckBoxImage;
             cb.IsSelected = true;
+            _language = cb.Name;
             MutualyExclusiveCheckboxes(cb.Name);
          
         }

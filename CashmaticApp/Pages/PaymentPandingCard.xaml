@@ -33,7 +33,7 @@
                     <RowDefinition Height="70*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button x:Name="btnCancel" Content="Cancel"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  Click="btnCancel_Click" Style="{StaticResource GrayButtonStyle}"></Button>
+                <Button x:Name="btnCancel" Content="Cancel"  Width="115" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  Click="btnCancel_Click" Style="{StaticResource GrayButtonStyle}"></Button>
             </Grid>
 
         </Grid>

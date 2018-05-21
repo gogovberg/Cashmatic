@@ -27,8 +27,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnBackToScan" Content="Back To Ticket Scan"  VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource GrayButtonStyle}" Grid.Column="0" Margin="10" ></Button>
-            <Button x:Name="btnContinuePaying" Content="Continue with paying" VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource GreenButtonStyle}" Grid.Column="1" Margin="10"></Button>
+            <Button x:Name="btnBackToScan" Content="Back To Ticket Scan" Width="250"  Height="60" VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource GrayButtonStyle}" Grid.Column="0" Margin="10" ></Button>
+            <Button x:Name="btnContinuePaying" Content="Continue with paying" Width="250"  Height="60" VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource GreenButtonStyle}" Grid.Column="1" Margin="10"></Button>
         </Grid>
         <TextBlock x:Name="tblSessionTimer" FontSize="20" FontWeight="Regular" FontFamily="SF Pro Display" Foreground="#FFC1C1C1" Text="Application will cancel in 1min 18seconds and save the money." Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
     </Grid>

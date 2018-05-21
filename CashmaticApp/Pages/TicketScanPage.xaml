@@ -25,10 +25,10 @@
 
         <TextBlock Margin="10" FontSize="15" x:Name="tblTitle" Text="Welcome to Panda Parken." Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#FF356499"></TextBlock>
         <TextBlock Margin="10" FontSize="40" x:Name="tblSubtitle" Text="Scan Your Ticket" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FF356499" FontWeight="Bold"></TextBlock>
-
+        <Image x:Name="imgScanLogo" Source="/Images/QRscan.png" Grid.Column="1" Grid.Row="2" Grid.RowSpan="4"></Image>
         <controls:CheckBoxImage Margin="60,15" x:Name="en"  FlagSource="/Images/gb.png"  LanguageBox="English"  Grid.Column="0" Grid.Row="2" Control_Click="Control_Click"  Style="{StaticResource CheckBoxImagetyle}"></controls:CheckBoxImage>
         <controls:CheckBoxImage Margin="60,15" x:Name="de"  FlagSource="/Images/de.png"  LanguageBox="German"  Grid.Column="0" Grid.Row="3"  Control_Click="Control_Click"  Style="{StaticResource CheckBoxImagetyle}"></controls:CheckBoxImage>
-        <controls:CheckBoxImage Margin="60,15" x:Name="slo" FlagSource="/Images/si.png"  LanguageBox="Slovene" Grid.Column="0" Grid.Row="4"  Control_Click="Control_Click" Style="{StaticResource CheckBoxImagetyle}" ></controls:CheckBoxImage>
+        <controls:CheckBoxImage Margin="60,15" x:Name="si" FlagSource="/Images/si.png"  LanguageBox="Slovene" Grid.Column="0" Grid.Row="4"  Control_Click="Control_Click" Style="{StaticResource CheckBoxImagetyle}" ></controls:CheckBoxImage>
         <controls:CheckBoxImage Margin="60,15" x:Name="hu"  FlagSource="/Images/hu.png"  LanguageBox="Hungary" Grid.Column="2" Grid.Row="2"  Control_Click="Control_Click" Style="{StaticResource CheckBoxImagetyle}" ></controls:CheckBoxImage>
         <controls:CheckBoxImage Margin="60,15" x:Name="cz"  FlagSource="/Images/cz.png"  LanguageBox="Czech"  Grid.Column="2" Grid.Row="3"  Control_Click="Control_Click" Style="{StaticResource CheckBoxImagetyle}" ></controls:CheckBoxImage>
         <controls:CheckBoxImage Margin="60,15" x:Name="sk"  FlagSource="/Images/sk.png"  LanguageBox="Slovak"  Grid.Column="2" Grid.Row="4" Control_Click="Control_Click" Style="{StaticResource CheckBoxImagetyle}" ></controls:CheckBoxImage>

@@ -20,7 +20,7 @@
                     <RowDefinition Height="5*"></RowDefinition>
                     <RowDefinition Height="5*"></RowDefinition>
                     <RowDefinition Height="5*"></RowDefinition>
-                    <RowDefinition Height="15*"></RowDefinition>
+                    <RowDefinition Height="30*"></RowDefinition>
                     <RowDefinition Height="15*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock x:Name="tblTitle" Text="There Was a Payment Problem" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="1"></TextBlock>
@@ -29,10 +29,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
-                        
+
                     </Grid.RowDefinitions>
-                    <Button x:Name="btnBack" Content="Back to Payment Options" VerticalAlignment="Center"   HorizontalAlignment="Center" Style="{StaticResource GrayButtonStyle}" Grid.Row="0" Click="btnBack_Click" ></Button>
-                    <Button x:Name="btnRetry" Content="Try again" VerticalAlignment="Top"   HorizontalAlignment="Center" Style="{StaticResource BlueButtonStyle}" Grid.Row="1" Click="btnRetry_Click" ></Button>
+                    <Button x:Name="btnBack" Content="Back to Payment Options" VerticalAlignment="Bottom"  Width="300" Height="60" HorizontalAlignment="Center" Style="{StaticResource GrayButtonStyle}" Grid.Row="0" Click="btnBack_Click" Margin="157,0,157.4,31" ></Button>
+                    <Button x:Name="btnRetry" Content="Try again" VerticalAlignment="Top"  Width="300" Height="60"  HorizontalAlignment="Center" Style="{StaticResource BlueButtonStyle}" Grid.Row="1" Click="btnRetry_Click" ></Button>
                 </Grid>
                 <Image x:Name="imgRefund" Source="/Images/half_card.png" Grid.Row="5" />
             </Grid>

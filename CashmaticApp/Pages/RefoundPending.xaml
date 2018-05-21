@@ -27,13 +27,14 @@
             <TextBlock x:Name="tblSubtitle" Text="Your Inserted Money?" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="2"></TextBlock>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"></ColumnDefinition>
+
                     <ColumnDefinition Width="20*"></ColumnDefinition>
+                    <ColumnDefinition Width="10*"></ColumnDefinition>
                     <ColumnDefinition Width="20*"></ColumnDefinition>
-                    <ColumnDefinition Width="5*"></ColumnDefinition>
+                 
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnRefund" Content="Refund my money" VerticalAlignment="Center"  HorizontalAlignment="Left" Style="{StaticResource GrayButtonStyle}" Grid.Column="1" Click="btnRefund_Click"></Button>
-                <Button x:Name="btnContinue" Content="Continue with paying" VerticalAlignment="Center"  HorizontalAlignment="Right" Style="{StaticResource GreenButtonStyle}" Grid.Column="2" Click="btnContinue_Click"></Button>
+                <Button x:Name="btnRefund" Content="Refund my money" Width="250" Height="60" VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource GrayButtonStyle}" Grid.Column="0" Click="btnRefund_Click"></Button>
+                <Button x:Name="btnContinue" Content="Continue with paying" Width="250"  Height="60" VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{StaticResource GreenButtonStyle}" Grid.Column="2" Click="btnContinue_Click"></Button>
             </Grid>
             <Image x:Name="imgRefund" Source="/Images/refund.png" Grid.Row="5" />
         </Grid>

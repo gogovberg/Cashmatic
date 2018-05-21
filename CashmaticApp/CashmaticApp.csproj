@@ -216,7 +216,29 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\applogo.jpg" />
+    <Resource Include="Images\cz.png" />
+    <Resource Include="Images\cz_bw.png" />
+    <Resource Include="Images\de.png" />
+    <Resource Include="Images\de_bw.png" />
+    <Resource Include="Images\gb.png" />
+    <Resource Include="Images\gb_bw.png" />
+    <Resource Include="Images\half_card.png" />
+    <Resource Include="Images\hu.png" />
+    <Resource Include="Images\hu_bw.png" />
+    <Resource Include="Images\payment_card.png" />
+    <Resource Include="Images\payment_cash.png" />
+    <Resource Include="Images\refund.png" />
+    <Resource Include="Images\refund_process.png" />
+    <Resource Include="Images\si.png" />
+    <Resource Include="Images\si_bw.png" />
+    <Resource Include="Images\sk.png" />
+    <Resource Include="Images\sk_bw.png" />
+    <Resource Include="Images\thankyou_card.png" />
+    <Resource Include="Images\thankyou_cash.png" />
+    <Resource Include="Images\wait_card.png" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
@@ -230,45 +252,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\applogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\cz.png" />
-    <Resource Include="Images\cz_bw.png" />
-    <Resource Include="Images\de.png" />
-    <Resource Include="Images\de_bw.png" />
-    <Resource Include="Images\gb.png" />
-    <Resource Include="Images\gb_bw.png" />
-    <Resource Include="Images\hu.png" />
-    <Resource Include="Images\hu_bw.png" />
-    <Resource Include="Images\si.png" />
-    <Resource Include="Images\si_bw.png" />
-    <Resource Include="Images\sk.png" />
-    <Resource Include="Images\sk_bw.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\payment_cash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\refund.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\payment_card.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\half_card.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\wait_card.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\refund_process.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\thankyou_cash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\thankyou_card.png" />
+    <Resource Include="Images\loader_inner.png" />
+    <Resource Include="Images\loader_outer.png" />
+    <Resource Include="Images\money.png" />
+    <Resource Include="Images\panda-parken-logo.png" />
+    <Resource Include="Images\paymetsummary.png" />
+    <Resource Include="Images\QRscan.png" />
+    <Resource Include="Images\receipt.png" />
+    <Resource Include="Images\scanticket.png" />
+    <Resource Include="Images\slot.png" />
+    <Resource Include="Images\visa.png" />
+    <Resource Include="Images\visa2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
