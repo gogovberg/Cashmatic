@@ -22,17 +22,17 @@
                 <RowDefinition Height="40*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="tblRemaining" Text="Remaining to pay:" FontSize="34" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Medium" Foreground="#FF29A26A" Grid.Row="1"></TextBlock>
+            <TextBlock x:Name="tblRemaining" Text="{DynamicResource titleRemainPay}" FontSize="34" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Medium" Foreground="#FF29A26A" Grid.Row="1"></TextBlock>
             <TextBlock x:Name="tblPrice"   FontSize="50" HorizontalAlignment="Center" VerticalAlignment="top" Foreground="#FF29A26A" FontWeight="SemiBold" Grid.Row="2"></TextBlock>
             <Image x:Name="imgPaymentType" Source="/Images/payment_cash.png" Grid.Row="3"></Image>
-            <TextBlock x:Name="tblReminder" Foreground="#FFC1C1C1" FontSize="20" FontWeight="Regular" Text="Please insert cash into slot" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tblReminder" Foreground="#FFC1C1C1" FontSize="20" FontWeight="Regular" Text="{DynamicResource titleInsertCash}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button x:Name="btnCancel" Content="Cancel and refund money"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="50" Grid.Row="1" Style="{StaticResource GrayButtonStyle}" Click="btnCancel_Click"></Button>
+            <Button x:Name="btnCancel" Content="{DynamicResource btnCancelRefund}"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="250" Height="50" Grid.Row="1" Style="{StaticResource GrayButtonStyle}" Click="btnCancel_Click"></Button>
         </Grid>
         
     </Grid>

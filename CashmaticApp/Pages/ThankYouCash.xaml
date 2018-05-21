@@ -26,9 +26,9 @@
                     <RowDefinition Height="10*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Image x:Name="imgLogo" Source="/Images/applogo.jpg" Grid.Row="1"></Image>
-                <TextBlock x:Name="tblTitle" Text="Thank you for choosing" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="2"></TextBlock>
-                <TextBlock x:Name="tblSubtitle" Text="Panda Parken" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3"></TextBlock>
-                <TextBlock x:Name="tblReminder" Foreground="#FFC1C1C1" FontSize="20" FontWeight="Regular" Text="And don't forget your Cash and Receipt!" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Name="tblTitle" Text="{DynamicResource titleThankYou}" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="2"></TextBlock>
+                <TextBlock x:Name="tblSubtitle" Text="{DynamicResource subTitleThankYou}" FontSize="40" Foreground="#FF707070" FontWeight="Regular" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="3"></TextBlock>
+                <TextBlock x:Name="tblReminder" Foreground="#FFC1C1C1" FontSize="20" FontWeight="Regular" Text="{DynamicResource titleForgetCash}" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Image x:Name="imgPaymentType" Source="/Images/thankyou_cash.png" Grid.Row="6"></Image>
             </Grid>
         </Grid>

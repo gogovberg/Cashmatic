@@ -18,10 +18,10 @@
         </Grid.RowDefinitions>
         <DataGrid Style="{StaticResource DataGridSummary}"  x:Name="dtSummary" Grid.Row="0" Grid.Column="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="60*"  Header="Item" Binding="{Binding Path=ItemName}"></DataGridTextColumn>
-                <DataGridTextColumn Width="20*"  Header="Price" Binding="{Binding Path=ItemPrice}"></DataGridTextColumn>
-                <DataGridTextColumn Width="20*"  Header="Qty" Binding="{Binding Path=ItemQty}"></DataGridTextColumn>
-                <DataGridTextColumn Width="20*"  Header="Total" Binding="{Binding Path=ItemTotal}"></DataGridTextColumn>
+                <DataGridTextColumn Width="60*"  Header="{DynamicResource titleItem}" Binding="{Binding Path=ItemName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="20*"  Header="{DynamicResource titlePrice}" Binding="{Binding Path=ItemPrice}"></DataGridTextColumn>
+                <DataGridTextColumn Width="20*"  Header="{DynamicResource titleQty}" Binding="{Binding Path=ItemQty}"></DataGridTextColumn>
+                <DataGridTextColumn Width="20*"  Header="{DynamicResource titleTotal}" Binding="{Binding Path=ItemTotal}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
@@ -60,40 +60,40 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0">
                     <Border BorderBrush="White" BorderThickness="0,0,0,2" Margin="10" >
-                        <TextBlock x:Name="tblPaymentSummary" Text="Payment Summary" FontWeight="SemiBold" FontSize="26" Foreground="White" Margin="10" ></TextBlock>
+                        <TextBlock x:Name="tblPaymentSummary" Text="{DynamicResource paymentSummary}" FontWeight="SemiBold" FontSize="26" Foreground="White" Margin="10" ></TextBlock>
                     </Border>
                     <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblDateTimeIn" Text="Check-in" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
+                        <TextBlock x:Name="tblDateTimeIn" Text="{DynamicResource checkInDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
                         <TextBlock x:Name="tblDateTimeInValue" Text="3.2.2018 14:30" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
                     </WrapPanel>
                     <Border BorderBrush="White" BorderThickness="0,0,0,1" Margin="10,0,10,10">
                         <WrapPanel >
-                            <TextBlock x:Name="tblDateTimeOut" Text="Check-out" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
+                            <TextBlock x:Name="tblDateTimeOut" Text="{DynamicResource checkOutDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
                             <TextBlock x:Name="tblDateTimeOutValue" Text="8.2.2018 01:16" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
                         </WrapPanel>
                     </Border>
                     <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblBasePrice" Text="Base price" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblBasePrice" Text="{DynamicResource basePrice}" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                         <TextBlock x:Name="tblBasePriceValue" Text="101.96$" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                     </WrapPanel>
                     <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblVatOne" Text="VAT (9%)" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblVatOne" Text="{DynamicResource vat1}" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                         <TextBlock x:Name="tblVatOneValue" Text="12.58$" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                     </WrapPanel>
                     <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblVatTwo" Text="VAT (20%)" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblVatTwo" Text="{DynamicResource vat2}" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                         <TextBlock x:Name="tblVatTwoValue" Text="30.04$" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                     </WrapPanel>
                     <Border BorderThickness="0,1,0,0" BorderBrush="White" Margin="10">
                         <WrapPanel >
-                            <TextBlock x:Name="tblTotal" Text="Total order"  VerticalAlignment="Center"  Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                            <TextBlock x:Name="tblTotal" Text="{DynamicResource totalOrder}"  VerticalAlignment="Center"  Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                             <TextBlock x:Name="tblTotalValue" Text="132.00$" Foreground="White" FontWeight="Regular" VerticalAlignment="Bottom"  FontSize="40" Margin="10,0,0,10"></TextBlock>
                         </WrapPanel>
                     </Border>
                 </StackPanel>
                 <StackPanel Grid.Row="1">
-                    <Button x:Name="btnPayCash" Background="#FF29A26A" Width="320" Height="70" Content="Pay with cash"  Style="{StaticResource PaymentButtons}" Click="btnPayCash_Click" />
-                    <Button x:Name="btnPayCard" Background="#FF2576F1" Width="320" Height="70" Content="Pay with card" Style="{StaticResource PaymentButtons}" Click="btnPayCard_Click" />
+                    <Button x:Name="btnPayCash" Background="#FF29A26A" Width="320" Height="70" Content="{DynamicResource payCash}"  Style="{StaticResource PaymentButtons}" Click="btnPayCash_Click" />
+                    <Button x:Name="btnPayCard" Background="#FF2576F1" Width="320" Height="70" Content="{DynamicResource payCard}" Style="{StaticResource PaymentButtons}" Click="btnPayCard_Click" />
                 </StackPanel>
             </Grid>
         </Border>

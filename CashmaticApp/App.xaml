@@ -9,6 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="IconsDictionary"  Source="pack://application:,,,/CashmaticApp;component/Icons.xaml" />
                 <ResourceDictionary x:Name="ControlStyles"  Source="pack://application:,,,/CashmaticApp;component/ControlStyles.xaml" />
+                <ResourceDictionary x:Name="EnglishLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/English.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
 
