@@ -15,9 +15,10 @@ namespace CashmaticApp
 {
     public static class Helper
     {
-        public static string base_path = @"C:\Cashmatic\";
+
         private static Newtonsoft.Json.Formatting indented = Newtonsoft.Json.Formatting.Indented;
         private static JsonSerializerSettings settings = new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.All };
+
         public static string ObjectToXml(object o)
         {
             StringWriter sw = new Utf8StringWriter();
@@ -103,6 +104,63 @@ namespace CashmaticApp
             }
 
             return obj;
+        }
+        public static bool isFileLocked(FileInfo file)
+        {
+            FileStream stream = null;
+            try
+            {
+                stream = file.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+            finally
+            {
+                if (stream != null)
+                    stream.Close();
+            }
+            return false;
+        }
+
+        private static string FormatToCurrency(int unformattedNumber)
+        {
+            float f = unformattedNumber * 0.01f;
+            return f.ToString("0.00");
+        }
+        private static int parseInt(string amount)
+        {
+            // Split string by decimal point
+            string[] s = amount.Split(',');
+            string final = "";
+            int payoutAmount = 0;
+
+            // If there was a decimal point
+            if (s.Length > 1)
+            {
+                // Add a trailing zero if necessary
+                if (s[1].Length == 1)
+                    s[1] += "0";
+                // If more than 2 decimal places, cull end
+                else if (s[1].Length > 2)
+                    s[1] = s[1].Substring(0, 2);
+
+                final += s[0] + s[1]; // Add to final result string
+            }
+            else
+                final += s[0] + "00"; // Add two zeros if there is no decimal point entered
+
+            try
+            {
+                // Parse it to a number
+                return payoutAmount = Int32.Parse(final);
+            }
+            catch
+            {
+                //MessageBox.Show("Error in splitting amount", "Cashmatic - Plus");
+                return 0;
+            }
         }
     }
 }

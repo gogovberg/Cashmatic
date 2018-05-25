@@ -30,29 +30,70 @@ namespace CashmaticApp.Pages
         {
             InitializeComponent();
             _ob = ob;
-            _fileWatcher = new FileSystemWatcher();
-            _fileWatcher.Path = Helper.base_path;
-
-            _fileWatcher.Filter = !CannotDispense ? "annulla.txt" : "subtotale.txt";
-
-            _fileWatcher.Deleted += new FileSystemEventHandler(OnDeleted);
-            _fileWatcher.EnableRaisingEvents = true;
             if(!CannotDispense)
             {
+                _fileWatcher = new FileSystemWatcher();
+                _fileWatcher.Path = Global.base_path;
+                _fileWatcher.Filter = "annualla.txt";
+                _fileWatcher.Deleted += new FileSystemEventHandler(OnDeletedAnnuala);
+                _fileWatcher.EnableRaisingEvents = true;
                 CashmaticCommands.WriteAnnulla();
             }
             else
             {
-                int pagato = CashmaticCommands.ReadPagato();
-                CashmaticCommands.WriteSubtotale(pagato*(-1));
+
+                _fileWatcher = new FileSystemWatcher();
+                _fileWatcher.Path = Global.base_path;
+                _fileWatcher.Filter = "erogato.txt";
+                _fileWatcher.Created += new FileSystemEventHandler(OnCreatedErogato);
+                _fileWatcher.EnableRaisingEvents = true;
+                
+                CashmaticCommands.WriteSubtotale(Global.pagato*(-1));
+            }
+        }
+        private void OnDeletedAnnuala(object source, FileSystemEventArgs e)
+        {
+
+            FileInfo file = new FileInfo(e.FullPath);
+            while (Helper.isFileLocked(file))
+            {
+                Thread.Sleep(50);
+            }
+            try
+            {
+                Application.Current.Dispatcher.BeginInvoke(
+                     DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
+            }
+            catch (Exception ex)
+            {
+                //TODO: handle error
+            }
+        }
+        private void OnCreatedErogato(object source, FileSystemEventArgs e)
+        {
+            FileInfo file = new FileInfo(e.FullPath);
+            while (Helper.isFileLocked(file))
+            {
+                Thread.Sleep(50);
+            }
+            try
+            {
+
+                int erogato = CashmaticCommands.ReadErogato();
+                int resto = Global.pagato - Global.subtotale;
+
+                if (erogato==Global.pagato )
+                {
+                    file.Delete();
+                    Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: handle error
             }
 
-        }
-        private void OnDeleted(object source, FileSystemEventArgs e)
-        {
-   
-            Application.Current.Dispatcher.BeginInvoke(
-                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
         }
     }
 }

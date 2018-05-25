@@ -111,6 +111,7 @@
       <DependentUpon>CheckBoxImage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataObjects.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

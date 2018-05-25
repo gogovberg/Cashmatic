@@ -65,7 +65,7 @@ namespace CashmaticApp.Pages
 
         private void OnChangedDir(object source, FileSystemEventArgs e)
         {
-            if (File.Exists(Helper.base_path + "saldato.txt") && _saldatoWatcher == null)
+            if (File.Exists(Global.base_path + "saldato.txt") && _saldatoWatcher == null)
             {
                 SetSaldatoChangeListener();
             }
@@ -73,77 +73,108 @@ namespace CashmaticApp.Pages
 
         private void OnChangeSaldato(object source, FileSystemEventArgs e)
         {
-            int saldato = CashmaticCommands.ReadSaldato();
-            saldato = _ob.payment.paymentSummary.total - saldato;
-            Application.Current.Dispatcher.BeginInvoke(
-                DispatcherPriority.Background, new Action(() => tblPrice.Text = String.Format("{0:0.00}€", saldato /(double) 100)));
+            FileInfo file = new FileInfo(e.FullPath);
+            while (Helper.isFileLocked(file))
+            {
+                Thread.Sleep(50);
+            }
+            try
+            {
+                int saldato = CashmaticCommands.ReadSaldato();
+                Global.pagato = saldato;
+                saldato = _ob.payment.paymentSummary.total - saldato;
+            
+                Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background, new Action(() => tblPrice.Text = String.Format("{0:0.00}€", saldato / (double)100)));
+            }
+            catch (Exception ex)
+            {
+
+            }
+         
         }
 
-        private void OnChangedPagato(object source, FileSystemEventArgs e)
+        private void OnCreatedPagato(object source, FileSystemEventArgs e)
         {
-            int pagato = CashmaticCommands.ReadPagato();
-            int saldato = CashmaticCommands.ReadPagato();
-            int erogato = CashmaticCommands.ReadErogato();
-            int nonerogat = CashmaticCommands.ReadNonerogato();
 
-            if(pagato==_ob.payment.paymentSummary.total && saldato==_ob.payment.paymentSummary.total)
+            FileInfo file = new FileInfo(e.FullPath);
+
+            while (Helper.isFileLocked(file))
             {
-                
-                Application.Current.Dispatcher.BeginInvoke(
-                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash()));
+                Thread.Sleep(50);
             }
-            if(nonerogat>0)
+            try
             {
-                Application.Current.Dispatcher.BeginInvoke(
-                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new RefundingProces(_ob,true)));
+                int pagato = CashmaticCommands.ReadPagato();
+                int saldato = CashmaticCommands.ReadPagato();
+                int erogato = CashmaticCommands.ReadErogato();
+                int nonerogat = CashmaticCommands.ReadNonerogato();
+                Global.pagato = pagato;
+
+                if (pagato == _ob.payment.paymentSummary.total && saldato == _ob.payment.paymentSummary.total)
+                {
+                    file.Delete();
+                    Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash()));
+                }
             }
+            catch(Exception ex)
+            {
+                //TODO:Handle exception
+            }
+
+           
         }
-        private void OnChangedErogato(object source, FileSystemEventArgs e)
+        private void OnCreatedErogato(object source, FileSystemEventArgs e)
         {
-            int pagato = CashmaticCommands.ReadPagato();
-            int saldato = CashmaticCommands.ReadPagato();
-            int erogato = CashmaticCommands.ReadErogato();
-            int nonerogat = CashmaticCommands.ReadNonerogato();
-
-            int erogato_real = saldato - _ob.payment.paymentSummary.total;
-
-            if (erogato== erogato_real)
+            FileInfo file = new FileInfo(e.FullPath);
+            while (Helper.isFileLocked(file))
             {
-                Application.Current.Dispatcher.BeginInvoke(
-                DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash()));
+                Thread.Sleep(50);
             }
-        }
+            try
+            {
+              
+                int erogato = CashmaticCommands.ReadErogato();
+                int resto = Global.pagato - Global.subtotale;
 
+                if ((resto - erogato) > 0)
+                {
+                    file.Delete();
+                    Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new RefundingProces(_ob,true)));
+                }
+            }
+            catch(Exception ex)
+            {
+                //TODO: handle error
+            }
+         
+        }
         private void SetSaldatoChangeListener()
         {
             _saldatoWatcher = new FileSystemWatcher();
-            _saldatoWatcher.Path = Helper.base_path;
+            _saldatoWatcher.Path = Global.base_path;
             _saldatoWatcher.Filter ="saldato.txt";
-            _saldatoWatcher.EnableRaisingEvents = true;
-            _saldatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
             _saldatoWatcher.Changed += new FileSystemEventHandler(OnChangeSaldato);
             _saldatoWatcher.EnableRaisingEvents = true;
         }
-
         private void SetPagatoChangeListener()
         {
             _pagatoWatcher = new FileSystemWatcher();
-            _pagatoWatcher.Path = Helper.base_path;
+            _pagatoWatcher.Path = Global.base_path;
             _pagatoWatcher.Filter = "pagato.txt";
             _pagatoWatcher.EnableRaisingEvents = true;
             _pagatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
-            _pagatoWatcher.Created += new FileSystemEventHandler(OnChangedPagato);
+            _pagatoWatcher.Created += new FileSystemEventHandler(OnCreatedPagato);
             _pagatoWatcher.EnableRaisingEvents = true;
         }
-
         private void SetErogatoChangeListener()
         {
             _erogatoWatcher = new FileSystemWatcher();
-            _erogatoWatcher.Path = Helper.base_path;
+            _erogatoWatcher.Path = Global.base_path;
             _erogatoWatcher.Filter = "erogato.txt";
-            _erogatoWatcher.EnableRaisingEvents = true;
-            _erogatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
-            _erogatoWatcher.Changed += new FileSystemEventHandler(OnChangedErogato);
+            _erogatoWatcher.Created += new FileSystemEventHandler(OnCreatedErogato);
             _erogatoWatcher.EnableRaisingEvents = true;
         }
     }

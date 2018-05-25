@@ -24,9 +24,10 @@ namespace CashmaticApp
         {
             try
             {
+
                 if (amount <= 999999999 && amount >= -999999999)
                 {
-
+                    Global.subtotale = amount;
                     string file_name = "subtotale.txt";
                     string write_path = _base_path + file_name;
                     string correct_amount = amount.ToString("000000000");
@@ -133,7 +134,7 @@ namespace CashmaticApp
             {
                 string file_name = "saldato.txt";
                 amount = ReadFile(file_name);
-
+               
             }
             catch (Exception ex)
             {
