@@ -26,16 +26,16 @@ namespace CashmaticApp.Pages
         {
             _ob = ob;
             InitializeComponent();
-            dtSummary.ItemsSource = LoadSummaryItems(_ob.payment.item);
+            dtSummary.ItemsSource = LoadSummaryItems(_ob.ready2order.items);
             dtSummary.AutoGenerateColumns = false;
-            tblTotalValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.total / (double)100);
-            tblBasePriceValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.basePrice / (double)100);
-            tblVatOneValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.vat1 / (double)100);
-            tblVatTwoValue.Text = string.Format("{0:0.00}€", ob.payment.paymentSummary.vat2 / (double)100);
-            tblDateTimeInValue.Text = ob.payment.paymentSummary.checkin;
-            tblDateTimeOutValue.Text = ob.payment.paymentSummary.checkout;
+            //tblTotalValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.total / (double)100);
+            //tblBasePriceValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.basePrice / (double)100);
+            //tblVatOneValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.vat1 / (double)100);
+            //tblVatTwoValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.vat2 / (double)100);
+            tblDateTimeInValue.Text = _ob.panda.checkindate;
+            tblDateTimeOutValue.Text = _ob.panda.checkoutdate;
 
-            SetLanguageCheckbox(_ob.payment.paymentSummary.Language);
+            SetLanguageCheckbox(_ob.panda.language);
         }
    
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -50,7 +50,8 @@ namespace CashmaticApp.Pages
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
+            //Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
+            TransactionLogic.RequestBill("33716581");
         }
 
         private void Language_checked(object sender, RoutedEventArgs e)
@@ -59,7 +60,7 @@ namespace CashmaticApp.Pages
 
             SetLanguageCheckbox(cb.Name);
             MutualyExclusiveCheckboxes(cb.Name);
-            _ob.payment.paymentSummary.Language = cb.Name;
+            _ob.panda.language = cb.Name;
         }
 
         private void SetLanguageCheckbox(string language)
@@ -114,7 +115,7 @@ namespace CashmaticApp.Pages
             int i = 0;
             foreach (var item in itm)
             {
-                items.Add(new SummaryItem() { ItemID = i, ItemName = item.name, ItemPrice = item.price, ItemQty = item.qty, ItemTotal = item.total });
+                items.Add(new SummaryItem() { ItemID = i, ItemName = item.item_name, ItemPrice = item.item_price, ItemQty = item.item_quantity, ItemTotal = item.item_price });
                 i++;
             }
 

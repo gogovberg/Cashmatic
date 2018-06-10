@@ -50,17 +50,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="hgi.Base">
-      <HintPath>..\..\..\public\projects\Aleksandar\Refs\hgi.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Runtime.Serialization.Json, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\public\projects\Aleksandar\Refs\Microsoft.Runtime.Serialization.Json.dll</HintPath>
+      <HintPath>..\..\..\Meetpoint\Refs\hgi.Base.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\public\projects\Aleksandar\Refs\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\..\Meetpoint\MeetpointPrinterNew\MeetpointPrinterNew\bin\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TransactionLogic.cs" />
     <Page Include="ControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,6 +269,17 @@
     <Resource Include="Images\slot.png" />
     <Resource Include="Images\visa.png" />
     <Resource Include="Images\visa2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="PDFPrinter">
+      <Guid>{1DAF0190-F405-41A6-954E-25B0F174978F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

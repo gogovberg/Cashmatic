@@ -63,13 +63,13 @@
                         <TextBlock x:Name="tblPaymentSummary" Text="{DynamicResource paymentSummary}" FontWeight="SemiBold" FontSize="26" Foreground="White" Margin="10" ></TextBlock>
                     </Border>
                     <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblDateTimeIn" Text="{DynamicResource checkInDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
-                        <TextBlock x:Name="tblDateTimeInValue" Text="3.2.2018 14:30" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
+                        <TextBlock x:Name="tblDateTimeIn" Text="{DynamicResource checkInDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
+                        <TextBlock x:Name="tblDateTimeInValue" Text="3.2.2018 14:30" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
                     </WrapPanel>
                     <Border BorderBrush="White" BorderThickness="0,0,0,1" Margin="10,0,10,10">
                         <WrapPanel >
-                            <TextBlock x:Name="tblDateTimeOut" Text="{DynamicResource checkOutDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
-                            <TextBlock x:Name="tblDateTimeOutValue" Text="8.2.2018 01:16" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10" ></TextBlock>
+                            <TextBlock x:Name="tblDateTimeOut" Text="{DynamicResource checkOutDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
+                            <TextBlock x:Name="tblDateTimeOutValue" Text="8.2.2018 01:16" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
                         </WrapPanel>
                     </Border>
                     <WrapPanel Margin="10,0,10,0">

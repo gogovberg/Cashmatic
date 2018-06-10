@@ -1,18 +1,11 @@
 ﻿using CashmaticApp.Controls;
+using hgi.Environment;
+using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace CashmaticApp.Pages
@@ -73,12 +66,14 @@ namespace CashmaticApp.Pages
             {
                 DisposeTimer();
 
-                var json = "{ 	'payment': {	'paymentSummary': {	'checkin': '3.2.2018 14:30 ',	'checkout': '8.2.2018 01:16',	'basePrice': '1',	'vat1': '2',	'vat2': '3',	'total': '100'	},	'item': [{	'name': 'item1',	'qty': '3',	'price': '5'	},	{	'name': 'item2',	'qty': '4',	'price': '2'	},	{	'name': 'item3',	'qty': '2',	'price': '4'	}] 	} }";
+                
 
-                RootObject ob = Helper.JSONToObject<RootObject>(json);
+                RootObject ob = TransactionLogic.RequestParkingDetails("5b0452ae-1c6b-4337-9a28-48c3ce3241bf");
+
+
                 if (ob != null)
                 {
-                    ob.payment.paymentSummary.Language = _language;
+                    //ob.ready2order.payment.paymentSummary.Language = _language;
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
                 }
@@ -134,6 +129,6 @@ namespace CashmaticApp.Pages
          
         }
 
-      
+        
     }
 }

@@ -43,17 +43,17 @@ namespace CashmaticApp.Pages
 
         private void InitPayment()
         {
-            int amountLeft = _ob.payment.paymentSummary.total;
+            int amountLeft = _ob.ready2order.payment.paymentSummary.total;
 
-            if(_ob.payment.paymentSummary.OnPayment)
+            if(_ob.ready2order.payment.paymentSummary.OnPayment)
             {
                 int saldato = CashmaticCommands.ReadSaldato();
-                amountLeft = _ob.payment.paymentSummary.total - saldato;
+                amountLeft = _ob.ready2order.payment.paymentSummary.total - saldato;
             }
             else
             {
-                CashmaticCommands.WriteSubtotale(_ob.payment.paymentSummary.total);
-                _ob.payment.paymentSummary.OnPayment = true;
+                CashmaticCommands.WriteSubtotale(_ob.ready2order.payment.paymentSummary.total);
+                _ob.ready2order.payment.paymentSummary.OnPayment = true;
             }
             
             tblPrice.Text = String.Format("{0:0.00}€", amountLeft /(double) 100);
@@ -82,7 +82,7 @@ namespace CashmaticApp.Pages
             {
                 int saldato = CashmaticCommands.ReadSaldato();
                 Global.pagato = saldato;
-                saldato = _ob.payment.paymentSummary.total - saldato;
+                saldato = _ob.ready2order.payment.paymentSummary.total - saldato;
             
                 Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() => tblPrice.Text = String.Format("{0:0.00}€", saldato / (double)100)));
@@ -111,7 +111,7 @@ namespace CashmaticApp.Pages
                 int nonerogat = CashmaticCommands.ReadNonerogato();
                 Global.pagato = pagato;
 
-                if (pagato == _ob.payment.paymentSummary.total && saldato == _ob.payment.paymentSummary.total)
+                if (pagato == _ob.ready2order.payment.paymentSummary.total && saldato == _ob.ready2order.payment.paymentSummary.total)
                 {
                     file.Delete();
                     Application.Current.Dispatcher.BeginInvoke(

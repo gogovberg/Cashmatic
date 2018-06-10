@@ -26,6 +26,7 @@ namespace CashmaticApp.Pages
     {
         private FileSystemWatcher _fileWatcher = null;
         private RootObject _ob;
+
         public RefundingProces(RootObject ob, bool CannotDispense)
         {
             InitializeComponent();
@@ -78,11 +79,8 @@ namespace CashmaticApp.Pages
             }
             try
             {
-
                 int erogato = CashmaticCommands.ReadErogato();
-                int resto = Global.pagato - Global.subtotale;
-
-                if (erogato==Global.pagato )
+                if (erogato==Global.pagato)
                 {
                     file.Delete();
                     Application.Current.Dispatcher.BeginInvoke(
