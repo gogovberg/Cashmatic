@@ -17,7 +17,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="CheckBoxImagetyle" TargetType="{x:Type controls:CheckBoxImage}">
+    
+    <Style x:Key="CheckBoxImageStyle" TargetType="{x:Type controls:CheckBoxImage}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:CheckBoxImage}">
@@ -34,7 +35,7 @@
                             <Setter Property="Foreground" Value="#FFB3B3B3" />
                             <Setter Property="Effect" TargetName="bdrOutside" >
                                 <Setter.Value>
-                                    <DropShadowEffect ShadowDepth="1" Direction="315" BlurRadius="15" Color="#1C000000" />
+                                    <DropShadowEffect ShadowDepth="1" Direction="250" BlurRadius="15" Color="#1C000000" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -52,7 +53,7 @@
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <Border x:Name="bdrOutside" Background="White" BorderBrush="Transparent" CornerRadius="8"  BorderThickness="2">
                         <Border.Effect>
-                            <DropShadowEffect ShadowDepth="1" Direction="315" BlurRadius="15" Color="#1C000000" />
+                            <DropShadowEffect ShadowDepth="1" Direction="315" BlurRadius="15" Color="#1C000000"  />
                         </Border.Effect>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                             <ContentPresenter  x:Name="contentPresenter" />
@@ -69,9 +70,18 @@
         </Setter>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="Foreground" Value="#FFB3B3B3"/>
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="Height" Value="32"/>
     </Style>
 
-    <Style x:Key="DataGridSummaryColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="imgLanguageStyle" TargetType="{x:Type Image}">
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Stretch" Value="Fill"></Setter>
+       
+    </Style>
+   
+    <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="#FF356499"/>
         <Setter Property="FontSize" Value="26" />
@@ -79,21 +89,20 @@
         <Setter Property="BorderThickness" Value="0,0,0,2"/>
         <Setter Property="BorderBrush" Value="#FF356499"/>
         <Setter Property="Padding" Value="10"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
-    <Style x:Key="DataGridSummaryRow" TargetType="{x:Type DataGridRow}">
+
+    <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="#FF999999"/>
         <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="#FFCCCCCC"/>
-        
     </Style>
 
     <Style x:Key="DataGridSummary" TargetType="{x:Type DataGrid}">
         <Setter Property="GridLinesVisibility" Value="None"/>
-        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridSummaryColumnHeader}"/>
-        <Setter Property="RowStyle" Value="{StaticResource DataGridSummaryRow}"/>
         <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="Margin" Value="10"/>
         <Setter Property="BorderBrush" Value="{x:Null}"/>
@@ -103,6 +112,7 @@
         <Setter Property="CanUserResizeRows" Value="False"/>
         
     </Style>
+   
     <Style x:Key="PriceSummaryStyle" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="#FF28669D"/>
     </Style>
@@ -137,6 +147,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+   
     <Style x:Key="GreenButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="#FF44A267"/>
         <Setter Property="Foreground" Value="#FFFFFFFF"/>
@@ -154,6 +165,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+  
     <Style x:Key="GrayButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="#FFB8B8B8"/>
         <Setter Property="Foreground" Value="#FFFFFFFF"/>
@@ -171,6 +183,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+   
     <Style x:Key="BlueButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="#FF2EA6FC"/>
         <Setter Property="Foreground" Value="#FFFFFFFF"/>
@@ -215,5 +228,30 @@
         <Setter Property="Margin" Value="10"/>
         <Setter Property="Foreground" Value="#FFB3B3B3"/>
     </Style>
+
+    <Style TargetType="DataGridCell" x:Key="nameColumn">
+        <Style.Setters>
+            <Setter Property="TextBlock.TextAlignment" Value="Left" />
+        </Style.Setters>
+    </Style>
+   
+    <Style TargetType="DataGridCell" x:Key="qtyColumn">
+        <Style.Setters>
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style.Setters>
+    </Style>
     
+    <Style TargetType="DataGridCell" x:Key="priceColumn">
+        <Style.Setters>
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style.Setters>
+    </Style>
+    
+    <Style TargetType="DataGridCell" x:Key="totalColumn">
+        <Style.Setters>
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="TextBlock.FontWeight" Value="SemiBold"/>
+        </Style.Setters>
+    </Style>
+
 </ResourceDictionary>

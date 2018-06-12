@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hgi.Environment;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -67,7 +68,7 @@ namespace CashmaticApp.Pages
             }
             catch (Exception ex)
             {
-                //TODO: handle error
+                Debug.Log("CashmaticApp", ex.ToString());
             }
         }
         private void OnCreatedErogato(object source, FileSystemEventArgs e)
@@ -89,7 +90,7 @@ namespace CashmaticApp.Pages
             }
             catch (Exception ex)
             {
-                //TODO: handle error
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
         }

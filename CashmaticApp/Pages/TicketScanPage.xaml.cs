@@ -25,7 +25,8 @@ namespace CashmaticApp.Pages
             InitializeComponent();
             en.IsSelected = true;
             _language = en.Name;
-            FocusManager.SetFocusedElement(gdrScanGrid, tbBarCode);
+            tbBarCode.Focus();
+            Keyboard.Focus(tbBarCode);
         }
 
         private void tbBarCode_TextChanged(object sender, TextChangedEventArgs e)
@@ -65,22 +66,12 @@ namespace CashmaticApp.Pages
             if(!string.IsNullOrEmpty(_barCode) && _barCode.Length==36)
             {
                 DisposeTimer();
-
-                
-
                 RootObject ob = TransactionLogic.RequestParkingDetails("5b0452ae-1c6b-4337-9a28-48c3ce3241bf");
-
-
                 if (ob != null)
                 {
-                    //ob.ready2order.payment.paymentSummary.Language = _language;
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
                 }
-
-                //TODO: send hash to server 
-                //TODO: go to next page
-
             }
         }
 

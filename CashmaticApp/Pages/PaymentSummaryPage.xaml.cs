@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hgi.Environment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,16 +27,24 @@ namespace CashmaticApp.Pages
         {
             _ob = ob;
             InitializeComponent();
-            dtSummary.ItemsSource = LoadSummaryItems(_ob.ready2order.items);
-            dtSummary.AutoGenerateColumns = false;
-            //tblTotalValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.total / (double)100);
-            //tblBasePriceValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.basePrice / (double)100);
-            //tblVatOneValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.vat1 / (double)100);
-            //tblVatTwoValue.Text = string.Format("{0:0.00}€", _ob.ready2order.payment.paymentSummary.vat2 / (double)100);
-            tblDateTimeInValue.Text = _ob.panda.checkindate;
-            tblDateTimeOutValue.Text = _ob.panda.checkoutdate;
+            try
+            {
+                dtSummary.ItemsSource = LoadSummaryItems(_ob.ready2order.items);
+                dtSummary.AutoGenerateColumns = false;
+                tblTotalValue.Text = string.Format("{0:0.00}€", _ob.panda.total_price);
+                tblBasePriceValue.Text = string.Format("{0:0.00}€", _ob.panda.base_price);
+                tblVatOneValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_one);
+                tblVatTwoValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_two);
+                tblDateTimeInValue.Text = _ob.panda.checkindate;
+                tblDateTimeOutValue.Text = _ob.panda.checkoutdate;
 
-            SetLanguageCheckbox(_ob.panda.language);
+                SetLanguageCheckbox(_ob.panda.language);
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("CashmaticApp", ex.ToString());
+            }
+  
         }
    
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -50,8 +59,8 @@ namespace CashmaticApp.Pages
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
-            //Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
-            TransactionLogic.RequestBill("33716581");
+            Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
+            
         }
 
         private void Language_checked(object sender, RoutedEventArgs e)
@@ -65,13 +74,21 @@ namespace CashmaticApp.Pages
 
         private void SetLanguageCheckbox(string language)
         {
-            language = string.IsNullOrEmpty(language) ? "en" : language;
-            enImg.Source = new BitmapImage(new Uri("/Images/"+(language.Equals("en") ? "gb.png":"gb_bw.png"), UriKind.Relative));
-            deImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("de") ? "de.png" : "de_bw.png"), UriKind.Relative));
-            siImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("si") ? "si.png" : "si_bw.png"), UriKind.Relative));
-            huImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("hu") ? "hu.png" : "hu_bw.png"), UriKind.Relative));
-            czImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("cz") ? "cz.png" : "cz_bw.png"), UriKind.Relative));
-            skImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("sk") ? "sk.png" : "sk_bw.png"), UriKind.Relative));
+            try
+            {
+                language = string.IsNullOrEmpty(language) ? "en" : language;
+                enImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("en") ? "gb.png" : "gb_bw.png"), UriKind.Relative));
+                deImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("de") ? "de.png" : "de_bw.png"), UriKind.Relative));
+                siImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("si") ? "si.png" : "si_bw.png"), UriKind.Relative));
+                huImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("hu") ? "hu.png" : "hu_bw.png"), UriKind.Relative));
+                czImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("cz") ? "cz.png" : "cz_bw.png"), UriKind.Relative));
+                skImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("sk") ? "sk.png" : "sk_bw.png"), UriKind.Relative));
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("CashmaticApp", ex.ToString());
+            }
+       
 
         }
 
@@ -115,7 +132,7 @@ namespace CashmaticApp.Pages
             int i = 0;
             foreach (var item in itm)
             {
-                items.Add(new SummaryItem() { ItemID = i, ItemName = item.item_name, ItemPrice = item.item_price, ItemQty = item.item_quantity, ItemTotal = item.item_price });
+                items.Add(new SummaryItem() { ItemID = i, ItemName = item.item_name, ItemPrice = string.Format("{0}€", item.item_price), ItemQty = item.item_quantity, ItemTotal = string.Format("{0}€", item.item_price*item.item_quantity) });
                 i++;
             }
 

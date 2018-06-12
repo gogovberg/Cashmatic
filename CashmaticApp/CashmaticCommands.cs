@@ -1,4 +1,5 @@
 ﻿//using hgi.Environment;
+using hgi.Environment;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -303,7 +304,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("Cashmatic", ex.ToString());
             }
 
             return flag;
@@ -327,7 +328,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("Cashmatic", ex.ToString());
             }
 
             return false;
@@ -350,7 +351,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("Cashmatic", ex.ToString());
             }
 
             return flag;
@@ -372,7 +373,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("Cashmatic", ex.ToString());
             }
 
             return flag;
@@ -396,7 +397,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("Cashmatic", ex.ToString());
             }
 
             return flag;
@@ -419,8 +420,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //TODO: handle exception
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("Cashmatic", ex.ToString());
             }
         }
 
@@ -447,7 +447,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("Cashmatic", ex.ToString());
             }
             return amount;
         }

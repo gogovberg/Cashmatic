@@ -39,6 +39,7 @@ namespace CashmaticApp.Controls
             set { this.SetValue(IsSelectedProperty, value); }
         }
         public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.RegisterAttached("IsSelected", typeof(bool), typeof(CheckBoxImage), new PropertyMetadata(false));
+
         public CheckBoxImage()
         {
             InitializeComponent();

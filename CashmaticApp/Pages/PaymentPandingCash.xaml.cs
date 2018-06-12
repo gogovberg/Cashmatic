@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hgi.Environment;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,22 +39,24 @@ namespace CashmaticApp.Pages
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Log("CashmaticApp", "CancelPayment");
             Application.Current.MainWindow.Content = new RefoundPending(_ob);
         }
 
         private void InitPayment()
         {
-            int amountLeft = _ob.ready2order.payment.paymentSummary.total;
+            Debug.Log("CashmaticApp", "InitPayment");
+            int amountLeft = _ob.ready2order.total;
 
-            if(_ob.ready2order.payment.paymentSummary.OnPayment)
+            if(_ob.panda.OnPayment)
             {
                 int saldato = CashmaticCommands.ReadSaldato();
-                amountLeft = _ob.ready2order.payment.paymentSummary.total - saldato;
+                amountLeft = _ob.ready2order.total - saldato;
             }
             else
             {
-                CashmaticCommands.WriteSubtotale(_ob.ready2order.payment.paymentSummary.total);
-                _ob.ready2order.payment.paymentSummary.OnPayment = true;
+                CashmaticCommands.WriteSubtotale(_ob.ready2order.total);
+                _ob.panda.OnPayment = true;
             }
             
             tblPrice.Text = String.Format("{0:0.00}€", amountLeft /(double) 100);
@@ -82,18 +85,17 @@ namespace CashmaticApp.Pages
             {
                 int saldato = CashmaticCommands.ReadSaldato();
                 Global.pagato = saldato;
-                saldato = _ob.ready2order.payment.paymentSummary.total - saldato;
+                saldato = _ob.ready2order.total - saldato;
             
                 Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() => tblPrice.Text = String.Format("{0:0.00}€", saldato / (double)100)));
             }
             catch (Exception ex)
             {
-
+                Debug.Log("CashmaticApp", ex.ToString());
             }
          
         }
-
         private void OnCreatedPagato(object source, FileSystemEventArgs e)
         {
 
@@ -111,7 +113,7 @@ namespace CashmaticApp.Pages
                 int nonerogat = CashmaticCommands.ReadNonerogato();
                 Global.pagato = pagato;
 
-                if (pagato == _ob.ready2order.payment.paymentSummary.total && saldato == _ob.ready2order.payment.paymentSummary.total)
+                if (pagato == _ob.ready2order.total && saldato == _ob.ready2order.total)
                 {
                     file.Delete();
                     Application.Current.Dispatcher.BeginInvoke(
@@ -120,7 +122,7 @@ namespace CashmaticApp.Pages
             }
             catch(Exception ex)
             {
-                //TODO:Handle exception
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
            
@@ -147,10 +149,11 @@ namespace CashmaticApp.Pages
             }
             catch(Exception ex)
             {
-                //TODO: handle error
+                Debug.Log("CashmaticApp", ex.ToString());
             }
          
         }
+
         private void SetSaldatoChangeListener()
         {
             _saldatoWatcher = new FileSystemWatcher();

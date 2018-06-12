@@ -18,10 +18,23 @@
         </Grid.RowDefinitions>
         <DataGrid Style="{StaticResource DataGridSummary}"  x:Name="dtSummary" Grid.Row="0" Grid.Column="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="60*"  Header="{DynamicResource titleItem}" Binding="{Binding Path=ItemName}"></DataGridTextColumn>
-                <DataGridTextColumn Width="20*"  Header="{DynamicResource titlePrice}" Binding="{Binding Path=ItemPrice}"></DataGridTextColumn>
-                <DataGridTextColumn Width="20*"  Header="{DynamicResource titleQty}" Binding="{Binding Path=ItemQty}"></DataGridTextColumn>
-                <DataGridTextColumn Width="20*"  Header="{DynamicResource titleTotal}" Binding="{Binding Path=ItemTotal}"></DataGridTextColumn>
+                <DataGridTextColumn Width="60*"  CellStyle="{StaticResource nameColumn}" Header="{DynamicResource titleItem}" Binding="{Binding Path=ItemName}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="#FF356499"/>
+                            <Setter Property="FontSize" Value="26" />
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                            <Setter Property="BorderBrush" Value="#FF356499"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="20*" CellStyle="{StaticResource qtyColumn}" Header="{DynamicResource titleQty}" Binding="{Binding Path=ItemQty}"></DataGridTextColumn>
+                <DataGridTextColumn Width="20*" CellStyle="{StaticResource priceColumn}" Header="{DynamicResource titlePrice}" Binding="{Binding Path=ItemPrice}"></DataGridTextColumn>
+                <DataGridTextColumn Width="20*" CellStyle="{StaticResource totalColumn}" Header="{DynamicResource titleTotal}" Binding="{Binding Path=ItemTotal}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
@@ -30,23 +43,23 @@
                     <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
                 </Button.BitmapEffect>
             </Button>
-            <CheckBox x:Name="en"  Style="{StaticResource ChecBoxLanguageImgStyle}" Checked="Language_checked">
-                <Image x:Name="enImg" ></Image>
+            <CheckBox x:Name="en"   Style="{StaticResource ChecBoxLanguageImgStyle}" Checked="Language_checked">
+                <Image x:Name="enImg" Style="{StaticResource imgLanguageStyle}" ></Image>
             </CheckBox>
             <CheckBox x:Name="de"  Style="{StaticResource ChecBoxLanguageImgStyle}" Checked="Language_checked">
-                <Image x:Name="deImg" ></Image>
+                <Image x:Name="deImg"  Style="{StaticResource imgLanguageStyle}"></Image>
             </CheckBox>
             <CheckBox x:Name="si" Style="{StaticResource ChecBoxLanguageImgStyle}" Checked="Language_checked">
-                <Image x:Name="siImg" ></Image>
+                <Image x:Name="siImg" Style="{StaticResource imgLanguageStyle}"></Image>
             </CheckBox>
             <CheckBox x:Name="hu"  Style="{StaticResource ChecBoxLanguageImgStyle}" Checked="Language_checked">
-                <Image x:Name="huImg" ></Image>
+                <Image x:Name="huImg" Style="{StaticResource imgLanguageStyle}"></Image>
             </CheckBox>
             <CheckBox x:Name="cz"  Style="{StaticResource ChecBoxLanguageImgStyle}" Checked="Language_checked">
-                <Image x:Name="czImg" ></Image>
+                <Image x:Name="czImg" Style="{StaticResource imgLanguageStyle}"></Image>
             </CheckBox>
             <CheckBox x:Name="sk"  Style="{StaticResource ChecBoxLanguageImgStyle}" Checked="Language_checked">
-                <Image  x:Name="skImg" ></Image>
+                <Image  x:Name="skImg" Style="{StaticResource imgLanguageStyle}" ></Image>
             </CheckBox>
         </WrapPanel>
         <Border Grid.RowSpan="2" Grid.Column="1" x:Name="bdrPrice" Style="{StaticResource PriceSummaryStyle}" >
@@ -62,33 +75,33 @@
                     <Border BorderBrush="White" BorderThickness="0,0,0,2" Margin="10" >
                         <TextBlock x:Name="tblPaymentSummary" Text="{DynamicResource paymentSummary}" FontWeight="SemiBold" FontSize="26" Foreground="White" Margin="10" ></TextBlock>
                     </Border>
-                    <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblDateTimeIn" Text="{DynamicResource checkInDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
-                        <TextBlock x:Name="tblDateTimeInValue" Text="3.2.2018 14:30" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
-                    </WrapPanel>
+                    <Grid Margin="10,0,10,0">
+                        <TextBlock x:Name="tblDateTimeIn" Text="{DynamicResource checkInDate}" FontWeight="Regular" HorizontalAlignment="Left"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
+                        <TextBlock x:Name="tblDateTimeInValue" Text="3.2.2018 14:30" FontWeight="SemiBold" HorizontalAlignment="Right"   FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
+                    </Grid>
                     <Border BorderBrush="White" BorderThickness="0,0,0,1" Margin="10,0,10,10">
-                        <WrapPanel >
-                            <TextBlock x:Name="tblDateTimeOut" Text="{DynamicResource checkOutDate}" FontWeight="Regular"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
-                            <TextBlock x:Name="tblDateTimeOutValue" Text="8.2.2018 01:16" FontWeight="SemiBold"  FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
-                        </WrapPanel>
+                        <Grid >
+                            <TextBlock x:Name="tblDateTimeOut" Text="{DynamicResource checkOutDate}" FontWeight="Regular"  HorizontalAlignment="Left" FontSize="20" Foreground="#B2FFFFFF" Margin="10,0,10,10" ></TextBlock>
+                            <TextBlock x:Name="tblDateTimeOutValue" Text="8.2.2018 01:16" FontWeight="SemiBold" HorizontalAlignment="Right" FontSize="20" Foreground="#B2FFFFFF" Margin="67,0,10,10" />
+                        </Grid>
                     </Border>
-                    <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblBasePrice" Text="{DynamicResource basePrice}" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
-                        <TextBlock x:Name="tblBasePriceValue" Text="101.96$" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
-                    </WrapPanel>
-                    <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblVatOne" Text="{DynamicResource vat1}" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
-                        <TextBlock x:Name="tblVatOneValue" Text="12.58$" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
-                    </WrapPanel>
-                    <WrapPanel Margin="10,0,10,0">
-                        <TextBlock x:Name="tblVatTwo" Text="{DynamicResource vat2}" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
-                        <TextBlock x:Name="tblVatTwoValue" Text="30.04$" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
-                    </WrapPanel>
+                    <Grid Margin="10,0,10,0">
+                        <TextBlock x:Name="tblBasePrice" Text="{DynamicResource basePrice}" HorizontalAlignment="Left" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblBasePriceValue" Text="101.96$" HorizontalAlignment="Right" Style="{StaticResource PaymentTextBlockStyle}" Margin="59,10,10,10"></TextBlock>
+                    </Grid>
+                    <Grid Margin="10,0,10,0">
+                        <TextBlock x:Name="tblVatOne" Text="{DynamicResource vat1}" HorizontalAlignment="Left" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblVatOneValue" Text="12.58$" HorizontalAlignment="Right" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                    </Grid>
+                    <Grid Margin="10,0,10,0">
+                        <TextBlock x:Name="tblVatTwo" Text="{DynamicResource vat2}" HorizontalAlignment="Left" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblVatTwoValue" Text="30.04$" HorizontalAlignment="Right" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                    </Grid>
                     <Border BorderThickness="0,1,0,0" BorderBrush="White" Margin="10">
-                        <WrapPanel >
-                            <TextBlock x:Name="tblTotal" Text="{DynamicResource totalOrder}"  VerticalAlignment="Center"  Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
-                            <TextBlock x:Name="tblTotalValue" Text="132.00$" Foreground="White" FontWeight="Regular" VerticalAlignment="Bottom"  FontSize="40" Margin="10,0,0,10"></TextBlock>
-                        </WrapPanel>
+                        <Grid >
+                            <TextBlock x:Name="tblTotal" Text="{DynamicResource totalOrder}"  HorizontalAlignment="Left" VerticalAlignment="Center"  Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                            <TextBlock x:Name="tblTotalValue" Text="132.00$" Foreground="White" HorizontalAlignment="Right"  FontWeight="Regular" VerticalAlignment="Bottom"  FontSize="40" Margin="10,0,0,10"></TextBlock>
+                        </Grid>
                     </Border>
                 </StackPanel>
                 <StackPanel Grid.Row="1">

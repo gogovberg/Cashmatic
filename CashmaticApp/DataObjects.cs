@@ -12,8 +12,8 @@ namespace CashmaticApp
         public int ItemID { set; get; }
         public string ItemName { set; get; }
         public int ItemQty { set; get; }
-        public int ItemPrice { set; get; }
-        public int ItemTotal { set; get; }
+        public string ItemPrice { set; get; }
+        public string ItemTotal { set; get; }
     }
     public class Utf8StringWriter : StringWriter
     {
@@ -63,6 +63,11 @@ namespace CashmaticApp
         public string checkindate { get; set; }
         public string checkoutdate { get; set; }
         public string language { set; get; }
+        public double base_price { set; get; }
+        public double vat_rate_one { set; get; }
+        public double vat_rate_two { set; get; }
+        public double total_price { set; get; }
+        public bool OnPayment { set; get; }
     }
     public class Address
     {
@@ -99,7 +104,8 @@ namespace CashmaticApp
         public int customer_id { get; set; }
         public List<Item> items { get; set; }
         public Address address { get; set; }
-        public Payment payment { set; get; }
+        public int total { set; get; }
+        
     }
     public class RootObject
     {

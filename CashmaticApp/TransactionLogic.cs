@@ -19,7 +19,7 @@ namespace CashmaticApp
         {
             try
             {
-                Debug.Log("Cashmatic", string.Format("Bill request for {0}", itemId));
+                Debug.Log("CashmaticApp", string.Format("Bill request for {0}", itemId));
 
                 if (ConfigurationManager.AppSettings["ready2orderAuthorization"] != null)
                 {
@@ -39,7 +39,7 @@ namespace CashmaticApp
 
                     if (!ob.ready2order.error)
                     {
-                        Debug.Log("Cashmatic", "Request succsessfull.");
+                        Debug.Log("CashmaticApp", "Request succsessfull.");
                         using (var webClient = new WebClient())
                         {
                             webClient.DownloadFile(ob.ready2order.uri, "Bills\\"+itemId+".pdf");
@@ -49,26 +49,26 @@ namespace CashmaticApp
                         Prn.Print("Bills\\" + itemId + ".pdf", printer, parameters);
                         if (Prn.ErrorMessage != null)
                         {
-                            Debug.Log("Cashmatic", Prn.ErrorMessage);
+                            Debug.Log("CashmaticApp", Prn.ErrorMessage);
                         }
                         else
                         {
-                            Debug.Log("Cashmatic", "Print succsessfull.");
+                            Debug.Log("CashmaticApp", "Print succsessfull.");
                         }
                     }
                     else
                     {
-                        Debug.Log("Cashmatic", "Server error.");
+                        Debug.Log("CashmaticApp", "Server error.");
                     }
                 }
                 else
                 {
-                    Debug.Log("Cashmatic",string.Format("Can not make request for item[{0}]. ready2orderAuthorization key not found in application configuration file. ", itemId));
+                    Debug.Log("CashmaticApp",string.Format("Can not make request for item[{0}]. ready2orderAuthorization key not found in application configuration file. ", itemId));
                 }  
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
         }
@@ -78,7 +78,7 @@ namespace CashmaticApp
             RootObject ob = new RootObject();
             try
             {
-                Debug.Log("Cashmatic", string.Format("Bill request for {0}", itemId));
+                Debug.Log("CashmaticApp", string.Format("Bill request for {0}", itemId));
 
                 if (ConfigurationManager.AppSettings["pandaParkenAuthorization"] != null)
                 {
@@ -97,18 +97,38 @@ namespace CashmaticApp
                     IRestResponse response = restClient.Execute(request);
                   
                     ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
-
+                    PaymentSummary(ob);
                 }
                 else
                 {
-                    Debug.Log("Cashmatic", string.Format("Can not make request for item[{0}]. pandaParkenAuthorization key not found in application configuration file. ", itemId));
+                    Debug.Log("CashmaticApp", string.Format("Can not make request for item[{0}]. pandaParkenAuthorization key not found in application configuration file. ", itemId));
                 }
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return ob;
+        }
+
+        private static void PaymentSummary(RootObject ob)
+        {
+            try
+            {
+                
+                if(ob!=null)
+                {
+                    ob.ready2order.total = 0;
+                    foreach (Item it in ob.ready2order.items)
+                    {
+                        ob.ready2order.total = it.item_price * it.item_quantity;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("Cashmatic", ex.ToString());
+            }
         }
     }
 }

@@ -4,7 +4,6 @@
              xmlns:local="clr-namespace:CashmaticApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="IconsDictionary"  Source="pack://application:,,,/CashmaticApp;component/Icons.xaml" />
@@ -12,8 +11,5 @@
                 <ResourceDictionary x:Name="EnglishLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/English.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
-        
-        
     </Application.Resources>
 </Application>

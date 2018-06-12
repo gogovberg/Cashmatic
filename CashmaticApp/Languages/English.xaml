@@ -22,7 +22,7 @@
     <system:String x:Key="payCard">Pay with Card</system:String>
     <system:String x:Key="btnBack">Back</system:String>
     <system:String x:Key="titleItem">Item</system:String>
-    <system:String x:Key="titleQty">QTy</system:String>
+    <system:String x:Key="titleQty">Qty</system:String>
     <system:String x:Key="titlePrice">Price</system:String>
     <system:String x:Key="titleTotal">Total</system:String>
     <system:String x:Key="titleRemainPay">Remaining to pay:</system:String>
