@@ -90,11 +90,11 @@
                         <TextBlock x:Name="tblBasePriceValue" Text="101.96$" HorizontalAlignment="Right" Style="{StaticResource PaymentTextBlockStyle}" Margin="59,10,10,10"></TextBlock>
                     </Grid>
                     <Grid Margin="10,0,10,0">
-                        <TextBlock x:Name="tblVatOne" Text="{DynamicResource vat1}" HorizontalAlignment="Left" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblVatOne" Text="" HorizontalAlignment="Left" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                         <TextBlock x:Name="tblVatOneValue" Text="12.58$" HorizontalAlignment="Right" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                     </Grid>
                     <Grid Margin="10,0,10,0">
-                        <TextBlock x:Name="tblVatTwo" Text="{DynamicResource vat2}" HorizontalAlignment="Left" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
+                        <TextBlock x:Name="tblVatTwo" Text="" HorizontalAlignment="Left" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                         <TextBlock x:Name="tblVatTwoValue" Text="30.04$" HorizontalAlignment="Right" Style="{StaticResource PaymentTextBlockStyle}"></TextBlock>
                     </Grid>
                     <Border BorderThickness="0,1,0,0" BorderBrush="White" Margin="10">

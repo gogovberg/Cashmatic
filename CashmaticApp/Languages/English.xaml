@@ -15,8 +15,6 @@
     <system:String x:Key="checkInDate">Check-in</system:String>
     <system:String x:Key="checkOutDate">Check-out</system:String>
     <system:String x:Key="basePrice">Base price</system:String>
-    <system:String x:Key="vat1">VAT (9%)</system:String>
-    <system:String x:Key="vat2">VAT (20%)</system:String>
     <system:String x:Key="totalOrder">Total Order</system:String>
     <system:String x:Key="payCash">Pay with Cash</system:String>
     <system:String x:Key="payCard">Pay with Card</system:String>

@@ -31,10 +31,14 @@ namespace CashmaticApp.Pages
             {
                 dtSummary.ItemsSource = LoadSummaryItems(_ob.ready2order.items);
                 dtSummary.AutoGenerateColumns = false;
+
                 tblTotalValue.Text = string.Format("{0:0.00}€", _ob.panda.total_price);
                 tblBasePriceValue.Text = string.Format("{0:0.00}€", _ob.panda.base_price);
-                tblVatOneValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_one);
-                tblVatTwoValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_two);
+                tblVatOne.Text = string.Format("VAT({0}%)",_ob.panda.vat_rate_low);
+                tblVatOneValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_low_value);
+                tblVatTwo.Text = string.Format("VAT({0}%)", _ob.panda.vat_rate_high);
+                tblVatTwoValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_high_value);
+
                 tblDateTimeInValue.Text = _ob.panda.checkindate;
                 tblDateTimeOutValue.Text = _ob.panda.checkoutdate;
 
@@ -59,8 +63,8 @@ namespace CashmaticApp.Pages
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
-            
+            //Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
+            TransactionLogic.RequestBill();
         }
 
         private void Language_checked(object sender, RoutedEventArgs e)

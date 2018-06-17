@@ -66,8 +66,8 @@ namespace CashmaticApp.Pages
             if(!string.IsNullOrEmpty(_barCode) && _barCode.Length==36)
             {
                 DisposeTimer();
-                RootObject ob = TransactionLogic.RequestParkingDetails("5b0452ae-1c6b-4337-9a28-48c3ce3241bf");
-                if (ob != null)
+                RootObject ob = TransactionLogic.RequestParkingDetails(_barCode);
+                if (ob != null && !ob.isError)
                 {
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));

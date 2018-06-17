@@ -13,5 +13,7 @@ namespace CashmaticApp
         public static int pagato = 0;
         public static string request_bill_id;
         public static string ready2order_hash;
+        public static string pandaParkenDetailsJson = "";
+        public static string ready2orderJson = "";
     }
 }

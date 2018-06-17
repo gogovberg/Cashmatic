@@ -64,8 +64,10 @@ namespace CashmaticApp
         public string checkoutdate { get; set; }
         public string language { set; get; }
         public double base_price { set; get; }
-        public double vat_rate_one { set; get; }
-        public double vat_rate_two { set; get; }
+        public double vat_rate_low { set; get; }
+        public double vat_rate_high { set; get; }
+        public double vat_rate_low_value { set; get; }
+        public double vat_rate_high_value { set; get; }
         public double total_price { set; get; }
         public bool OnPayment { set; get; }
     }
@@ -105,7 +107,7 @@ namespace CashmaticApp
         public List<Item> items { get; set; }
         public Address address { get; set; }
         public int total { set; get; }
-        
+       
     }
     public class RootObject
     {
@@ -113,5 +115,7 @@ namespace CashmaticApp
         public string message { set; get; }
         public Panda panda { get; set; }
         public Ready2order ready2order { get; set; }
+        public string invoice_pdf { get; set; }
+        public bool isError { set; get; }
     }
 }
