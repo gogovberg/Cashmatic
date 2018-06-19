@@ -25,6 +25,7 @@ namespace CashmaticApp.Pages
 
         public PaymentSummaryPage(RootObject ob)
         {
+            Debug.Log("CashmaticApp", "Initializing payment summary page");
             _ob = ob;
             InitializeComponent();
             try
@@ -55,17 +56,20 @@ namespace CashmaticApp.Pages
    
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Log("CashmaticApp", "Button back click");
             Application.Current.MainWindow.Content = new TicketScanPage();
         }
 
         private void btnPayCash_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Log("CashmaticApp", "Button pay cash click");
             _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCASH;
             Application.Current.MainWindow.Content = new PaymentPandingCash(_ob);
         }
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Log("CashmaticApp", "Button pay card click");
             //Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
             _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCARD;
             TransactionLogic.RequestBill(_ob);

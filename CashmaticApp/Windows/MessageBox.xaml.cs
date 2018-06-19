@@ -1,5 +1,4 @@
-﻿using hgi.Environment;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CashmaticApp.Pages
+namespace CashmaticApp.Windows
 {
     /// <summary>
-    /// Interaction logic for ThankYou.xaml
+    /// Interaction logic for MessageBox.xaml
     /// </summary>
-    public partial class ThankYouCash : Page
+    public partial class MessageBox : Window
     {
-        public ThankYouCash()
+        public MessageBox()
         {
-            Debug.Log("CashmaticApp", "Initializing thank you cash");
             InitializeComponent();
+        }
+        public MessageBox(string Content)
+        {
+            InitializeComponent();
+            tblContentText.Text = Content;
+
+        }
+
+        private void btnOk_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

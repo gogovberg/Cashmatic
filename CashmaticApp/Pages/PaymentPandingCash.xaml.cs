@@ -32,6 +32,7 @@ namespace CashmaticApp.Pages
 
         public PaymentPandingCash(RootObject ob)
         {
+            Debug.Log("CashmaticApp", "Initializing payment panding cash");
             InitializeComponent();
             _ob = ob;
             InitPayment();
@@ -68,6 +69,7 @@ namespace CashmaticApp.Pages
 
         private void OnChangedDir(object source, FileSystemEventArgs e)
         {
+            Debug.Log("CashmaticApp", "OnChangedDir");
             if (File.Exists(Global.base_path + "saldato.txt") && _saldatoWatcher == null)
             {
                 SetSaldatoChangeListener();
@@ -76,6 +78,7 @@ namespace CashmaticApp.Pages
 
         private void OnChangeSaldato(object source, FileSystemEventArgs e)
         {
+            Debug.Log("CashmaticApp", "OnChangeSaldato");
             FileInfo file = new FileInfo(e.FullPath);
             while (Helper.isFileLocked(file))
             {
@@ -99,7 +102,7 @@ namespace CashmaticApp.Pages
 
         private void OnCreatedPagato(object source, FileSystemEventArgs e)
         {
-
+            Debug.Log("CashmaticApp", "OnCreatedPagato");
             FileInfo file = new FileInfo(e.FullPath);
 
             while (Helper.isFileLocked(file))
@@ -131,6 +134,7 @@ namespace CashmaticApp.Pages
 
         private void OnCreatedErogato(object source, FileSystemEventArgs e)
         {
+            Debug.Log("CashmaticApp", "OnCreatedErogato");
             FileInfo file = new FileInfo(e.FullPath);
             while (Helper.isFileLocked(file))
             {
@@ -158,6 +162,7 @@ namespace CashmaticApp.Pages
 
         private void SetSaldatoChangeListener()
         {
+            Debug.Log("CashmaticApp", "SetSaldatoChangeListener");
             _saldatoWatcher = new FileSystemWatcher();
             _saldatoWatcher.Path = Global.base_path;
             _saldatoWatcher.Filter ="saldato.txt";
@@ -167,6 +172,7 @@ namespace CashmaticApp.Pages
 
         private void SetPagatoChangeListener()
         {
+            Debug.Log("CashmaticApp", "SetPagatoChangeListener");
             _pagatoWatcher = new FileSystemWatcher();
             _pagatoWatcher.Path = Global.base_path;
             _pagatoWatcher.Filter = "pagato.txt";
@@ -178,6 +184,7 @@ namespace CashmaticApp.Pages
 
         private void SetErogatoChangeListener()
         {
+            Debug.Log("CashmaticApp", "SetErogatoChangeListener");
             _erogatoWatcher = new FileSystemWatcher();
             _erogatoWatcher.Path = Global.base_path;
             _erogatoWatcher.Filter = "erogato.txt";

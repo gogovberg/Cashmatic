@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hgi.Environment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace CashmaticApp.Pages
     {
         public ThankYouCard()
         {
+            Debug.Log("CashmaticApp", "Initializing thank you card");
             InitializeComponent();
         }
     }

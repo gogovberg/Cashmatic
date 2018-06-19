@@ -1,4 +1,5 @@
 ﻿using CashmaticApp.Pages;
+using hgi.Environment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CashmaticApp
+namespace CashmaticApp.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,7 +24,9 @@ namespace CashmaticApp
     {
         public MainWindow()
         {
+            Debug.Log("CashmaticApp", "Initializing main window");
             InitializeComponent();
+          
             this.Content = new TicketScanPage();
         }
     }

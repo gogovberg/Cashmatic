@@ -22,6 +22,7 @@ namespace CashmaticApp.Pages
 
         public TicketScanPage()
         {
+            Debug.Log("CashmaticApp", "Initializing ticket scan page");
             InitializeComponent();
             en.IsSelected = true;
             _language = en.Name;
@@ -65,6 +66,7 @@ namespace CashmaticApp.Pages
             ));
             if(!string.IsNullOrEmpty(_barCode) && _barCode.Length==36)
             {
+                Debug.Log("CashmaticApp", "CheckSyntaxAndReport");
                 DisposeTimer();
                 RootObject ob = TransactionLogic.RequestParkingDetails(_barCode);
                 if (ob != null && !ob.isError)
@@ -72,6 +74,7 @@ namespace CashmaticApp.Pages
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
                 }
+
             }
         }
 

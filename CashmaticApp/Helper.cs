@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -18,6 +19,8 @@ namespace CashmaticApp
 
         private static Newtonsoft.Json.Formatting indented = Newtonsoft.Json.Formatting.Indented;
         private static JsonSerializerSettings settings = new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.All };
+
+        private static App _currentApp = ((App)Application.Current);
 
         public static string ObjectToXml(object o)
         {
@@ -124,6 +127,22 @@ namespace CashmaticApp
             return false;
         }
 
+        public static void ShowResponseMessage(string status, string message)
+        {
+            Windows.MessageBox mb = null;
+
+            if (!string.IsNullOrWhiteSpace(status) && !string.IsNullOrWhiteSpace(message))
+            {
+                object resource = Application.Current.Resources[message];
+                if (resource != null)
+                {
+                    mb = new Windows.MessageBox(resource.ToString());
+                }
+            }
+            mb.Owner = _currentApp.MainWindow;
+            mb.ShowDialog();
+        }
+
         private static string FormatToCurrency(int unformattedNumber)
         {
             float f = unformattedNumber * 0.01f;
@@ -162,6 +181,8 @@ namespace CashmaticApp
                 return 0;
             }
         }
+
+        
 
     }
 }

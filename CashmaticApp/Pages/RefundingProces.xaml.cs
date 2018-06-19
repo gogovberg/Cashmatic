@@ -30,6 +30,7 @@ namespace CashmaticApp.Pages
 
         public RefundingProces(RootObject ob, bool CannotDispense)
         {
+            Debug.Log("CashmaticApp", "Initializing refunding process");
             InitializeComponent();
             _ob = ob;
             if(!CannotDispense)
@@ -55,7 +56,7 @@ namespace CashmaticApp.Pages
         }
         private void OnDeletedAnnuala(object source, FileSystemEventArgs e)
         {
-
+            Debug.Log("CashmaticApp", "OnDeletedAnnuala");
             FileInfo file = new FileInfo(e.FullPath);
             while (Helper.isFileLocked(file))
             {
@@ -73,6 +74,7 @@ namespace CashmaticApp.Pages
         }
         private void OnCreatedErogato(object source, FileSystemEventArgs e)
         {
+            Debug.Log("CashmaticApp", "OnCreatedErogato");
             FileInfo file = new FileInfo(e.FullPath);
             while (Helper.isFileLocked(file))
             {

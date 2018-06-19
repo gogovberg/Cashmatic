@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hgi.Environment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,18 +24,20 @@ namespace CashmaticApp.Pages
         private RootObject _ob;
         public RefoundPending(RootObject ob)
         {
+            Debug.Log("CashmaticApp", "Initializing refund pending");
             InitializeComponent();
             _ob = ob;
         }
 
         private void btnContinue_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Log("CashmaticApp", "Button continue click");
             Application.Current.MainWindow.Content = new PaymentPandingCash(_ob);
         }
 
         private void btnRefund_Click(object sender, RoutedEventArgs e)
         {
-            
+            Debug.Log("CashmaticApp", "Button refund click");
             Application.Current.MainWindow.Content = new RefundingProces(_ob,false);
         }
     }

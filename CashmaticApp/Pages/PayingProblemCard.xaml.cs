@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hgi.Environment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,17 +24,20 @@ namespace CashmaticApp.Pages
         RootObject _ob;
         public PayingProblemCard(RootObject ob)
         {
+            Debug.Log("CashmaticApp", "Initializing paying problem card");
             InitializeComponent();
             _ob = ob;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Log("CashmaticApp", "Button back click");
             Application.Current.MainWindow.Content = new PaymentSummaryPage(_ob);
         }
 
         private void btnRetry_Click(object sender, RoutedEventArgs e)
         {
+            Debug.Log("CashmaticApp", "Button retry click");
             Application.Current.MainWindow.Content = new RefoundPending(_ob);
         }
     }

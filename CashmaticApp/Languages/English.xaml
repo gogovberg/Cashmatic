@@ -48,4 +48,10 @@
     <system:String x:Key="titleProblem">There Was a Payment Problem</system:String>
     <system:String x:Key="subtitleProblem">With Your Bank Card</system:String>
     <system:String x:Key="btnCancel">Cancel</system:String>
+    <system:String x:Key="statusOk">OK</system:String>
+    <system:String x:Key="statusError">ERROR</system:String>
+    <system:String x:Key="WRONG_AUTHORIZATION">Unknown error, try again later.</system:String>
+    <system:String x:Key="WRONG_BOOKING">Wrong booking.</system:String>
+    <system:String x:Key="CHECKIN">Wrong booking.</system:String>
+    <system:String x:Key="CAR_NOT_PARKED">Vehicle with this QR code is not parked, we cannot issue a receipt.</system:String>
 </ResourceDictionary>
