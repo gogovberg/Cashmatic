@@ -43,6 +43,8 @@ namespace CashmaticApp.Pages
                 tblDateTimeOutValue.Text = _ob.panda.checkoutdate;
 
                 SetLanguageCheckbox(_ob.panda.language);
+
+                Global.subtotale = (int)_ob.panda.total_price * 100;
             }
             catch(Exception ex)
             {
