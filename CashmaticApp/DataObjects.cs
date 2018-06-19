@@ -69,6 +69,8 @@ namespace CashmaticApp
         public double vat_rate_low_value { set; get; }
         public double vat_rate_high_value { set; get; }
         public double total_price { set; get; }
+        public int paymentMethodCASH { get; set; }
+        public int paymentMethodCARD { get; set; }
         public bool OnPayment { set; get; }
     }
     public class Address
@@ -103,7 +105,7 @@ namespace CashmaticApp
         public bool invoice_testMode { get; set; }
         public int paymentMethod_id { get; set; }
         public int user_id { get; set; }
-        public int customer_id { get; set; }
+        public string customer_id { get; set; }
         public List<Item> items { get; set; }
         public Address address { get; set; }
         public int total { set; get; }
@@ -116,6 +118,8 @@ namespace CashmaticApp
         public Panda panda { get; set; }
         public Ready2order ready2order { get; set; }
         public string invoice_pdf { get; set; }
+        public int invoice_id { get; set; }
+        public string invoice_numberFull { get; set; }
         public bool isError { set; get; }
     }
 }

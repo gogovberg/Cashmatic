@@ -58,13 +58,16 @@ namespace CashmaticApp.Pages
 
         private void btnPayCash_Click(object sender, RoutedEventArgs e)
         {
+            _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCASH;
             Application.Current.MainWindow.Content = new PaymentPandingCash(_ob);
         }
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
             //Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
-            TransactionLogic.RequestBill();
+            _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCARD;
+            TransactionLogic.RequestBill(_ob);
+            TransactionLogic.ExternalCheckout(_ob);
         }
 
         private void Language_checked(object sender, RoutedEventArgs e)
