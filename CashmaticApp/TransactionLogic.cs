@@ -86,11 +86,11 @@ namespace CashmaticApp
                     IRestResponse response = restClient.Execute(request);
                     RootObject ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
 
-                    //string status = ob.isError ? "ERROR" : "OK";
-                    //string message = string.IsNullOrEmpty(ob.message) ? "" : ob.message;
+                    string status = ob.isError ? "ERROR" : "OK";
+                    string message = string.IsNullOrEmpty(ob.message) ? "" : ob.message;
 
-                    string status = "ERROR";
-                    string message = "CAR_NOT_PARKED";
+                    //string status = "ERROR";
+                    //string message = "CAR_NOT_PARKED";
 
                     Helper.ShowResponseMessage(status, message);
                     Debug.Log("CashmaticApp", string.Format("STATUS: {0} MESSAGE:{1}", status, message));
