@@ -24,6 +24,12 @@ namespace CashmaticApp.Windows
     {
         public MainWindow()
         {
+            string pathTodirectoryBills = "/Bills";
+            //string pathTodirectoryDebugLog = "/DebugLog";
+
+            System.IO.Directory.CreateDirectory(pathTodirectoryBills);
+            //System.IO.Directory.CreateDirectory(pathTodirectoryDebugLog);
+
             Debug.Log("CashmaticApp", "Initializing main window");
             InitializeComponent();
           

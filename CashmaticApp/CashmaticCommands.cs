@@ -39,7 +39,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
         }
         /// <summary>
@@ -55,7 +55,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
         }
         /// <summary>
@@ -71,7 +71,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
         }
 
@@ -120,7 +120,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return ml;
         }
@@ -139,7 +139,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return amount;
         }
@@ -158,7 +158,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return amount;
         }
@@ -177,7 +177,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return amount;
         }
@@ -197,7 +197,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return amount;
         }
@@ -220,7 +220,7 @@ namespace CashmaticApp
             {
                 // TODO: handle exception
                 flag = false;
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return flag;
         }
@@ -243,7 +243,7 @@ namespace CashmaticApp
             {
                 // TODO: handle exception
                 flag = false;
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return flag;
         }
@@ -275,13 +275,13 @@ namespace CashmaticApp
                 }
                 else
                 {
-                    //TODO: handle non existing level file
+                    Debug.Log("CashmaticApp", "File" + file_name + " do not exists.");
                 }
             }
             catch (Exception ex)
             {
                 //TODO: handle exception
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return response;
         }
@@ -304,7 +304,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
             return flag;
@@ -328,7 +328,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
             return false;
@@ -351,7 +351,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
             return flag;
@@ -373,7 +373,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
             return flag;
@@ -397,7 +397,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
             return flag;
@@ -420,7 +420,7 @@ namespace CashmaticApp
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
         }
 
@@ -441,13 +441,14 @@ namespace CashmaticApp
                 }
                 else
                 {
-                    //TODO: handle non existing level file
+                  
+                    Debug.Log("CashmaticApp", "File"+file_name+" do not exists.");
                 }
 
             }
             catch (Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
             return amount;
         }

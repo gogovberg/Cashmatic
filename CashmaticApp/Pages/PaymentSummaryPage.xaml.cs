@@ -35,7 +35,7 @@ namespace CashmaticApp.Pages
 
                 tblTotalValue.Text = string.Format("{0:0.00}€", _ob.panda.total_price);
                 tblBasePriceValue.Text = string.Format("{0:0.00}€", _ob.panda.base_price);
-                tblVatOne.Text = string.Format("VAT({0}%)",_ob.panda.vat_rate_low);
+                tblVatOne.Text = string.Format("VAT({0}%)", _ob.panda.vat_rate_low);
                 tblVatOneValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_low_value);
                 tblVatTwo.Text = string.Format("VAT({0}%)", _ob.panda.vat_rate_high);
                 tblVatTwoValue.Text = string.Format("{0:0.00}€", _ob.panda.vat_rate_high_value);
@@ -45,15 +45,15 @@ namespace CashmaticApp.Pages
 
                 SetLanguageCheckbox(_ob.panda.language);
 
-                Global.subtotale = (int)_ob.panda.total_price * 100;
+                Global.subtotale = (int)(ob.panda.total_price * 100);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Log("CashmaticApp", ex.ToString());
             }
-  
+
         }
-   
+
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             Debug.Log("CashmaticApp", "Button back click");
@@ -70,10 +70,9 @@ namespace CashmaticApp.Pages
         private void btnPayCard_Click(object sender, RoutedEventArgs e)
         {
             Debug.Log("CashmaticApp", "Button pay card click");
-            //Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
+
             _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCARD;
-            TransactionLogic.RequestBill(_ob);
-            TransactionLogic.ExternalCheckout(_ob);
+            Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
         }
 
         private void Language_checked(object sender, RoutedEventArgs e)
@@ -97,11 +96,11 @@ namespace CashmaticApp.Pages
                 czImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("cz") ? "cz.png" : "cz_bw.png"), UriKind.Relative));
                 skImg.Source = new BitmapImage(new Uri("/Images/" + (language.Equals("sk") ? "sk.png" : "sk_bw.png"), UriKind.Relative));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Log("CashmaticApp", ex.ToString());
             }
-       
+
 
         }
 
@@ -145,7 +144,7 @@ namespace CashmaticApp.Pages
             int i = 0;
             foreach (var item in itm)
             {
-                items.Add(new SummaryItem() { ItemID = i, ItemName = item.item_name, ItemPrice = string.Format("{0}€", item.item_price), ItemQty = item.item_quantity, ItemTotal = string.Format("{0}€", item.item_price*item.item_quantity) });
+                items.Add(new SummaryItem() { ItemID = i, ItemName = item.item_name, ItemPrice = string.Format("{0}€", item.item_price), ItemQty = item.item_quantity, ItemTotal = string.Format("{0}€", item.item_price * item.item_quantity) });
                 i++;
             }
 

@@ -9,11 +9,15 @@ namespace CashmaticApp.Pages
     /// </summary>
     public partial class TransactionWait : Page
     {
-        public TransactionWait()
+        private RootObject _ob;
+
+        public TransactionWait(RootObject ob)
         {
             Debug.Log("CashmaticApp", "Initialize transaction wait");
+
+            _ob = ob;
             InitializeComponent();
-            Application.Current.MainWindow.Content = new ThankYouCash();
+            tbAmount.Text = string.Format("Paying amount of {0}", string.Format("{0:0.00}€", _ob.panda.total_price));
         }
     }
 }

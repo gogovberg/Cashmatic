@@ -20,8 +20,6 @@ namespace CashmaticApp
         private static Newtonsoft.Json.Formatting indented = Newtonsoft.Json.Formatting.Indented;
         private static JsonSerializerSettings settings = new JsonSerializerSettings() {TypeNameHandling = TypeNameHandling.All };
 
-        private static App _currentApp = ((App)Application.Current);
-
         public static string ObjectToXml(object o)
         {
             StringWriter sw = new Utf8StringWriter();
@@ -137,10 +135,11 @@ namespace CashmaticApp
                 if (resource != null)
                 {
                     mb = new Windows.MessageBox(resource.ToString());
+                    mb.Owner = ((App)Application.Current).MainWindow;
+                    mb.ShowDialog();
                 }
             }
-            mb.Owner = _currentApp.MainWindow;
-            mb.ShowDialog();
+         
         }
 
         private static string FormatToCurrency(int unformattedNumber)

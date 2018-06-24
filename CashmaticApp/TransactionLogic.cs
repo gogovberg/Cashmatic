@@ -198,8 +198,10 @@ namespace CashmaticApp
             }
             catch(Exception ex)
             {
-                Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
         }
+
+        
     }
 }

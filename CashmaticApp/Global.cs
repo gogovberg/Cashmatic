@@ -16,5 +16,6 @@ namespace CashmaticApp
         public static string pandaParkenDetailsJson = "";
         public static string ready2orderJson = "";
         public static RootObject bill_data = null;
+        public static TerminalCommands terminalCommands=null;
     }
 }

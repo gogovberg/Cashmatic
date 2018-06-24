@@ -38,7 +38,8 @@ namespace CashmaticApp.Pages
         private void btnRetry_Click(object sender, RoutedEventArgs e)
         {
             Debug.Log("CashmaticApp", "Button retry click");
-            Application.Current.MainWindow.Content = new RefoundPending(_ob);
+            _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCARD;
+            Application.Current.MainWindow.Content = new PaymentPandingCard(_ob);
         }
     }
 }

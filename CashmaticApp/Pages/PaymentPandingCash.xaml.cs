@@ -25,7 +25,7 @@ namespace CashmaticApp.Pages
     public partial class PaymentPandingCash : Page
     {
         private RootObject _ob;
-      
+
         private FileSystemWatcher _saldatoWatcher = null;
         private FileSystemWatcher _pagatoWatcher = null;
         private FileSystemWatcher _erogatoWatcher = null;
@@ -49,22 +49,23 @@ namespace CashmaticApp.Pages
             Debug.Log("CashmaticApp", "InitPayment");
             int amountLeft = Global.subtotale;
 
-            if(_ob.panda.OnPayment)
+            if (_ob.panda.OnPayment)
             {
                 int saldato = CashmaticCommands.ReadSaldato();
                 amountLeft = Global.subtotale - saldato;
             }
             else
             {
-                CashmaticCommands.WriteSubtotale((int)_ob.panda.total_price*100);
+                CashmaticCommands.WriteSubtotale(Global.subtotale);
                 _ob.panda.OnPayment = true;
             }
-            
-            tblPrice.Text = String.Format("{0:0.00}€", amountLeft /(double) 100);
+
+            tblPrice.Text = String.Format("{0:0.00}€", amountLeft / (double)100);
 
             SetSaldatoChangeListener();
             SetPagatoChangeListener();
             SetErogatoChangeListener();
+            SetNonerogatoChangeListener();
         }
 
         private void OnChangedDir(object source, FileSystemEventArgs e)
@@ -89,7 +90,7 @@ namespace CashmaticApp.Pages
                 int saldato = CashmaticCommands.ReadSaldato();
                 Global.pagato = saldato;
                 saldato = Global.subtotale - saldato;
-            
+
                 Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() => tblPrice.Text = String.Format("{0:0.00}€", saldato / (double)100)));
             }
@@ -97,7 +98,7 @@ namespace CashmaticApp.Pages
             {
                 Debug.Log("CashmaticApp", ex.ToString());
             }
-         
+
         }
 
         private void OnCreatedPagato(object source, FileSystemEventArgs e)
@@ -105,6 +106,7 @@ namespace CashmaticApp.Pages
             Debug.Log("CashmaticApp", "OnCreatedPagato");
             FileInfo file = new FileInfo(e.FullPath);
 
+            Thread.Sleep(3000);
             while (Helper.isFileLocked(file))
             {
                 Thread.Sleep(50);
@@ -115,21 +117,21 @@ namespace CashmaticApp.Pages
                 int saldato = CashmaticCommands.ReadPagato();
                 int erogato = CashmaticCommands.ReadErogato();
                 int nonerogat = CashmaticCommands.ReadNonerogato();
-                Global.pagato = pagato;
+                Global.pagato = pagato - erogato;
 
-                if (pagato == _ob.panda.total_price && saldato == _ob.panda.total_price)
+                if (pagato >= Global.subtotale)
                 {
                     file.Delete();
                     Application.Current.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash()));
+                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash(_ob)));
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Log("CashmaticApp", ex.ToString());
             }
 
-           
+
         }
 
         private void OnCreatedErogato(object source, FileSystemEventArgs e)
@@ -142,7 +144,7 @@ namespace CashmaticApp.Pages
             }
             try
             {
-              
+
                 int erogato = CashmaticCommands.ReadErogato();
                 int resto = Global.pagato - Global.subtotale;
 
@@ -150,14 +152,41 @@ namespace CashmaticApp.Pages
                 {
                     file.Delete();
                     Application.Current.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new RefundingProces(_ob,true)));
+                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new RefundingProces(_ob, true)));
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.Log("CashmaticApp", ex.ToString());
             }
-         
+
+        }
+        private void OnCreatedNonerogato(object source, FileSystemEventArgs e)
+        {
+            Debug.Log("CashmaticApp", "OnCreatedNonerogato");
+            FileInfo file = new FileInfo(e.FullPath);
+            while (Helper.isFileLocked(file))
+            {
+                Thread.Sleep(50);
+            }
+            try
+            {
+
+                int erogato = CashmaticCommands.ReadErogato();
+                int resto = Global.pagato - Global.subtotale;
+
+                if ((resto - erogato) > 0)
+                {
+                    file.Delete();
+                    Application.Current.Dispatcher.BeginInvoke(
+                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new RefundingProces(_ob, true)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("CashmaticApp", ex.ToString());
+            }
+
         }
 
         private void SetSaldatoChangeListener()
@@ -165,7 +194,7 @@ namespace CashmaticApp.Pages
             Debug.Log("CashmaticApp", "SetSaldatoChangeListener");
             _saldatoWatcher = new FileSystemWatcher();
             _saldatoWatcher.Path = Global.base_path;
-            _saldatoWatcher.Filter ="saldato.txt";
+            _saldatoWatcher.Filter = "saldato.txt";
             _saldatoWatcher.Changed += new FileSystemEventHandler(OnChangeSaldato);
             _saldatoWatcher.EnableRaisingEvents = true;
         }
@@ -176,8 +205,6 @@ namespace CashmaticApp.Pages
             _pagatoWatcher = new FileSystemWatcher();
             _pagatoWatcher.Path = Global.base_path;
             _pagatoWatcher.Filter = "pagato.txt";
-            _pagatoWatcher.EnableRaisingEvents = true;
-            _pagatoWatcher.NotifyFilter = NotifyFilters.LastWrite;
             _pagatoWatcher.Created += new FileSystemEventHandler(OnCreatedPagato);
             _pagatoWatcher.EnableRaisingEvents = true;
         }
@@ -189,6 +216,15 @@ namespace CashmaticApp.Pages
             _erogatoWatcher.Path = Global.base_path;
             _erogatoWatcher.Filter = "erogato.txt";
             _erogatoWatcher.Created += new FileSystemEventHandler(OnCreatedErogato);
+            _erogatoWatcher.EnableRaisingEvents = true;
+        }
+        private void SetNonerogatoChangeListener()
+        {
+            Debug.Log("CashmaticApp", "SetNonerogatoChangeListener");
+            _erogatoWatcher = new FileSystemWatcher();
+            _erogatoWatcher.Path = Global.base_path;
+            _erogatoWatcher.Filter = "nonerogato.txt";
+            _erogatoWatcher.Created += new FileSystemEventHandler(OnCreatedNonerogato);
             _erogatoWatcher.EnableRaisingEvents = true;
         }
     }
