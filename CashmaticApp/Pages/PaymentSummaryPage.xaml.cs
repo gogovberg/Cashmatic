@@ -51,6 +51,16 @@ namespace CashmaticApp.Pages
                 SetLanguageCheckbox(_ob.panda.language);
 
                 Global.subtotale = (int)(ob.panda.total_price * 100);
+
+                if(!Global.isCardPayment)
+                {
+                    btnPayCard.Visibility = Visibility.Collapsed;
+                }
+                if (!Global.isCashPayment)
+                {
+                    btnPayCash.Visibility = Visibility.Collapsed;
+                }
+
             }
             catch (Exception ex)
             {
