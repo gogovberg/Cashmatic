@@ -1,19 +1,7 @@
 ﻿using hgi.Environment;
 using SIX.TimApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static SIX.TimApi.Terminal;
 
 namespace CashmaticApp.Pages
@@ -81,7 +69,7 @@ namespace CashmaticApp.Pages
             _connectionStatus = e.ConnectionStatus;
             if (!_isTransactionComplete)
             {
-                if (e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.Processing ||
+                if (e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.Processing  ||
                     e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.ReadingCard ||
                     e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.PinEntry)
                 {
@@ -90,8 +78,8 @@ namespace CashmaticApp.Pages
             }
             else
             {
-                if (_cardReaderStatus == SIX.TimApi.Constants.CardReaderStatus.CardReaderEmpty &&
-                        _transactionStatus == SIX.TimApi.Constants.TransactionStatus.Idle)
+                if ( _cardReaderStatus == SIX.TimApi.Constants.CardReaderStatus.CardReaderEmpty &&
+                    _transactionStatus == SIX.TimApi.Constants.TransactionStatus.Idle)
                 {
                     Global.terminalCommands.TransactionError -= terminal_transactionError;
                     Global.terminalCommands.StatusChanged -= terminal_statusChanged;
