@@ -35,10 +35,10 @@ namespace CashmaticApp.Pages
             Debug.Log("CashmaticApp", "Initializing thank you card");
             InitializeComponent();
 
-            //TransactionLogic.RequestBill(ob);
-            //TransactionLogic.ExternalCheckout(ob);
+            TransactionLogic.RequestBill(ob);
+            TransactionLogic.ExternalCheckout(ob);
 
-            //_thankyouTimer = 3000;
+            //_thankyouTimer =  Global.thankYouTimer;
 
             //_thankyouPrint = new System.Timers.Timer();
             //_thankyouPrint.Elapsed += new ElapsedEventHandler(RedirectToTicketScan);

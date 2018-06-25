@@ -35,37 +35,37 @@ namespace CashmaticApp.Pages
             _ob = ob;
             if(!CannotDispense)
             {
+
                 _fileWatcher = new FileSystemWatcher();
-                _fileWatcher.Path = Global.base_path;
-                _fileWatcher.Filter = "annualla.txt";
+                _fileWatcher.Path = Global.cashmaticBasePath;
+                _fileWatcher.Filter = "annulla.txt";
                 _fileWatcher.Deleted += new FileSystemEventHandler(OnDeletedAnnuala);
                 _fileWatcher.EnableRaisingEvents = true;
+
                 CashmaticCommands.WriteAnnulla();
             }
             else
             {
 
                 _fileWatcher = new FileSystemWatcher();
-                _fileWatcher.Path = Global.base_path;
+                _fileWatcher.Path = Global.cashmaticBasePath;
                 _fileWatcher.Filter = "erogato.txt";
                 _fileWatcher.Created += new FileSystemEventHandler(OnCreatedErogato);
                 _fileWatcher.EnableRaisingEvents = true;
-                
+
+                CashmaticCommands.DeleteCashmaticFiles();
                 CashmaticCommands.WriteSubtotale(Global.pagato*(-1));
             }
+            _ob.panda.OnPayment = false;
         }
         private void OnDeletedAnnuala(object source, FileSystemEventArgs e)
         {
             Debug.Log("CashmaticApp", "OnDeletedAnnuala");
             FileInfo file = new FileInfo(e.FullPath);
-            while (Helper.isFileLocked(file))
-            {
-                Thread.Sleep(50);
-            }
             try
             {
                 Application.Current.Dispatcher.BeginInvoke(
-                     DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
+                     DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(_ob)));
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace CashmaticApp.Pages
                 {
                     file.Delete();
                     Application.Current.Dispatcher.BeginInvoke(
-                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
+                    DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(_ob)));
                 }
             }
             catch (Exception ex)

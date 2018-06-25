@@ -23,7 +23,7 @@
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock x:Name="tblRemaining" Text="{DynamicResource titleRemainPay}" FontSize="34" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Medium" Foreground="#FF29A26A" Grid.Row="1"></TextBlock>
-            <TextBlock x:Name="tblPrice"   FontSize="50" HorizontalAlignment="Center" VerticalAlignment="top" Foreground="#FF29A26A" FontWeight="SemiBold" Grid.Row="2"></TextBlock>
+            <TextBlock x:Name="tblPrice"   FontSize="50" HorizontalAlignment="Center" VerticalAlignment="top" Foreground="Red" FontWeight="SemiBold" Grid.Row="2"></TextBlock>
             <Image x:Name="imgPaymentType" Source="/Images/payment_cash.png" Grid.Row="3"></Image>
             <TextBlock x:Name="tblReminder" Foreground="#FFC1C1C1" FontSize="20" FontWeight="Regular" Text="{DynamicResource titleInsertCash}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>

@@ -5,18 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CashmaticApp"
         mc:Ignorable="d"
-        Title="PandaParken error" Height="230" Width="560" ResizeMode="NoResize" WindowStyle="ToolWindow" Background="#FFF7F7F7"  WindowStartupLocation="CenterOwner">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0"  Background="#28434752" CornerRadius="4" Margin="25" Padding="10">
-            <DockPanel>
-                <Image x:Name="imgContentImage" Grid.Column="0" Margin="0,0,10,0" Source="/Images/icon_danger.png" Width="30"></Image>
-                <TextBlock x:Name="tblContentText" Foreground="#FF434752" FontWeight="SemiBold" FontSize="13" Grid.Column="1" VerticalAlignment="Center" ></TextBlock>
-            </DockPanel>
-        </Border>
-        <Button x:Name="btnOk" Grid.Row="1" Content="OK" Margin="25" Width="100" HorizontalAlignment="Right" Style="{StaticResource BlueButtonStyle}" Click="btnOk_Click" ></Button>
-    </Grid>
+        Title="PandaParken error" Height="230" Width="560" ResizeMode="NoResize" WindowStyle="None"  Background="#FFF7F7F7"  WindowStartupLocation="CenterOwner">
+    <Border BorderBrush="Black" BorderThickness="3"> 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0"  Background="#28434752" CornerRadius="4" Margin="25" Padding="10">
+                <DockPanel>
+                    <Image x:Name="imgContentImage" Grid.Column="0" Margin="0,0,10,0" Source="/Images/icon_danger.png" Width="30"></Image>
+                    <TextBlock x:Name="tblContentText" Foreground="#FF434752" FontWeight="SemiBold" FontSize="13" Grid.Column="1" VerticalAlignment="Center" ></TextBlock>
+                </DockPanel>
+            </Border>
+            <Button x:Name="btnOk" Grid.Row="1" Content="OK" Margin="25" Width="100" HorizontalAlignment="Right" Style="{StaticResource BlueButtonStyle}" Click="btnOk_Click" ></Button>
+        </Grid>
+    </Border>
+    
 </Window>

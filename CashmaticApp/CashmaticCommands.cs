@@ -13,9 +13,25 @@ namespace CashmaticApp
     public static class CashmaticCommands
     {
 
-        private static string _key = "UkFPi7g5ApTFvcwGd6yp3Th7VjViV3WB";
-        private static string _iv = "8fWnMRmK4ic7qHaM";
-        private static string _base_path = @"C:\Cashmatic\";
+
+
+        public static void DeleteCashmaticFiles()
+        {
+            Debug.Log("CashmaticApp", "DeleteCashmaticFiles");
+            try
+            {
+                System.IO.File.Delete(Global.cashmaticBasePath + "erogazione.txt");
+                System.IO.File.Delete(Global.cashmaticBasePath + "nonerogato.txt");
+                System.IO.File.Delete(Global.cashmaticBasePath + "erogato.txt");
+                System.IO.File.Delete(Global.cashmaticBasePath + "pagato.txt");
+                System.IO.File.Delete(Global.cashmaticBasePath + "saldato.txt");
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("CashmaticApp", ex.ToString());
+            }
+           
+        }
 
         /// <summary>
         /// The creation of the file “subtotale.txt” starts a new transaction.
@@ -30,7 +46,7 @@ namespace CashmaticApp
                 {
                     Global.subtotale = amount;
                     string file_name = "subtotale.txt";
-                    string write_path = _base_path + file_name;
+                    string write_path = Global.cashmaticBasePath + file_name;
                     string correct_amount = amount.ToString("000000000");
                     string encrypted_content = encrypt(correct_amount);
                     System.IO.File.WriteAllText(write_path, encrypted_content);
@@ -50,7 +66,7 @@ namespace CashmaticApp
             try
             {
                 string file_name = "annulla.txt";
-                string write_path = _base_path + file_name;
+                string write_path = Global.cashmaticBasePath + file_name;
                 System.IO.File.WriteAllText(write_path, "");
             }
             catch (Exception ex)
@@ -66,7 +82,7 @@ namespace CashmaticApp
             try
             {
                 string file_name = "checklevels.txt";
-                string write_path = _base_path + file_name;
+                string write_path = Global.cashmaticBasePath + file_name;
                 System.IO.File.WriteAllText(write_path, "");
             }
             catch (Exception ex)
@@ -85,7 +101,7 @@ namespace CashmaticApp
             try
             {
                 string file_name = "levels.xml";
-                string read_path = _base_path + file_name;
+                string read_path = Global.cashmaticBasePath + file_name;
                 ml = new MoneyLevels();
                 if (File.Exists(read_path))
                 {
@@ -202,6 +218,22 @@ namespace CashmaticApp
             return amount;
         }
 
+        public static int ReadErogazione()
+        {
+            int amount = 0;
+            try
+            {
+                string file_name = "erogazione.txt";
+                amount = ReadFile(file_name);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("CashmaticApp", ex.ToString());
+            }
+            return amount;
+        }
+
         /// <summary>
         /// The file "connected" lets you know the status of the automatic cash drawer. 
         /// In this case, the automatic cash drawer is connected and working correctly.
@@ -213,7 +245,7 @@ namespace CashmaticApp
             try
             {
                 string file_name = "connected";
-                string read_path = _base_path + file_name;
+                string read_path = Global.cashmaticBasePath + file_name;
                 flag = File.Exists(read_path);
             }
             catch (Exception ex)
@@ -236,7 +268,7 @@ namespace CashmaticApp
             try
             {
                 string file_name = "disconnected";
-                string read_path = _base_path + file_name;
+                string read_path = Global.cashmaticBasePath + file_name;
                 flag = File.Exists(read_path);
             }
             catch (Exception ex)
@@ -259,7 +291,7 @@ namespace CashmaticApp
             try
             {
                 string file_name = "cmd_response";
-                string read_path = _base_path + file_name;
+                string read_path = Global.cashmaticBasePath + file_name;
 
                 if (File.Exists(read_path))
                 {
@@ -403,6 +435,8 @@ namespace CashmaticApp
             return flag;
         }
 
+        
+
         /// <summary>
         /// The file "cmd" allows you to send a custom command. 
         /// The file is deleted at the end of execution of the command and the response is written in "cmd_response" file.
@@ -413,7 +447,7 @@ namespace CashmaticApp
             try
             {
                 string file_name = "cmd";
-                string write_path = _base_path + file_name;
+                string write_path = Global.cashmaticBasePath + file_name;
                 string encrypted_command = encrypt(custom_command);
                 System.IO.File.WriteAllText(write_path, encrypted_command);
 
@@ -431,7 +465,7 @@ namespace CashmaticApp
             try
             {
 
-                string read_path = _base_path + file_name;
+                string read_path = Global.cashmaticBasePath + file_name;
 
                 if (File.Exists(read_path))
                 {
@@ -459,8 +493,8 @@ namespace CashmaticApp
             AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
             aes.BlockSize = 128;
             aes.KeySize = 256;
-            aes.Key = System.Text.ASCIIEncoding.ASCII.GetBytes(_key);
-            aes.IV = System.Text.ASCIIEncoding.ASCII.GetBytes(_iv);
+            aes.Key = System.Text.ASCIIEncoding.ASCII.GetBytes(Global.cashmaticKey);
+            aes.IV = System.Text.ASCIIEncoding.ASCII.GetBytes(Global.cashmaticInitializationVector);
             aes.Padding = PaddingMode.PKCS7;
             aes.Mode = CipherMode.CBC;
             ICryptoTransform crypto = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -475,8 +509,8 @@ namespace CashmaticApp
             AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
             aes.BlockSize = 128;
             aes.KeySize = 256;
-            aes.Key = System.Text.ASCIIEncoding.ASCII.GetBytes(_key);
-            aes.IV = System.Text.ASCIIEncoding.ASCII.GetBytes(_iv);
+            aes.Key = System.Text.ASCIIEncoding.ASCII.GetBytes(Global.cashmaticKey);
+            aes.IV = System.Text.ASCIIEncoding.ASCII.GetBytes(Global.cashmaticInitializationVector);
             aes.Padding = PaddingMode.PKCS7;
             aes.Mode = CipherMode.CBC;
             ICryptoTransform decrypto = aes.CreateDecryptor(aes.Key, aes.IV);
@@ -504,5 +538,6 @@ namespace CashmaticApp
             }
             return moneyLevels;
         }
+
     }
 }

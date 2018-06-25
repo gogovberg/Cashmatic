@@ -24,9 +24,11 @@
     <system:String x:Key="titlePrice">Price</system:String>
     <system:String x:Key="titleTotal">Total</system:String>
     <system:String x:Key="titleRemainPay">Remaining to pay:</system:String>
+    <system:String x:Key="titleRemainReturn">Remaining to return:</system:String>
     <system:String x:Key="titleInsertCash">Please insert Cash into slot</system:String>
     <system:String x:Key="titleInsertCard">Insert Your Bank Card</system:String>
     <system:String x:Key="btnCancelRefund">Cancel and Refund Money</system:String>
+    <system:String x:Key="btnCancelBack">Back to payment options</system:String>
     <system:String x:Key="titleThankYou">Thank you for choosing</system:String>
     <system:String x:Key="subTitleThankYou">Panda Parken</system:String>
     <system:String x:Key="titleForgetCash">And don't forget your Cash and Receipt</system:String>
@@ -36,7 +38,7 @@
     <system:String x:Key="titleSessionTime">Application will cancel in 1min 18seconds and save the money.</system:String>
     <system:String x:Key="titleRefund">Do you want to refund</system:String>
     <system:String x:Key="subTitleRefund">your inserted money</system:String>
-    <system:String x:Key="btnRefund">Refund my money</system:String>
+    <system:String x:Key="btnRefund">Cancel and refound money</system:String>
     <system:String x:Key="titleRefundProcess">Refunding in process</system:String>
     <system:String x:Key="titleForgetRefund">Dont forget to take your money!</system:String>
     <system:String x:Key="titleWaitTransaction">Waiting for transaction</system:String>
@@ -54,4 +56,5 @@
     <system:String x:Key="WRONG_BOOKING">Wrong booking.</system:String>
     <system:String x:Key="CHECKIN">Wrong booking.</system:String>
     <system:String x:Key="CAR_NOT_PARKED">Vehicle with this QR code is not parked, we cannot issue a receipt.</system:String>
+    <system:String x:Key="SYSTEM_ERROR">System error. Error is logged.</system:String>
 </ResourceDictionary>

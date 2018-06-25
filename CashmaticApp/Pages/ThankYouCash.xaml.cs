@@ -36,7 +36,7 @@ namespace CashmaticApp.Pages
             TransactionLogic.RequestBill(ob);
             TransactionLogic.ExternalCheckout(ob);
 
-            _thankyouTimer = 3000;
+            _thankyouTimer = Global.thankYouTimer;
 
             _thankyouPrint = new System.Timers.Timer();
             _thankyouPrint.Elapsed += new ElapsedEventHandler(RedirectToTicketScan);

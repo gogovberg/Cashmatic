@@ -30,6 +30,11 @@ namespace CashmaticApp.Pages
             InitializeComponent();
             try
             {
+                _ob.panda.total_price = 1;
+
+                Global.cardholderReceipt = "";
+                Global.merchantReceipt = "";
+
                 dtSummary.ItemsSource = LoadSummaryItems(_ob.ready2order.items);
                 dtSummary.AutoGenerateColumns = false;
 

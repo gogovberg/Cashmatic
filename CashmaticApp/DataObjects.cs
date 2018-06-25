@@ -49,7 +49,7 @@ namespace CashmaticApp
         public int item_quantity { get; set; }
         public string item_name { get; set; }
         public string item_comment { get; set; }
-        public int item_price { get; set; }
+        public double item_price { get; set; }
         public int item_vatRate { get; set; }
         public int product_id { get; set; }
         public int discount_id { get; set; }
@@ -108,7 +108,7 @@ namespace CashmaticApp
         public string customer_id { get; set; }
         public List<Item> items { get; set; }
         public Address address { get; set; }
-        public int total { set; get; }
+        public double total { set; get; }
        
     }
     public class RootObject

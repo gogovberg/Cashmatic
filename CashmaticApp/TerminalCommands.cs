@@ -27,14 +27,14 @@ namespace CashmaticApp
         public TerminalCommands()
         {
             TerminalSettings settings = new TerminalSettings();
-            settings.TerminalId = "23490031";
-            settings.LogDir = "C:\\Temp";
+            settings.TerminalId = Global.terminalId;
+            settings.LogDir = Global.terminalLog;
 
             terminal = new SIX.TimApi.Terminal(settings);
             terminal.TerminalStatusChanged += new Terminal.TerminalStatusChangedHandler(terminal_TerminalStatusChanged);
             terminal.TransactionCompleted += new Terminal.TransactionCompletedEventHandler(terminal_TransactionCompleted);
             terminal.BalanceCompleted += new Terminal.BalanceCompletedEventHandler(terminal_BalanceCompleted);
-           
+            terminal.PrintOptions.Cardholder.PrintWidth = Global.sixPrintReceiptWidth;
 
         }
         void terminal_TerminalStatusChanged(object sender, SIX.TimApi.TerminalStatus trmStatus)

@@ -135,13 +135,15 @@ namespace CashmaticApp
                 if (resource != null)
                 {
                     mb = new Windows.MessageBox(resource.ToString());
-                    mb.Owner = ((App)Application.Current).MainWindow;
+                    if(!status.Equals("ERROR_MAIN"))
+                    {
+                        mb.Owner = ((App)Application.Current).MainWindow;
+                    }
                     mb.ShowDialog();
                 }
             }
          
         }
-
         private static string FormatToCurrency(int unformattedNumber)
         {
             float f = unformattedNumber * 0.01f;
@@ -180,8 +182,6 @@ namespace CashmaticApp
                 return 0;
             }
         }
-
-        
 
     }
 }

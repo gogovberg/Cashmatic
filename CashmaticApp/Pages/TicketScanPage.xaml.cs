@@ -16,8 +16,6 @@ namespace CashmaticApp.Pages
     public partial class TicketScanPage : Page
     {
         private string _barCode = string.Empty;
-        static int VALIDATION_DELAY = 350;
-        System.Threading.Timer timer = null;
         private string _language = null;
 
         public TicketScanPage()
@@ -28,35 +26,9 @@ namespace CashmaticApp.Pages
             _language = en.Name;
             tbBarCode.Focus();
             Keyboard.Focus(tbBarCode);
-        }
-
-        private void tbBarCode_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox origin = sender as TextBox;
-            if (!origin.IsFocused)
-            {
-                return;
-            }
-            DisposeTimer();
-            timer = new System.Threading.Timer(TimerElapsed, null, VALIDATION_DELAY, VALIDATION_DELAY);
+            _barCode = "";
 
         }
-
-        private void TimerElapsed(Object obj)
-        {
-            CheckSyntaxAndReport();
-            DisposeTimer();
-        }
-
-        private void DisposeTimer()
-        {
-            if (timer != null)
-            {
-                timer.Dispose();
-                timer = null;
-            }
-        }
-
         private void CheckSyntaxAndReport()
         {
             this.Dispatcher.Invoke(new Action(() =>
@@ -64,18 +36,24 @@ namespace CashmaticApp.Pages
                 _barCode = tbBarCode.Text.Trim();
             }
             ));
-            if(!string.IsNullOrEmpty(_barCode) && _barCode.Length==36)
+            if (!string.IsNullOrEmpty(_barCode) && _barCode.Length == 36)
             {
                 Debug.Log("CashmaticApp", "CheckSyntaxAndReport");
-                DisposeTimer();
+              
                 RootObject ob = TransactionLogic.RequestParkingDetails(_barCode);
                 if (ob != null && !ob.isError)
                 {
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
                 }
+                else
+                {
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                          new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
+                }
 
             }
+            _barCode = "";
         }
 
         private void MutualyExclusiveCheckboxes(string cbName)
@@ -122,7 +100,14 @@ namespace CashmaticApp.Pages
             MutualyExclusiveCheckboxes(cb.Name);
          
         }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                CheckSyntaxAndReport();
+            }
+            base.OnKeyDown(e);
+        }
 
-        
     }
 }

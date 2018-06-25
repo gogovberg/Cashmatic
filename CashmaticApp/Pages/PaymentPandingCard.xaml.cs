@@ -18,6 +18,7 @@ namespace CashmaticApp.Pages
         private SIX.TimApi.Constants.ConnectionStatus _connectionStatus;
 
         private bool _isTransactionComplete;
+        private bool _isTransactionError;
     
         public PaymentPandingCard(RootObject ob)
         {
@@ -35,30 +36,36 @@ namespace CashmaticApp.Pages
             Global.terminalCommands.TransactionError += terminal_transactionError;
             Global.terminalCommands.StatusChanged += terminal_statusChanged;
             Global.terminalCommands.TransactionCompleted += terminal_transactionCompleted;
-
             Global.terminalCommands.onPurchase(ob.panda.total_price);
 
 
             _isTransactionComplete = false;
+            _isTransactionError = false;
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Debug.Log("CashmaticApp", "Button cancel click");
             _isTransactionComplete = false;
             Global.terminalCommands.onCancel();
-            Global.terminalCommands.TransactionError -= terminal_transactionError;
-            Global.terminalCommands.StatusChanged -= terminal_statusChanged;
-            Global.terminalCommands.TransactionCompleted -= terminal_transactionCompleted;
+
+            TerminalListenersClear();
             System.Windows.Application.Current.MainWindow.Content = new PayingProblemCard(_ob);
           
         }
         private void terminal_transactionError(object sender, TimException e)
         {
+            _isTransactionError = true;
+            TerminalListenersClear();
             System.Windows.Application.Current.MainWindow.Content = new PayingProblemCard(_ob);
+            
         }
         private void terminal_transactionCompleted(object sender, TransactionCompletedEventArgs EventArgs)
         {
             _isTransactionComplete = true;
+
+            Global.merchantReceipt = EventArgs.TransactionResponse.PrintData.MerchantReceipt;
+            Global.cardholderReceipt = EventArgs.TransactionResponse.PrintData.CardholderReceipt;
+
             System.Windows.Application.Current.MainWindow.Content = new ThankYouCard(_ob);
            
         }
@@ -67,30 +74,35 @@ namespace CashmaticApp.Pages
             _transactionStatus = e.TransactionStatus;
             _cardReaderStatus = e.CardReaderStatus;
             _connectionStatus = e.ConnectionStatus;
-            if (!_isTransactionComplete)
+            if(!_isTransactionError)
             {
-                if (e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.Processing  ||
-                    e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.ReadingCard ||
-                    e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.PinEntry)
+                if (!_isTransactionComplete)
                 {
-                    System.Windows.Application.Current.MainWindow.Content = new TransactionWait(_ob);
+                    if (e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.Processing ||
+                        e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.ReadingCard ||
+                        e.TransactionStatus == SIX.TimApi.Constants.TransactionStatus.PinEntry)
+                    {
+                        System.Windows.Application.Current.MainWindow.Content = new TransactionWait(_ob);
+                    }
+                }
+                else
+                {
+                    if (_cardReaderStatus == SIX.TimApi.Constants.CardReaderStatus.CardReaderEmpty &&
+                        _transactionStatus == SIX.TimApi.Constants.TransactionStatus.Idle)
+                    {
+                        Global.terminalCommands.TransactionError -= terminal_transactionError;
+                        Global.terminalCommands.StatusChanged -= terminal_statusChanged;
+                        Global.terminalCommands.TransactionCompleted -= terminal_transactionCompleted;
+                        System.Windows.Application.Current.MainWindow.Content = new TicketScanPage();
+                    }
                 }
             }
-            else
-            {
-                if ( _cardReaderStatus == SIX.TimApi.Constants.CardReaderStatus.CardReaderEmpty &&
-                    _transactionStatus == SIX.TimApi.Constants.TransactionStatus.Idle)
-                {
-                    Global.terminalCommands.TransactionError -= terminal_transactionError;
-                    Global.terminalCommands.StatusChanged -= terminal_statusChanged;
-                    Global.terminalCommands.TransactionCompleted -= terminal_transactionCompleted;
-                    System.Windows.Application.Current.MainWindow.Content = new TicketScanPage();
-                }
-
-            }
-          
-
         }
-
+        private void TerminalListenersClear()
+        {
+            Global.terminalCommands.TransactionError -= terminal_transactionError;
+            Global.terminalCommands.StatusChanged -= terminal_statusChanged;
+            Global.terminalCommands.TransactionCompleted -= terminal_transactionCompleted;
+        }
     }
 }
