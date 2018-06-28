@@ -1,6 +1,6 @@
 ﻿using hgi.Environment;
 using Newtonsoft.Json.Linq;
-using PDFPrinter;
+//using PDFPrinter;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -88,17 +88,17 @@ namespace CashmaticApp
                     {
                         webClient.DownloadFile(ob.invoice_pdf, pathToFile);
                     }
-                    PDFPrinterX Prn = new PDFPrinterX();
-                    Prn.LogFile = "PDFPrinter.log";
-                    Prn.Print(pathToFile, Global.printer, Global.parameters);
-                    if (Prn.ErrorMessage != null)
-                    {
-                        Debug.Log("CashmaticApp", Prn.ErrorMessage);
-                    }
-                    else
-                    {
-                        Debug.Log("CashmaticApp", "Print succsessfull.");
-                    }
+                    //PDFPrinterX Prn = new PDFPrinterX();
+                    //Prn.LogFile = "PDFPrinter.log";
+                    //Prn.Print(pathToFile, Global.printer, Global.parameters);
+                    //if (Prn.ErrorMessage != null)
+                    //{
+                    //    Debug.Log("CashmaticApp", Prn.ErrorMessage);
+                    //}
+                    //else
+                    //{
+                    //    Debug.Log("CashmaticApp", "Print succsessfull.");
+                    //}
                 }
                 else
                 {

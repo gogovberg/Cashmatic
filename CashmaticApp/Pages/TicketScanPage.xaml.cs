@@ -28,6 +28,9 @@ namespace CashmaticApp.Pages
             Keyboard.Focus(tbBarCode);
             _barCode = "";
 
+            imgScanLogo.Source = new Uri(@"Images/QRscan.mp4", UriKind.Relative);
+            imgScanLogo.Play();
+
         }
         private void CheckSyntaxAndReport()
         {
@@ -109,5 +112,10 @@ namespace CashmaticApp.Pages
             base.OnKeyDown(e);
         }
 
+        private void imgScanLogo_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            imgScanLogo.Position = TimeSpan.Zero;
+            imgScanLogo.Play();
+        }
     }
 }

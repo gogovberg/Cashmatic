@@ -74,7 +74,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="TimApi">
-      <HintPath>..\..\..\Refs\TimApi.dll</HintPath>
+      <HintPath>..\TimSdk 18-03-2\TimSdk\DotNet\TimApi\TimApi.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -283,18 +283,14 @@
     <Resource Include="Images\visa2.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="PDFPrinter">
-      <Guid>{1DAF0190-F405-41A6-954E-25B0F174978F}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
+    <Resource Include="Images\icon_danger.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\icon_danger.png" />
+    <Resource Include="Images\PayCards.png" />
+    <Resource Include="Images\PayCash.png" />
+    <Content Include="Images\QRscan.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
