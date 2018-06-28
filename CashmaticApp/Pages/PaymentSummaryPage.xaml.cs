@@ -30,7 +30,6 @@ namespace CashmaticApp.Pages
             InitializeComponent();
             try
             {
-                _ob.panda.total_price = 1;
 
                 Global.cardholderReceipt = "";
                 Global.merchantReceipt = "";
@@ -79,8 +78,16 @@ namespace CashmaticApp.Pages
         private void btnPayCash_Click(object sender, RoutedEventArgs e)
         {
             Debug.Log("CashmaticApp", "Button pay cash click");
-            _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCASH;
-            Application.Current.MainWindow.Content = new PaymentPandingCash(_ob);
+            if(CashmaticCommands.IsConnected())
+            {
+                _ob.ready2order.paymentMethod_id = _ob.panda.paymentMethodCASH;
+                Application.Current.MainWindow.Content = new PaymentPandingCash(_ob);
+            }
+            else
+            {
+                Application.Current.MainWindow.Content = new PayingProblemCash(_ob);
+            }
+        
         }
 
         private void btnPayCard_Click(object sender, RoutedEventArgs e)

@@ -14,7 +14,6 @@ namespace CashmaticApp
     {
 
 
-
         public static void DeleteCashmaticFiles()
         {
             Debug.Log("CashmaticApp", "DeleteCashmaticFiles");

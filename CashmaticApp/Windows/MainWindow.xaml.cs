@@ -3,6 +3,7 @@ using hgi.Environment;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,8 @@ namespace CashmaticApp.Windows
                 Global.thankYouTimer = double.Parse(ConfigurationManager.AppSettings["thankYouTimer"]);
                 Global.sixPrintReceiptWidth = int.Parse(ConfigurationManager.AppSettings["sixPrintReceiptWidth"]);
 
+             
+                File.Delete(Global.cashmaticBasePath+"connected");
 
                 //System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["CashmaticAppPath"]);
 
