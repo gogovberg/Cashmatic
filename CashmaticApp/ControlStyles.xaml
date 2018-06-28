@@ -121,10 +121,10 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="FontSize" Value="22"/>
-        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Margin" Value="10,5,10,5"/>
     </Style>
 
-    <Style  x:Key="PaymentButtons" TargetType="Button">
+    <Style  x:Key="PaymentButtonCash" TargetType="Button">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Margin" Value="10"/>
         <Setter Property="FontSize" Value="24"/>
@@ -140,14 +140,37 @@
                     <Border CornerRadius="8"  Background="{TemplateBinding Background}" BorderThickness="1" >
                         <Grid>
                             <ContentPresenter  x:Name="contentPresenter"  ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="Left" Margin="10" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <Image x:Name="imgPayment" HorizontalAlignment="Right" Margin="10" Source="Images/cz.png" ></Image>
+                            <Image x:Name="imgPayment" HorizontalAlignment="Right" Margin="10" Width="55" Height="30" Source="Images/PayCash.png" ></Image>
                         </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-   
+    <Style  x:Key="PaymentButtonCard" TargetType="Button">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="Height" Value="70"/>
+        <Setter Property="Button.Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="#10000000" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="8"  Background="{TemplateBinding Background}" BorderThickness="1" >
+                        <Grid>
+                            <ContentPresenter  x:Name="contentPresenter"  ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="Left" Margin="10" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Image x:Name="imgPayment" HorizontalAlignment="Right" Margin="10" Width="119" Height="24" Source="Images/PayCards.png" ></Image>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="GreenButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="#FF44A267"/>
         <Setter Property="Foreground" Value="#FFFFFFFF"/>
@@ -232,18 +255,21 @@
     <Style TargetType="DataGridCell" x:Key="nameColumn">
         <Style.Setters>
             <Setter Property="TextBlock.TextAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="36"/>
         </Style.Setters>
     </Style>
    
     <Style TargetType="DataGridCell" x:Key="qtyColumn">
         <Style.Setters>
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="36"/>
         </Style.Setters>
     </Style>
     
     <Style TargetType="DataGridCell" x:Key="priceColumn">
         <Style.Setters>
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="36"/>
         </Style.Setters>
     </Style>
     
@@ -251,6 +277,7 @@
         <Style.Setters>
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
             <Setter Property="TextBlock.FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="36"/>
         </Style.Setters>
     </Style>
 

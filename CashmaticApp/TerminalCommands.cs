@@ -15,27 +15,46 @@ namespace CashmaticApp
         Terminal terminal;
         string reversableTrxRefNum = "";
         bool requestInProgress = false;
+        public bool isActivated = false;
 
         public delegate void TerminalStatusChanged(object sender, TerminalStatus terminalStatus);
         public delegate void TerminalTransactionError(object sender, TimException exc);
         public delegate void TerminalTransactionCompleted(object sender, TransactionCompletedEventArgs EventArgs);
+        public delegate void TerminalActivateCompleted(object sender, ActivateCompletedEventArgs EventArgs);
+        public delegate void TerminalDeactivateCompleted(object sender, DeactivateCompletedEventArgs EventArgs);
 
         public event TerminalStatusChanged StatusChanged;
         public event TerminalTransactionError TransactionError;
         public event TerminalTransactionCompleted TransactionCompleted;
+        public event TerminalActivateCompleted ActivateCompleted;
+        public event TerminalDeactivateCompleted DeactivateCompleted;
 
         public TerminalCommands()
         {
             TerminalSettings settings = new TerminalSettings();
-            settings.TerminalId = Global.terminalId;
-            settings.LogDir = Global.terminalLog;
+            //settings.TerminalId = Global.terminalId;
+            //settings.LogDir = Global.terminalLog;
 
             terminal = new SIX.TimApi.Terminal(settings);
+          
+            terminal.ActivateCompleted += new ActivateCompletedEventHandler(terminal_ActivateComplete);
+            terminal.DeactivateCompleted += new DeactivateCompletedEventHandler(terminal_DeactivateComplete);
             terminal.TerminalStatusChanged += new Terminal.TerminalStatusChangedHandler(terminal_TerminalStatusChanged);
             terminal.TransactionCompleted += new Terminal.TransactionCompletedEventHandler(terminal_TransactionCompleted);
             terminal.BalanceCompleted += new Terminal.BalanceCompletedEventHandler(terminal_BalanceCompleted);
             terminal.PrintOptions.Cardholder.PrintWidth = Global.sixPrintReceiptWidth;
 
+
+        }
+        void terminal_ActivateComplete(object sender, SIX.TimApi.Terminal.ActivateCompletedEventArgs activateCompletedEventArgs)
+        {
+            isActivated = true;
+            OnActivateComplete(activateCompletedEventArgs);
+        }
+        void terminal_DeactivateComplete(object sender, SIX.TimApi.Terminal.DeactivateCompletedEventArgs deactivateCompletedEventArgs)
+        {
+            isActivated = false;
+            OnDeactivateComplete(deactivateCompletedEventArgs);
         }
         void terminal_TerminalStatusChanged(object sender, SIX.TimApi.TerminalStatus trmStatus)
         {
@@ -104,6 +123,36 @@ namespace CashmaticApp
             //btnReversal.Enabled = (!requestInProgress && transactionReferenceNumber != "");
         }
       
+        public void onDeactivate()
+        {
+            try
+            {
+                Debug.Log("CashmaticApp", "onDeactivate");
+                terminal.DeactivateAsync();
+
+            }
+            catch(SIX.TimApi.TimException exc)
+            {
+                setRequestInProgress(false);
+                Debug.Log("CashmaticApp", exc.ToString());
+                OnTransactionError(exc);
+            }
+        }
+        public void onActivate()
+        {
+            try
+            {
+                Debug.Log("CashmaticApp", "onActivate");
+                terminal.ActivateAsync();
+
+            }
+            catch (SIX.TimApi.TimException exc)
+            {
+                setRequestInProgress(false);
+                Debug.Log("CashmaticApp", exc.ToString());
+                OnTransactionError(exc);
+            }
+        }
         /**
 	    * Do a purchase transaction.
 	    */
@@ -221,7 +270,20 @@ namespace CashmaticApp
                 StatusChanged(this, status);
             }
         }
-
+        private void OnActivateComplete(ActivateCompletedEventArgs EventArgs)
+        {
+            if(ActivateCompleted!=null)
+            {
+                ActivateCompleted(this, EventArgs);
+            }
+        }
+        private void OnDeactivateComplete(DeactivateCompletedEventArgs EventArgs)
+        {
+            if (DeactivateCompleted != null)
+            {
+                DeactivateCompleted(this, EventArgs);
+            }
+        }
         public void Dispose()
         {
             terminal.Dispose();

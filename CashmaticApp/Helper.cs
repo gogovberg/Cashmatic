@@ -1,4 +1,5 @@
 ﻿//using hgi.Environment;
+using hgi.Environment;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -143,6 +144,21 @@ namespace CashmaticApp
                 }
             }
          
+        }
+        public static void SaveReceiptsData(string transactionId,string reciever,string content)
+        {
+            try
+            {
+                string todaysDate = DateTime.Now.ToString("yyyyMMdd");
+                string pathTodirectory = string.Format("Receipts\\{0}", todaysDate);
+                System.IO.Directory.CreateDirectory(pathTodirectory);
+                string pathToFile = string.Format("{0}\\{1}_{2}.txt", pathTodirectory, transactionId, reciever);
+                System.IO.File.WriteAllText(pathToFile, content);
+            }
+            catch(Exception ex)
+            {
+                Debug.Log("CashmaticApp", ex.ToString());
+            }
         }
         private static string FormatToCurrency(int unformattedNumber)
         {

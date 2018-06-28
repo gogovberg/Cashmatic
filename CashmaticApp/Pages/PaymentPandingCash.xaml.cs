@@ -45,6 +45,7 @@ namespace CashmaticApp.Pages
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Debug.Log("CashmaticApp", "CancelPayment");
+           
             Application.Current.MainWindow.Content = new RefoundPending(_ob);
         }
 

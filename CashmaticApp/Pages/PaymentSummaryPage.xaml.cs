@@ -22,7 +22,7 @@ namespace CashmaticApp.Pages
     public partial class PaymentSummaryPage : Page
     {
         RootObject _ob;
-
+        private App _currentApp = ((App)Application.Current);
         public PaymentSummaryPage(RootObject ob)
         {
             Debug.Log("CashmaticApp", "Initializing payment summary page");
@@ -72,6 +72,7 @@ namespace CashmaticApp.Pages
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             Debug.Log("CashmaticApp", "Button back click");
+            //Global.terminalCommands.onDeactivate();
             Application.Current.MainWindow.Content = new TicketScanPage();
         }
 
@@ -97,6 +98,7 @@ namespace CashmaticApp.Pages
             SetLanguageCheckbox(cb.Name);
             MutualyExclusiveCheckboxes(cb.Name);
             _ob.panda.language = cb.Name;
+            ChangeLanguageDictionary(cb.Name);
         }
 
         private void SetLanguageCheckbox(string language)
@@ -152,7 +154,53 @@ namespace CashmaticApp.Pages
 
             }
         }
+        private void ChangeLanguageDictionary(string cbName)
+        {
+            ResourceDictionary dict = new ResourceDictionary();
 
+            switch (cbName)
+            {
+                case "en":
+                    dict.Source = new Uri("..\\Languages\\English.xaml", UriKind.Relative);
+                    break;
+                case "de":
+                    dict.Source = new Uri("..\\Languages\\German.xaml", UriKind.Relative);
+                    break;
+                case "si":
+                    dict.Source = new Uri("..\\Languages\\Slovene.xaml", UriKind.Relative);
+                    break;
+                case "hu":
+                    dict.Source = new Uri("..\\Languages\\Hungary.xaml", UriKind.Relative);
+                    break;
+                case "cz":
+                    dict.Source = new Uri("..\\Languages\\Czech.xaml", UriKind.Relative);
+                    break;
+                case "sk":
+                    dict.Source = new Uri("..\\Languages\\Slovak.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("..\\Languages\\English.xaml", UriKind.Relative);
+                    break;
+            }
+
+            int index = -1;
+
+            for (int i = 0; i < _currentApp.Resources.MergedDictionaries.Count; i++)
+            {
+                if (_currentApp.Resources.MergedDictionaries[i].Source.OriginalString.Contains("Language"))
+                {
+                    index = i;
+                }
+            }
+
+            if (index > 0)
+            {
+                _currentApp.Resources.MergedDictionaries.RemoveAt(index);
+            }
+
+            _currentApp.Resources.MergedDictionaries.Add(dict);
+
+        }
         private List<SummaryItem> LoadSummaryItems(List<Item> itm)
         {
             List<SummaryItem> items = new List<SummaryItem>();

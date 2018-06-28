@@ -2,6 +2,8 @@
 using hgi.Environment;
 using RestSharp;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +19,7 @@ namespace CashmaticApp.Pages
     {
         private string _barCode = string.Empty;
         private string _language = null;
-
+        private App _currentApp = ((App)Application.Current);
         public TicketScanPage()
         {
             Debug.Log("CashmaticApp", "Initializing ticket scan page");
@@ -27,6 +29,8 @@ namespace CashmaticApp.Pages
             tbBarCode.Focus();
             Keyboard.Focus(tbBarCode);
             _barCode = "";
+
+            ChangeLanguageDictionary(_language);
 
             imgScanLogo.Source = new Uri(@"Images/QRscan.mp4", UriKind.Relative);
             imgScanLogo.Play();
@@ -46,6 +50,7 @@ namespace CashmaticApp.Pages
                 RootObject ob = TransactionLogic.RequestParkingDetails(_barCode);
                 if (ob != null && !ob.isError)
                 {
+                    ob.panda.language = _language;
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
                 }
@@ -61,10 +66,11 @@ namespace CashmaticApp.Pages
 
         private void MutualyExclusiveCheckboxes(string cbName)
         {
-            if(!en.Name.Equals(cbName))
+           
+            if (!en.Name.Equals(cbName))
             {
                 en.IsSelected = false;
-           
+                
             }
             if (!de.Name.Equals(cbName))
             {
@@ -95,13 +101,64 @@ namespace CashmaticApp.Pages
             
         }
 
+        private void ChangeLanguageDictionary(string cbName)
+        {
+            ResourceDictionary dict = new ResourceDictionary();
+
+            switch (cbName)
+            {
+                case "en":
+                    dict.Source = new Uri("..\\Languages\\English.xaml", UriKind.Relative);
+                    break;
+                case "de":
+                    dict.Source = new Uri("..\\Languages\\German.xaml", UriKind.Relative);
+                    break;
+                case "si":
+                    dict.Source = new Uri("..\\Languages\\Slovene.xaml", UriKind.Relative);
+                    break;
+                case "hu":
+                    dict.Source = new Uri("..\\Languages\\Hungary.xaml", UriKind.Relative);
+                    break;
+                case "cz":
+                    dict.Source = new Uri("..\\Languages\\Czech.xaml", UriKind.Relative);
+                    break;
+                case "sk":
+                    dict.Source = new Uri("..\\Languages\\Slovak.xaml", UriKind.Relative);
+                    break;
+                default:
+                    dict.Source = new Uri("..\\Languages\\English.xaml", UriKind.Relative);
+                    break;
+            }
+        
+            int index = -1;
+
+            for(int i=0; i< _currentApp.Resources.MergedDictionaries.Count; i++)
+            {
+                if(_currentApp.Resources.MergedDictionaries[i].Source.OriginalString.Contains("Language"))
+                {
+                    index = i;
+                }
+            }
+           
+            if( index > 0 )
+            {
+                _currentApp.Resources.MergedDictionaries.RemoveAt(index);
+            }
+
+            _currentApp.Resources.MergedDictionaries.Add(dict);
+
+        }
+
         private void Control_Click(object sender, EventArgs e)
         {
             CheckBoxImage cb = sender as CheckBoxImage;
             cb.IsSelected = true;
             _language = cb.Name;
+
             MutualyExclusiveCheckboxes(cb.Name);
-         
+            ChangeLanguageDictionary(cb.Name);
+
+
         }
         protected override void OnKeyDown(KeyEventArgs e)
         {

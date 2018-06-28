@@ -8,7 +8,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="IconsDictionary"  Source="pack://application:,,,/CashmaticApp;component/Icons.xaml" />
                 <ResourceDictionary x:Name="ControlStyles"  Source="pack://application:,,,/CashmaticApp;component/ControlStyles.xaml" />
-                <ResourceDictionary x:Name="EnglishLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/English.xaml" />
+                <!--<ResourceDictionary x:Name="EnglishLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/English.xaml" />
+                <ResourceDictionary x:Name="GermanLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/German.xaml" />
+                <ResourceDictionary x:Name="HungaryLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/Hungary.xaml" />
+                <ResourceDictionary x:Name="SlovakLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/Slovak.xaml" />
+                <ResourceDictionary x:Name="SloveneLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/Slovene.xaml" />
+                <ResourceDictionary x:Name="CzechLanguage" Source="pack://application:,,,/CashmaticApp;component/Languages/Czech.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

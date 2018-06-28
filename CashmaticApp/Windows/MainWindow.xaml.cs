@@ -32,13 +32,14 @@ namespace CashmaticApp.Windows
             string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
             string pathTodirectoryBills = baseDir + "Bills";
             string pathTodirectoryDebugLog = baseDir + "DebugLog";
+            string pathTodirectoryReceipts = baseDir + "Receipts";
 
-           
 
             try
             {
                 System.IO.Directory.CreateDirectory(pathTodirectoryBills);
                 System.IO.Directory.CreateDirectory(pathTodirectoryDebugLog);
+                System.IO.Directory.CreateDirectory(pathTodirectoryReceipts);
 
                 Global.ready2orderAuthorization = ConfigurationManager.AppSettings["ready2orderAuthorization"];
                 Global.pandaParkenAuthorization = ConfigurationManager.AppSettings["pandaParkenAuthorization"];
@@ -56,6 +57,9 @@ namespace CashmaticApp.Windows
                 Global.cashmaticBasePath = ConfigurationManager.AppSettings["cashmaticBasePath"];
                 Global.thankYouTimer = double.Parse(ConfigurationManager.AppSettings["thankYouTimer"]);
                 Global.sixPrintReceiptWidth = int.Parse(ConfigurationManager.AppSettings["sixPrintReceiptWidth"]);
+
+
+                //System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["CashmaticAppPath"]);
 
                 this.Content = new TicketScanPage();
 

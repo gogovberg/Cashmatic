@@ -36,8 +36,17 @@ namespace CashmaticApp.Pages
             Global.terminalCommands.TransactionError += terminal_transactionError;
             Global.terminalCommands.StatusChanged += terminal_statusChanged;
             Global.terminalCommands.TransactionCompleted += terminal_transactionCompleted;
-            Global.terminalCommands.onPurchase(ob.panda.total_price);
+            Global.terminalCommands.ActivateCompleted += terminal_activateCompleted;
+            Global.terminalCommands.DeactivateCompleted += terminal_deactivateCompleted;
 
+            if (Global.terminalCommands.isActivated)
+            {
+                Global.terminalCommands.onPurchase(_ob.panda.total_price);
+            }
+            else
+            {
+                Global.terminalCommands.onActivate();
+            }
 
             _isTransactionComplete = false;
             _isTransactionError = false;
@@ -52,6 +61,17 @@ namespace CashmaticApp.Pages
             System.Windows.Application.Current.MainWindow.Content = new PayingProblemCard(_ob);
           
         }
+        private void terminal_activateCompleted(object sender, ActivateCompletedEventArgs EventArgs)
+        {
+            Global.terminalCommands.onPurchase(_ob.panda.total_price);
+        }
+        private void terminal_deactivateCompleted(object sender, DeactivateCompletedEventArgs EventArgs)
+        {
+            if(EventArgs.DeactivateResponse.PrintData!=null)
+            {
+
+            }
+        }
         private void terminal_transactionError(object sender, TimException e)
         {
             _isTransactionError = true;
@@ -62,10 +82,11 @@ namespace CashmaticApp.Pages
         private void terminal_transactionCompleted(object sender, TransactionCompletedEventArgs EventArgs)
         {
             _isTransactionComplete = true;
-
+            string tranId = EventArgs.TransactionResponse.TransactionInformation.TransSeq;
             Global.merchantReceipt = EventArgs.TransactionResponse.PrintData.MerchantReceipt;
             Global.cardholderReceipt = EventArgs.TransactionResponse.PrintData.CardholderReceipt;
-
+            Helper.SaveReceiptsData(tranId, "MerchantReceipt", Global.merchantReceipt);
+            Helper.SaveReceiptsData(tranId, "CardholderReceipt", Global.cardholderReceipt);
             System.Windows.Application.Current.MainWindow.Content = new ThankYouCard(_ob);
            
         }
