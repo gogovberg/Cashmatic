@@ -27,6 +27,7 @@ namespace CashmaticApp
                 request.AddParameter("authorization", Global.pandaParkenAuthorization);
                 request.AddParameter("bid", hash);
                 IRestResponse response = restClient.Execute(request);
+                Debug.Log("CashmaticApp", response.Content);
                 ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
                 ob.isError = true;
 
@@ -60,6 +61,7 @@ namespace CashmaticApp
                 request.AddHeader("authorization", Global.ready2orderAuthorization);
                 request.AddParameter("application/json", jsonOrderdata, ParameterType.RequestBody);
                 IRestResponse response = restClient.Execute(request);
+                Debug.Log("CashmaticApp", response.Content);
                 RootObject ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
 
                 string status = ob.isError ? "ERROR" : "OK";
@@ -122,6 +124,7 @@ namespace CashmaticApp
                 request.AddParameter("invoiceNumberFull ", ob.invoice_numberFull);
                 request.AddParameter("merchantReceipt", Global.merchantReceipt);
                 IRestResponse response = restClient.Execute(request);
+                Debug.Log("CashmaticApp", response.Content);
                 RootObject tempob = SimpleJson.DeserializeObject<RootObject>(response.Content);
                 Helper.ShowResponseMessage(tempob.status, tempob.message);
                 Debug.Log("CashmaticApp", string.Format("STATUS: {0} MESSAGE:{1}", tempob.status, tempob.message));
