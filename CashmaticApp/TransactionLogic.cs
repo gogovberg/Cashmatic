@@ -26,6 +26,9 @@ namespace CashmaticApp
                 request.AddHeader("content-type", "multipart/form-data;");
                 request.AddParameter("authorization", Global.pandaParkenAuthorization);
                 request.AddParameter("bid", hash);
+
+                string requestLog = string.Format("authorization:{0} bid:{1} ",Global.pandaParkenAuthorization, Global.request_bill_id, hash);
+                Debug.Log("CashmaticApp", string.Format("Request data for RequestParkingDetails: {0}", requestLog));
                 IRestResponse response = restClient.Execute(request);
                 Debug.Log("CashmaticApp", response.Content);
                 ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
@@ -60,6 +63,11 @@ namespace CashmaticApp
                 request.AddHeader("content-type", "multipart/form-data;");
                 request.AddHeader("authorization", Global.ready2orderAuthorization);
                 request.AddParameter("application/json", jsonOrderdata, ParameterType.RequestBody);
+
+                string requestLog = string.Format("authorization:{0} application/json:{1}",
+                Global.ready2orderAuthorization, Global.request_bill_id, jsonOrderdata);
+                Debug.Log("CashmaticApp", string.Format("Request data for RequestBill: {0}", requestLog));
+
                 IRestResponse response = restClient.Execute(request);
                 Debug.Log("CashmaticApp", response.Content);
                 RootObject ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
@@ -112,10 +120,11 @@ namespace CashmaticApp
         {
             try
             {
-              
                 Debug.Log("CashmaticApp", string.Format("External checkout for {0}", Global.request_bill_id));
+
                 var restClient = new RestClient(Global.pandaParkenExternalCheckoutUri);
                 var request = new RestRequest(Method.GET);
+
                 request.AddHeader("content-type", "multipart/form-data;");
                 request.AddParameter("authorization", Global.pandaParkenAuthorization);
                 request.AddParameter("bid", Global.request_bill_id);
@@ -123,10 +132,17 @@ namespace CashmaticApp
                 request.AddParameter("invoiceId ", ob.invoice_id);
                 request.AddParameter("invoiceNumberFull ", ob.invoice_numberFull);
                 request.AddParameter("merchantReceipt", Global.merchantReceipt);
+
+                string requestLog = string.Format("authorization:{0} bis:{1} paymentMethod:{2} invoiceId:{3} invoiceNumberFull:{4} merchantReceipt:{5}",
+                    Global.pandaParkenAuthorization, Global.request_bill_id, ob.ready2order.paymentMethod_id, ob.invoice_id, ob.invoice_numberFull, Global.merchantReceipt);
+
+                Debug.Log("CashmaticApp", string.Format("Request data for ExternalCheckout: {0}", requestLog));
+
                 IRestResponse response = restClient.Execute(request);
                 Debug.Log("CashmaticApp", response.Content);
                 RootObject tempob = SimpleJson.DeserializeObject<RootObject>(response.Content);
                 Helper.ShowResponseMessage(tempob.status, tempob.message);
+
                 Debug.Log("CashmaticApp", string.Format("STATUS: {0} MESSAGE:{1}", tempob.status, tempob.message));
             }
             catch (Exception ex)
