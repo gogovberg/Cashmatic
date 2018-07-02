@@ -1,6 +1,6 @@
 ﻿using hgi.Environment;
 using Newtonsoft.Json.Linq;
-//using PDFPrinter;
+using PDFPrinter;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -72,7 +72,9 @@ namespace CashmaticApp
 
                 string todaysDate = DateTime.Now.ToString("yyyyMMdd");
 
-                string pathTodirectory = string.Format("Bills\\{0}", todaysDate);
+                string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+
+                string pathTodirectory = baseDir + string.Format("Bills\\{0}", todaysDate);
 
                 System.IO.Directory.CreateDirectory(pathTodirectory);
 
@@ -88,17 +90,17 @@ namespace CashmaticApp
                     {
                         webClient.DownloadFile(ob.invoice_pdf, pathToFile);
                     }
-                    //PDFPrinterX Prn = new PDFPrinterX();
-                    //Prn.LogFile = "PDFPrinter.log";
-                    //Prn.Print(pathToFile, Global.printer, Global.parameters);
-                    //if (Prn.ErrorMessage != null)
-                    //{
-                    //    Debug.Log("CashmaticApp", Prn.ErrorMessage);
-                    //}
-                    //else
-                    //{
-                    //    Debug.Log("CashmaticApp", "Print succsessfull.");
-                    //}
+                    PDFPrinterX Prn = new PDFPrinterX();
+                    Prn.LogFile = baseDir+"DebugLog\\PDFPrinter.log";
+                    Prn.Print(pathToFile, Global.printer, Global.parameters);
+                    if (Prn.ErrorMessage != null)
+                    {
+                        Debug.Log("CashmaticApp", Prn.ErrorMessage);
+                    }
+                    else
+                    {
+                        Debug.Log("CashmaticApp", "Print succsessfull.");
+                    }
                 }
                 else
                 {

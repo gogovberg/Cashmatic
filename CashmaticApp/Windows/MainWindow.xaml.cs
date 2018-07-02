@@ -29,11 +29,15 @@ namespace CashmaticApp.Windows
             Debug.Log("CashmaticApp", "Initializing main window");
             InitializeComponent();
 
-
+            
             string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
             string pathTodirectoryBills = baseDir + "Bills";
             string pathTodirectoryDebugLog = baseDir + "DebugLog";
             string pathTodirectoryReceipts = baseDir + "Receipts";
+            Debug.Log("CashmaticApp", "Basedir: "+baseDir);
+            Debug.Log("CashmaticApp", "pathTodirectoryBills: " + pathTodirectoryBills);
+            Debug.Log("CashmaticApp", "pathTodirectoryDebugLog: " + pathTodirectoryDebugLog);
+            Debug.Log("CashmaticApp", "pathTodirectoryReceipts: " + pathTodirectoryReceipts);
 
 
             try
@@ -59,10 +63,19 @@ namespace CashmaticApp.Windows
                 Global.thankYouTimer = double.Parse(ConfigurationManager.AppSettings["thankYouTimer"]);
                 Global.sixPrintReceiptWidth = int.Parse(ConfigurationManager.AppSettings["sixPrintReceiptWidth"]);
 
-             
-                File.Delete(Global.cashmaticBasePath+"connected");
+                if (Global.isCashPayment) { 
+                    File.Delete(Global.cashmaticBasePath+"connected");
 
-                //System.Diagnostics.Process.Start(ConfigurationManager.AppSettings["CashmaticAppPath"]);
+                    System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Cashmatic");
+                    if (pname.Length == 0) { 
+                        System.Diagnostics.ProcessStartInfo PSI = new System.Diagnostics.ProcessStartInfo();
+                        PSI.FileName = System.IO.Path.GetFileName(ConfigurationManager.AppSettings["CashmaticAppPath"]);
+                        PSI.WorkingDirectory = System.IO.Path.GetDirectoryName(ConfigurationManager.AppSettings["CashmaticAppPath"]);
+                        PSI.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                        PSI.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                        System.Diagnostics.Process.Start(PSI);
+                    }
+                }
 
                 this.Content = new TicketScanPage();
 

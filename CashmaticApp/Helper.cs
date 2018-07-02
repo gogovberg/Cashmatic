@@ -33,7 +33,7 @@ namespace CashmaticApp
             }
             catch (Exception e)
             {
-                //Debug.Log("Cashmatic", e.ToString());
+                Debug.Log("CashmaticApp", e.ToString());
             }
             finally
             {
@@ -60,7 +60,7 @@ namespace CashmaticApp
             }
             catch (Exception e)
             {
-                //Debug.Log("Cashmatic", e.ToString());
+                Debug.Log("CashmaticApp", e.ToString());
             }
             finally
             {
@@ -85,7 +85,7 @@ namespace CashmaticApp
             }
             catch(Exception ex)
             {
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
          
             return result;
@@ -102,7 +102,7 @@ namespace CashmaticApp
             catch(Exception ex)
             {
                 
-                //Debug.Log("Cashmatic", ex.ToString());
+                Debug.Log("CashmaticApp", ex.ToString());
             }
 
             return obj;
@@ -150,7 +150,8 @@ namespace CashmaticApp
             try
             {
                 string todaysDate = DateTime.Now.ToString("yyyyMMdd");
-                string pathTodirectory = string.Format("Receipts\\{0}", todaysDate);
+                string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+                string pathTodirectory = baseDir+string.Format("Receipts\\{0}", todaysDate);
                 System.IO.Directory.CreateDirectory(pathTodirectory);
                 string pathToFile = string.Format("{0}\\{1}_{2}.txt", pathTodirectory, transactionId, reciever);
                 System.IO.File.WriteAllText(pathToFile, content);
