@@ -328,7 +328,6 @@
   <ItemGroup>
     <Resource Include="Images\PayCards.png" />
     <Resource Include="Images\PayCash.png" />
-    <Content Include="bin\Debug\pdfium.dll" />
     <Content Include="Images\QRscan.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
