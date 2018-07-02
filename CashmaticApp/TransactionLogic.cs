@@ -27,7 +27,7 @@ namespace CashmaticApp
                 request.AddParameter("authorization", Global.pandaParkenAuthorization);
                 request.AddParameter("bid", hash);
 
-                string requestLog = string.Format("authorization:{0} bid:{1} ",Global.pandaParkenAuthorization, Global.request_bill_id, hash);
+                string requestLog = string.Format("authorization:{0} \nbid:{1} ", Global.pandaParkenAuthorization, Global.request_bill_id, hash);
                 Debug.Log("CashmaticApp", string.Format("Request data for RequestParkingDetails: {0}", requestLog));
                 IRestResponse response = restClient.Execute(request);
                 Debug.Log("CashmaticApp", response.Content);
@@ -64,7 +64,7 @@ namespace CashmaticApp
                 request.AddHeader("authorization", Global.ready2orderAuthorization);
                 request.AddParameter("application/json", jsonOrderdata, ParameterType.RequestBody);
 
-                string requestLog = string.Format("authorization:{0} application/json:{1}",
+                string requestLog = string.Format("authorization:{0} \napplication/json:{1}",
                 Global.ready2orderAuthorization, Global.request_bill_id, jsonOrderdata);
                 Debug.Log("CashmaticApp", string.Format("Request data for RequestBill: {0}", requestLog));
 
@@ -128,12 +128,13 @@ namespace CashmaticApp
                 request.AddHeader("content-type", "multipart/form-data;");
                 request.AddParameter("authorization", Global.pandaParkenAuthorization);
                 request.AddParameter("bid", Global.request_bill_id);
-                request.AddParameter("paymentMethod ", ob.ready2order.paymentMethod_id);
-                request.AddParameter("invoiceId ", ob.invoice_id);
-                request.AddParameter("invoiceNumberFull ", ob.invoice_numberFull);
+                request.AddParameter("paymentMethod", ob.ready2order.paymentMethod_id);
+                request.AddParameter("invoiceId", ob.invoice_id);
+                request.AddParameter("invoiceNumberFull", ob.invoice_numberFull);
                 request.AddParameter("merchantReceipt", Global.merchantReceipt);
+                //request.AddParameter("merchantReceipt", "");
 
-                string requestLog = string.Format("authorization:{0} bis:{1} paymentMethod:{2} invoiceId:{3} invoiceNumberFull:{4} merchantReceipt:{5}",
+                string requestLog = string.Format("authorization:{0} \nbid:{1} \npaymentMethod:{2} \ninvoiceId:{3} \ninvoiceNumberFull:{4} \nmerchantReceipt:{5}",
                     Global.pandaParkenAuthorization, Global.request_bill_id, ob.ready2order.paymentMethod_id, ob.invoice_id, ob.invoice_numberFull, Global.merchantReceipt);
 
                 Debug.Log("CashmaticApp", string.Format("Request data for ExternalCheckout: {0}", requestLog));
