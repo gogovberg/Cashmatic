@@ -82,7 +82,7 @@ namespace CashmaticApp.Pages
         private void terminal_transactionCompleted(object sender, TransactionCompletedEventArgs EventArgs)
         {
             _isTransactionComplete = true;
-            string tranId = EventArgs.TransactionResponse.TransactionInformation.TransSeq;
+            string tranId = EventArgs.TransactionResponse.TransactionInformation.TransRef;
             Global.merchantReceipt = EventArgs.TransactionResponse.PrintData.MerchantReceipt;
             Global.cardholderReceipt = EventArgs.TransactionResponse.PrintData.CardholderReceipt;
             Helper.SaveReceiptsData(tranId, "MerchantReceipt", Global.merchantReceipt);

@@ -35,6 +35,8 @@ namespace CashmaticApp
         public static string ready2orderJson = "";
         public static RootObject bill_data = null;
         public static TerminalCommands terminalCommands = null;
-
+        public static int BalanceTimeFrom = 2;
+        public static int BalanceTimeTo = 3;
+        public static double BalanceTimer = 1500000;
     }
 }

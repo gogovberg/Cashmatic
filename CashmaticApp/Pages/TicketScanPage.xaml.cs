@@ -43,10 +43,12 @@ namespace CashmaticApp.Pages
                 _barCode = tbBarCode.Text.Trim();
             }
             ));
-            if (!string.IsNullOrEmpty(_barCode) && _barCode.Length == 36)
+            if(!string.IsNullOrEmpty(_barCode) && _barCode.Length>=36)
             {
+                _barCode = _barCode.Substring(_barCode.Length - 36, 36);
+
                 Debug.Log("CashmaticApp", "CheckSyntaxAndReport");
-              
+
                 RootObject ob = TransactionLogic.RequestParkingDetails(_barCode);
                 if (ob != null && !ob.isError)
                 {
@@ -54,13 +56,17 @@ namespace CashmaticApp.Pages
                     Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(ob)));
                 }
-                else
-                {
-                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
-                          new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
-                }
-
             }
+            else
+            {
+                Debug.Log("CashmaticApp", "incorrect hash"+_barCode);
+            }
+           
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                tbBarCode.Text = "";
+            }
+              ));
             _barCode = "";
         }
 
@@ -165,6 +171,8 @@ namespace CashmaticApp.Pages
             if (e.Key == Key.Enter)
             {
                 CheckSyntaxAndReport();
+                
+              
             }
             base.OnKeyDown(e);
         }

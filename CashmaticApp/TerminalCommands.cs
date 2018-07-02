@@ -2,9 +2,11 @@
 using SIX.TimApi;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using static SIX.TimApi.Terminal;
 
 namespace CashmaticApp
@@ -17,6 +19,8 @@ namespace CashmaticApp
         bool requestInProgress = false;
         public bool isActivated = false;
 
+        private Timer _balanceTimer;
+        private object _balanceObject = new object();
         public delegate void TerminalStatusChanged(object sender, TerminalStatus terminalStatus);
         public delegate void TerminalTransactionError(object sender, TimException exc);
         public delegate void TerminalTransactionCompleted(object sender, TransactionCompletedEventArgs EventArgs);
@@ -34,9 +38,7 @@ namespace CashmaticApp
             TerminalSettings settings = new TerminalSettings();
             //settings.TerminalId = Global.terminalId;
             //settings.LogDir = Global.terminalLog;
-
             terminal = new SIX.TimApi.Terminal(settings);
-          
             terminal.ActivateCompleted += new ActivateCompletedEventHandler(terminal_ActivateComplete);
             terminal.DeactivateCompleted += new DeactivateCompletedEventHandler(terminal_DeactivateComplete);
             terminal.TerminalStatusChanged += new Terminal.TerminalStatusChangedHandler(terminal_TerminalStatusChanged);
@@ -45,11 +47,24 @@ namespace CashmaticApp
             terminal.PrintOptions.Cardholder.PrintWidth = Global.sixPrintReceiptWidth;
 
 
+            _balanceTimer = new Timer();
+            _balanceTimer.Elapsed += new ElapsedEventHandler(OnElapsedTime);
+            _balanceTimer.Interval = Global.BalanceTimer;
+            _balanceTimer.Enabled = true;
         }
         void terminal_ActivateComplete(object sender, SIX.TimApi.Terminal.ActivateCompletedEventArgs activateCompletedEventArgs)
         {
-            isActivated = true;
-            OnActivateComplete(activateCompletedEventArgs);
+            if(activateCompletedEventArgs.Error==null)
+            {
+                isActivated = true;
+                OnActivateComplete(activateCompletedEventArgs);
+            }
+            else
+            {
+                Debug.Log("CashmaticApp", activateCompletedEventArgs.TimError.ErrorMessage);
+                OnTransactionError(activateCompletedEventArgs.TimError);
+            }
+           
         }
         void terminal_DeactivateComplete(object sender, SIX.TimApi.Terminal.DeactivateCompletedEventArgs deactivateCompletedEventArgs)
         {
@@ -84,7 +99,7 @@ namespace CashmaticApp
             {
                 if (transactionCompletedEventArgs.TransactionResponse.TransactionType == SIX.TimApi.Constants.TransactionType.Purchase)
                 {
-                    setReversableTransaction(transactionCompletedEventArgs.TransactionResponse.TransactionInformation.TransSeq);
+                    setReversableTransaction(transactionCompletedEventArgs.TransactionResponse.TransactionInformation.TransRef);
                     OnTransactionCompeted(transactionCompletedEventArgs);
 
                 }
@@ -108,21 +123,40 @@ namespace CashmaticApp
         void terminal_BalanceCompleted(object sender, Terminal.BalanceCompletedEventArgs balanceCompletedEventArgs)
         {
             Debug.Log("CashmaticApp","Balance completed");
+            isActivated = false;
             setRequestInProgress(false);
             if (balanceCompletedEventArgs.Error != null)
             {
                 Debug.Log("CashmaticApp", balanceCompletedEventArgs.Error.ToString());
-          
+            }
+            else
+            {
+                if(balanceCompletedEventArgs.BalanceResponse!=null)
+                {
+                    if(balanceCompletedEventArgs.BalanceResponse.PrintData!=null)
+                    {
+                        try
+                        {
+                            string todaysDate = DateTime.Now.ToString("yyyyMMdd");
+                            string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+                            string merchantReceiptName = todaysDate + "_balance";
+                            string merchantReceipt = string.Format("{0}Balances\\{1}.txt", baseDir, merchantReceiptName);
+                            System.IO.File.WriteAllText(merchantReceipt, balanceCompletedEventArgs.BalanceResponse.PrintData.MerchantReceipt);
+                        }
+                        catch(Exception ex)
+                        {
+                            Debug.Log("CashmaticApp", ex.ToString());
+                        }
+                    }
+                }
             }
         }
-          
         void setReversableTransaction(string transactionReferenceNumber)
         {
             reversableTrxRefNum = transactionReferenceNumber;
            
             //btnReversal.Enabled = (!requestInProgress && transactionReferenceNumber != "");
         }
-      
         public void onDeactivate()
         {
             try
@@ -152,7 +186,7 @@ namespace CashmaticApp
                 Debug.Log("CashmaticApp", exc.ToString());
                 OnTransactionError(exc);
             }
-        }
+        }   
         /**
 	    * Do a purchase transaction.
 	    */
@@ -248,7 +282,6 @@ namespace CashmaticApp
 
         }
 
-        
         private void OnTransactionError(TimException e)
         {
             if (TransactionError != null)
@@ -288,6 +321,46 @@ namespace CashmaticApp
         {
             terminal.Dispose();
             Terminal.TimApiDispose();
+            if(_balanceTimer!=null)
+            {
+                _balanceTimer.Enabled = false;
+            }
+            
         }
+
+        private void OnElapsedTime(object source, ElapsedEventArgs e)
+        {
+            lock (_balanceObject)
+            {
+                try
+                {
+                    DateTime balanceFrom = DateTime.Now.Date.AddHours(Global.BalanceTimeFrom);
+                    DateTime balanceTo = DateTime.Now.Date.AddHours(Global.BalanceTimeTo);
+
+                    if(DateTime.Compare(DateTime.Now,balanceFrom)>=0 &&
+                       DateTime.Compare(DateTime.Now,balanceTo)<=0)
+                    {
+                        string todaysDate = DateTime.Now.ToString("yyyyMMdd");
+                        string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+                        string merchantReceiptName = todaysDate + "_balance";
+                        string merchantReceipt = string.Format("{0}Balances\\{1}.txt", baseDir, merchantReceiptName);
+                        if(!File.Exists(merchantReceipt))
+                        {
+                            onBalance();
+
+                        }
+                        else
+                        {
+                            Debug.Log("CashmaticApp", string.Format("Balance {0} already exists.", merchantReceipt));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log("CashmaticApp", ex.ToString());
+                }
+            }
+        }
+
     }
 }
