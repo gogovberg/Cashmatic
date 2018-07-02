@@ -70,14 +70,17 @@ namespace CashmaticApp.Windows
                 string balanceTimeFrom = ConfigurationManager.AppSettings["balanceTimeFrom"];
                 string balanceTimeTo = ConfigurationManager.AppSettings["balanceTimeTo"];
 
+                int timeFrom = 0;
+                int timeTo = 0;
+
                 //if number, must be between 1 and 24
-                bool isNumeric = int.TryParse(balanceTimeFrom, out int timeFrom);
+                bool isNumeric = int.TryParse(balanceTimeFrom, out timeFrom);
                 if(isNumeric && timeFrom >=1 && timeFrom<=24)
                 {
                     Global.BalanceTimeFrom = timeFrom;
                 }
                 //if number, must be between 1 and 24
-                isNumeric = int.TryParse(balanceTimeTo, out int timeTo);
+                isNumeric = int.TryParse(balanceTimeTo, out timeTo);
                 if (isNumeric && timeTo >= 1 && timeTo <= 24)
                 {
                     Global.BalanceTimeTo= timeTo;
