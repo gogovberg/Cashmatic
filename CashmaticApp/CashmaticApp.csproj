@@ -53,13 +53,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\refs\hgi.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.PDFPrinter">
-      <HintPath>..\..\TempCashmatic\CashmaticApp\bin\Debug\Interop.PDFPrinter.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="itextsharp">
+      <HintPath>..\refs\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\public\projects\Aleksandar\Refs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfiumViewer">
+      <HintPath>..\refs\PdfiumViewer.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -68,6 +70,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
@@ -95,6 +98,7 @@
     <Compile Include="Pages\PayingProblemCash.xaml.cs">
       <DependentUpon>PayingProblemCash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrinterCommands.cs" />
     <Compile Include="TerminalCommands.cs" />
     <Compile Include="Windows\MessageBox.xaml.cs">
       <DependentUpon>MessageBox.xaml</DependentUpon>
