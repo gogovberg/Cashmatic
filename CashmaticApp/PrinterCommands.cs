@@ -57,7 +57,9 @@ namespace CashmaticApp
 
             string fileDirectory = Path.GetDirectoryName(fileNamePath);
             string fileName = Path.GetFileNameWithoutExtension(fileNamePath);
-            string newFile = fileDirectory + fileName + "_print.pdf";
+            string newFile = fileDirectory+"\\"+fileName + "_print.pdf";
+
+           
             // open the reader
             iTextSharp.text.pdf.PdfReader reader = new iTextSharp.text.pdf.PdfReader(fileNamePath);
 
