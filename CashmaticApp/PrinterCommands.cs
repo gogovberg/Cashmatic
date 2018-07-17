@@ -65,7 +65,7 @@ namespace CashmaticApp
 
             iTextSharp.text.Rectangle size = reader.GetPageSizeWithRotation(1);
             //Document document = new Document(size);
-            iTextSharp.text.Document document = new iTextSharp.text.Document(new iTextSharp.text.Rectangle(size.Width + 15, size.Height));
+            iTextSharp.text.Document document = new iTextSharp.text.Document(new iTextSharp.text.Rectangle(size.Width + 15, size.Height+Global.CardPaymentPrintPageSizeAddHeight));
 
             // open the writer
             FileStream fs = new FileStream(newFile, FileMode.Create, FileAccess.Write);
@@ -75,9 +75,29 @@ namespace CashmaticApp
             // the pdf content
             iTextSharp.text.pdf.PdfContentByte cb = writer.DirectContent;
 
+            if (Global.cardholderReceipt != "")
+            {
+                // select the font properties
+                iTextSharp.text.pdf.BaseFont bf = iTextSharp.text.pdf.BaseFont.CreateFont(iTextSharp.text.pdf.BaseFont.COURIER_BOLD, iTextSharp.text.pdf.BaseFont.CP1252, iTextSharp.text.pdf.BaseFont.EMBEDDED);
+                cb.SetColorFill(iTextSharp.text.BaseColor.BLACK);
+                cb.SetFontAndSize(bf, 8);
+
+                int StartAt = Global.CardPaymentPrintStartAt  +Global.CardPaymentPrintPageSizeAddHeight;
+
+                foreach (string line in Global.cardholderReceipt.Split(new string[] { Environment.NewLine }, StringSplitOptions.None))
+                {
+                    // write the text in the pdf content
+                    cb.BeginText();
+                    // put the alignment and coordinates here
+                    cb.ShowTextAligned(0, line, Global.CardPaymentPrintLeft, StartAt, 0);
+                    cb.EndText();
+                    StartAt = StartAt - Global.CardPaymentPrintLineHeight;
+                }
+            }
+
             //// create the new page and add it to the pdf
             iTextSharp.text.pdf.PdfImportedPage page = writer.GetImportedPage(reader, 1);
-            cb.AddTemplate(page, 10, 0);
+            cb.AddTemplate(page, 10, +Global.CardPaymentPrintPageSizeAddHeight);
 
             // close the streams and voilá the file should be changed :)
             document.Close();

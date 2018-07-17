@@ -66,8 +66,14 @@ namespace CashmaticApp.Windows
                 Global.cashmaticBasePath = ConfigurationManager.AppSettings["cashmaticBasePath"];
                 Global.thankYouTimer = double.Parse(ConfigurationManager.AppSettings["thankYouTimer"]);
                 Global.sixPrintReceiptWidth = int.Parse(ConfigurationManager.AppSettings["sixPrintReceiptWidth"]);
+                if (ConfigurationManager.AppSettings["CardPaymentPrintPageSizeAddHeight"] != null) { Global.CardPaymentPrintPageSizeAddHeight = int.Parse(ConfigurationManager.AppSettings["CardPaymentPrintPageSizeAddHeight"]); };
+                if (ConfigurationManager.AppSettings["CardPaymentPrintStartAt"] != null) { Global.CardPaymentPrintStartAt = int.Parse(ConfigurationManager.AppSettings["CardPaymentPrintStartAt"]); };
+                if (ConfigurationManager.AppSettings["CardPaymentPrintLineHeight"] != null) { Global.CardPaymentPrintLineHeight = int.Parse(ConfigurationManager.AppSettings["CardPaymentPrintLineHeight"]); };
+                if (ConfigurationManager.AppSettings["CardPaymentPrintLeft"] != null) { Global.CardPaymentPrintLeft = int.Parse(ConfigurationManager.AppSettings["CardPaymentPrintLeft"]); };
+   
 
-                string balanceTimeFrom = ConfigurationManager.AppSettings["balanceTimeFrom"];
+
+        string balanceTimeFrom = ConfigurationManager.AppSettings["balanceTimeFrom"];
                 string balanceTimeTo = ConfigurationManager.AppSettings["balanceTimeTo"];
 
                 int timeFrom = 0;

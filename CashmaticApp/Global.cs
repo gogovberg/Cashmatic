@@ -38,5 +38,10 @@ namespace CashmaticApp
         public static int BalanceTimeFrom = 2;
         public static int BalanceTimeTo = 3;
         public static double BalanceTimer = 1500000;
+        public static int CardPaymentPrintPageSizeAddHeight = 0;
+        public static int CardPaymentPrintStartAt = 150;
+        public static int CardPaymentPrintLineHeight = 11;
+        public static int CardPaymentPrintLeft = 30;
+
     }
 }
