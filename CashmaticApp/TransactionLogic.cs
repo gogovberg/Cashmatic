@@ -30,7 +30,7 @@ namespace CashmaticApp
                 string requestLog = string.Format("authorization:{0} \nbid:{1} ", Global.pandaParkenAuthorization, hash);
                 Debug.Log("CashmaticApp", string.Format("Request data for RequestParkingDetails: {0}", requestLog));
                 IRestResponse response = restClient.Execute(request);
-                Debug.Log("CashmaticApp", response.Content);
+                Debug.Log("CashmaticApp", string.Format("Response for RequestParkingDetails: {0}", response.Content));
                 ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
                 ob.isError = true;
 
@@ -66,7 +66,7 @@ namespace CashmaticApp
                 Debug.Log("CashmaticApp", string.Format("Request data for RequestBill: {0}", requestLog));
 
                 IRestResponse response = restClient.Execute(request);
-                Debug.Log("CashmaticApp", response.Content);
+                Debug.Log("CashmaticApp", string.Format("Response for RequestBill: {0}", response.Content));
                 RootObject ob = SimpleJson.DeserializeObject<RootObject>(response.Content);
 
                 string status = ob.isError ? "ERROR" : "OK";
@@ -136,7 +136,7 @@ namespace CashmaticApp
                 Debug.Log("CashmaticApp", string.Format("Request data for ExternalCheckout: {0}", requestLog));
 
                 IRestResponse response = restClient.Execute(request);
-                Debug.Log("CashmaticApp", response.Content);
+                Debug.Log("CashmaticApp", string.Format("Response for ExternalCheckout: {0}", response.Content));
                 RootObject tempob = SimpleJson.DeserializeObject<RootObject>(response.Content);
                 Helper.ShowResponseMessage(tempob.status, tempob.message);
 

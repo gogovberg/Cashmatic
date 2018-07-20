@@ -474,7 +474,7 @@ namespace CashmaticApp
                 else
                 {
                   
-                    Debug.Log("CashmaticApp", "File"+file_name+" do not exists.");
+                    Debug.Log("CashmaticApp", "File "+file_name+" do not exists.");
                 }
 
             }

@@ -134,11 +134,6 @@ namespace CashmaticApp.Pages
             try
             {
                 int pagato = CashmaticCommands.ReadPagato();
-                int saldato = CashmaticCommands.ReadPagato();
-                int erogato = CashmaticCommands.ReadErogato();
-                int nonerogat = CashmaticCommands.ReadNonerogato();
-                int erogazione = CashmaticCommands.ReadErogazione();
-
                 if (pagato == Global.subtotale)
                 {
                     file.Delete();
@@ -168,8 +163,6 @@ namespace CashmaticApp.Pages
 
                 int erogato = CashmaticCommands.ReadErogato();
                 int resto = Global.pagato - Global.subtotale;
-                int erogazione = CashmaticCommands.ReadErogazione();
-
                 if ((resto - erogato) > 0)
                 {
                     file.Delete();
@@ -194,7 +187,6 @@ namespace CashmaticApp.Pages
             }
             try
             {
-
                 int nonerogato = CashmaticCommands.ReadNonerogato();
 
             }
@@ -301,6 +293,11 @@ namespace CashmaticApp.Pages
             _erogatoWatcher.EnableRaisingEvents = false;
             _nonerogatoWatcher.EnableRaisingEvents = false;
             _erogazioneWatcher.EnableRaisingEvents = false;
+            _saldatoWatcher = null;
+            _pagatoWatcher = null;
+            _erogatoWatcher = null;
+            _nonerogatoWatcher = null;
+            _erogazioneWatcher = null;
         }
     }
 }

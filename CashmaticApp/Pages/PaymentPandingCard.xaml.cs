@@ -56,7 +56,6 @@ namespace CashmaticApp.Pages
             Debug.Log("CashmaticApp", "Button cancel click");
             _isTransactionComplete = false;
             Global.terminalCommands.onCancel();
-
             TerminalListenersClear();
             System.Windows.Application.Current.MainWindow.Content = new PayingProblemCard(_ob);
           
@@ -87,6 +86,7 @@ namespace CashmaticApp.Pages
             Global.cardholderReceipt = EventArgs.TransactionResponse.PrintData.CardholderReceipt;
             Helper.SaveReceiptsData(tranId, "MerchantReceipt", Global.merchantReceipt);
             Helper.SaveReceiptsData(tranId, "CardholderReceipt", Global.cardholderReceipt);
+            TerminalListenersClear();
             System.Windows.Application.Current.MainWindow.Content = new ThankYouCard(_ob);
            
         }
@@ -111,9 +111,7 @@ namespace CashmaticApp.Pages
                     if (_cardReaderStatus == SIX.TimApi.Constants.CardReaderStatus.CardReaderEmpty &&
                         _transactionStatus == SIX.TimApi.Constants.TransactionStatus.Idle)
                     {
-                        Global.terminalCommands.TransactionError -= terminal_transactionError;
-                        Global.terminalCommands.StatusChanged -= terminal_statusChanged;
-                        Global.terminalCommands.TransactionCompleted -= terminal_transactionCompleted;
+                        TerminalListenersClear();
                         System.Windows.Application.Current.MainWindow.Content = new TicketScanPage();
                     }
                 }
@@ -124,6 +122,10 @@ namespace CashmaticApp.Pages
             Global.terminalCommands.TransactionError -= terminal_transactionError;
             Global.terminalCommands.StatusChanged -= terminal_statusChanged;
             Global.terminalCommands.TransactionCompleted -= terminal_transactionCompleted;
+            Global.terminalCommands.ActivateCompleted -= terminal_activateCompleted;
+            Global.terminalCommands.DeactivateCompleted -= terminal_deactivateCompleted;
+
+
         }
     }
 }

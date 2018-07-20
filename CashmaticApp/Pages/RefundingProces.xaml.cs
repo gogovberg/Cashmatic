@@ -64,6 +64,7 @@ namespace CashmaticApp.Pages
             FileInfo file = new FileInfo(e.FullPath);
             try
             {
+                _fileWatcher.EnableRaisingEvents = false;
                 Application.Current.Dispatcher.BeginInvoke(
                      DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(_ob)));
             }
@@ -86,6 +87,7 @@ namespace CashmaticApp.Pages
                 if (erogato==Global.pagato)
                 {
                     file.Delete();
+                    _fileWatcher.EnableRaisingEvents = false;
                     Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new PaymentSummaryPage(_ob)));
                 }
