@@ -47,7 +47,7 @@ namespace CashmaticApp.Pages
         }
         private void RedirectToTicketScan(object source, ElapsedEventArgs e)
         {
-
+            _thankyouPrint.Enabled = false;
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
 
