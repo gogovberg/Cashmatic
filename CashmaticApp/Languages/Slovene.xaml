@@ -12,6 +12,7 @@
     <system:String x:Key="languageCz">Czech</system:String>
     <system:String x:Key="languageSk">Slovak</system:String>
     <system:String x:Key="paymentSummary">Povzetek plačila</system:String>
+    <system:String x:Key="paymentSummaryBack">Nazaj</system:String>
     <system:String x:Key="checkInDate">Prijava</system:String>
     <system:String x:Key="checkOutDate">Odjava</system:String>
     <system:String x:Key="basePrice">Osnovna cene</system:String>

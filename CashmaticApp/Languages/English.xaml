@@ -12,6 +12,7 @@
     <system:String x:Key="languageCz">Czech</system:String>
     <system:String x:Key="languageSk">Slovak</system:String>
     <system:String x:Key="paymentSummary">Payment Summary</system:String>
+    <system:String x:Key="paymentSummaryBack">Back</system:String>
     <system:String x:Key="checkInDate">Check-in</system:String>
     <system:String x:Key="checkOutDate">Check-out</system:String>
     <system:String x:Key="basePrice">Base price</system:String>

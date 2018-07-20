@@ -38,7 +38,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
-            <Button x:Name="btnBack" Margin="10" Width="108"   Content="Back" FontSize="24" Background="#FFFAFAFA"  Foreground="#FF36669C"  Click="btnBack_Click" >
+            <Button x:Name="btnBack" Margin="10" Width="108"   Content="{DynamicResource paymentSummaryBack}" FontSize="24" Background="#FFFAFAFA"  Foreground="#FF36669C"  Click="btnBack_Click" >
                 <Button.BitmapEffect>
                     <DropShadowBitmapEffect ShadowDepth="1" Direction="315" />
                 </Button.BitmapEffect>
