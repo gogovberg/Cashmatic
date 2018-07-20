@@ -99,7 +99,7 @@ namespace CashmaticApp.Pages
                 saldato = Global.subtotale - saldato;
 
                 int signChanger = saldato < 0 ? -1:1;
-                if(saldato<=0)
+                if(saldato <= 0)
                 {
                     Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() => tblPrice.Foreground = green));
@@ -108,7 +108,7 @@ namespace CashmaticApp.Pages
                 Application.Current.Dispatcher.BeginInvoke( 
                 DispatcherPriority.Background, new Action(() => tblPrice.Text = String.Format("{0:0.00}€", (saldato* signChanger) / (double)100)));
 
-                if(signChanger<0)
+                if(signChanger < 0)
                 {
                     Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() =>  tblRemaining.Text = (string)FindResource("titleRemainReturn")));
@@ -142,6 +142,7 @@ namespace CashmaticApp.Pages
                 if (pagato == Global.subtotale)
                 {
                     file.Delete();
+                    StopListeners();
                     Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash(_ob)));
                 }
@@ -233,6 +234,7 @@ namespace CashmaticApp.Pages
                 if (pagato == Global.subtotale)
                 {
                     file.Delete();
+                    StopListeners();
                     Application.Current.Dispatcher.BeginInvoke(
                     DispatcherPriority.Background, new Action(() => Application.Current.MainWindow.Content = new ThankYouCash(_ob)));
                 }

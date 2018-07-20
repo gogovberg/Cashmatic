@@ -29,6 +29,7 @@ namespace CashmaticApp.Pages
             tbBarCode.Focus();
             Keyboard.Focus(tbBarCode);
             _barCode = "";
+            Global.request_bill_id = "";
 
             ChangeLanguageDictionary(_language);
 

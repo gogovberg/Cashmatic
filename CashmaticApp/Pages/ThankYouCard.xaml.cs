@@ -29,7 +29,6 @@ namespace CashmaticApp.Pages
         private object _thankyouObject = new object();
         private double _thankyouTimer;
 
-
         public ThankYouCard(RootObject ob)
         {
             Debug.Log("CashmaticApp", "Initializing thank you card");
@@ -38,16 +37,17 @@ namespace CashmaticApp.Pages
             TransactionLogic.RequestBill(ob);
             TransactionLogic.ExternalCheckout(ob);
 
-            //_thankyouTimer =  Global.thankYouTimer;
+            _thankyouTimer = Global.thankYouTimer;
 
-            //_thankyouPrint = new System.Timers.Timer();
-            //_thankyouPrint.Elapsed += new ElapsedEventHandler(RedirectToTicketScan);
-            //_thankyouPrint.Interval = _thankyouTimer; // 1000 ms => 1 second
-            //_thankyouPrint.Enabled = true;
+            _thankyouPrint = new System.Timers.Timer();
+            _thankyouPrint.Elapsed += new ElapsedEventHandler(RedirectToTicketScan);
+            _thankyouPrint.Interval = _thankyouTimer; // 1000 ms => 1 second
+            _thankyouPrint.Enabled = true;
+
         }
         private void RedirectToTicketScan(object source, ElapsedEventArgs e)
         {
-            _thankyouPrint.Enabled = false;
+
             Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
                         new Action(() => Application.Current.MainWindow.Content = new TicketScanPage()));
 

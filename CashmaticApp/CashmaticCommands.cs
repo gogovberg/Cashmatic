@@ -349,7 +349,6 @@ namespace CashmaticApp
         /// <returns></returns>
         public static bool TotalCoinWithdrowal()
         {
-            bool flag = false;
 
             try
             {
