@@ -49,6 +49,7 @@
     <system:String x:Key="titleForgetCard">And don't forget your Card and Receipt</system:String>
     <system:String x:Key="titleProblem">There Was a Payment Problem</system:String>
     <system:String x:Key="subtitleProblem">With Your Bank Card</system:String>
+    <system:String x:Key="titleAmounToPayCard">Amount to pay:</system:String>
     <system:String x:Key="titleProblemCash">There Was a Payment Problem</system:String>
     <system:String x:Key="subtitleProblemCash">With Cash Machine</system:String>
     <system:String x:Key="btnCancel">Cancel</system:String>

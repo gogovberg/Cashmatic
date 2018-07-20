@@ -36,6 +36,7 @@ namespace CashmaticApp.Pages
             imgScanLogo.Source = new Uri(@"Images/QRscan.mp4", UriKind.Relative);
             imgScanLogo.Play();
 
+      
         }
         private void CheckSyntaxAndReport()
         {
@@ -154,6 +155,14 @@ namespace CashmaticApp.Pages
 
             _currentApp.Resources.MergedDictionaries.Add(dict);
 
+
+
+            en.LanguageBox = _currentApp.Resources["languageEn"].ToString();
+            de.LanguageBox = _currentApp.Resources["languageDe"].ToString();
+            si.LanguageBox = _currentApp.Resources["languageSi"].ToString();
+            hu.LanguageBox = _currentApp.Resources["languageHu"].ToString();
+            cz.LanguageBox = _currentApp.Resources["languageDe"].ToString();
+            sk.LanguageBox = _currentApp.Resources["languageSk"].ToString();
         }
 
         private void Control_Click(object sender, EventArgs e)

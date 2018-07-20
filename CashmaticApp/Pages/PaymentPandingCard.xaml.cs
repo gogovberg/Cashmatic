@@ -16,6 +16,7 @@ namespace CashmaticApp.Pages
         private SIX.TimApi.Constants.TransactionStatus _transactionStatus;
         private SIX.TimApi.Constants.CardReaderStatus _cardReaderStatus;
         private SIX.TimApi.Constants.ConnectionStatus _connectionStatus;
+        private App _currentApp = ((App)System.Windows.Application.Current);
 
         private bool _isTransactionComplete;
         private bool _isTransactionError;
@@ -25,7 +26,7 @@ namespace CashmaticApp.Pages
             Debug.Log("CashmaticApp", "Initializing payment paning card");
             InitializeComponent();
             _ob = ob;
-            tblReminder.Text = string.Format("Amount to pay {0}", string.Format("{0:0.00}€", _ob.panda.total_price));
+            tblReminder.Text = string.Format("{0} {1}", _currentApp.Resources["titleAmounToPayCard"].ToString(), string.Format("{0:0.00}€", _ob.panda.total_price));
 
 
             if (Global.terminalCommands==null)
