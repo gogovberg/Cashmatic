@@ -20,7 +20,7 @@ namespace CashmaticApp
             ob.isError = true;
             try
             {
-                Debug.Log("CashmaticApp", string.Format("Bill request for {0}", hash));
+                Debug.Log("CashmaticApp", string.Format("RequestParkingDetails {0}", hash));
                 var restClient = new RestClient(Global.pandaParkenExternalGetBillDataUri);
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("content-type", "multipart/form-data;");
@@ -38,8 +38,6 @@ namespace CashmaticApp
                 {
                     Global.request_bill_id = hash;
                     ob.isError = false;
-                    PaymentSummary(ob);
-
                 }
                 Helper.ShowResponseMessage(ob.status, ob.message);
                 Debug.Log("CashmaticApp", string.Format("STATUS: {0} MESSAGE:{1}", ob.status, ob.message));
@@ -55,7 +53,7 @@ namespace CashmaticApp
         {
             try
             {
-                Debug.Log("CashmaticApp", string.Format("Bill request for {0}", Global.request_bill_id));
+                Debug.Log("CashmaticApp", string.Format("RequestBill for {0}", Global.request_bill_id));
 
                 string jsonOrderdata = SimpleJson.SerializeObject(globalData.ready2order);
                 var restClient = new RestClient(Global.ready2orderUri);
@@ -119,7 +117,7 @@ namespace CashmaticApp
         {
             try
             {
-                Debug.Log("CashmaticApp", string.Format("External checkout for {0}", Global.request_bill_id));
+                Debug.Log("CashmaticApp", string.Format("ExternalCheckout for {0}", Global.request_bill_id));
 
                 var restClient = new RestClient(Global.pandaParkenExternalCheckoutUri);
                 var request = new RestRequest(Method.GET);
@@ -151,23 +149,6 @@ namespace CashmaticApp
           
         }
 
-        private static void PaymentSummary(RootObject ob)
-        {
-            try
-            {
-                if(ob!=null)
-                {
-                    ob.ready2order.total = 0;
-                    foreach (Item it in ob.ready2order.items)
-                    {
-                        ob.ready2order.total = it.item_price * it.item_quantity;
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Debug.Log("CashmaticApp", ex.ToString());
-            }
-        }
+        
     }
 }

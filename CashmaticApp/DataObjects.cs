@@ -98,7 +98,7 @@ namespace CashmaticApp
         public string pdfFormat { get; set; }
         public int invoice_inPrinterQueue { get; set; }
         public string invoice_roundToSmallestCurrencyUnit { get; set; }
-        public string invoice_externalReferenceNumber { get; set; }
+        public int invoice_externalReferenceNumber { get; set; }
         public string invoice_showRecipient { get; set; }
         public string invoice_text { get; set; }
         public string invoice_priceBase { get; set; }
@@ -108,7 +108,7 @@ namespace CashmaticApp
         public string customer_id { get; set; }
         public List<Item> items { get; set; }
         public Address address { get; set; }
-        public double total { set; get; }
+      
        
     }
     public class RootObject
