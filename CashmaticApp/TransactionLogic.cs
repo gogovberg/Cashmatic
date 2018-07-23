@@ -95,9 +95,10 @@ namespace CashmaticApp
                     string pathToFile = string.Format("{0}\\{1}.pdf", pathTodirectory, Global.request_bill_id);
                     using (var webClient = new WebClient())
                     {
+                       
                         webClient.DownloadFile(ob.invoice_pdf, pathToFile);
                     }
-
+                    Debug.Log("CashmaticApp", "File donwloaded.");
                     string newFileName = PrinterCommands.PrintPDFResize(pathToFile);
                     PrinterCommands.PrintPDF(Global.printer, "", newFileName, 1);
 
