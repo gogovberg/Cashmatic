@@ -119,6 +119,7 @@ namespace CashmaticApp
         public Ready2order ready2order { get; set; }
         public string invoice_pdf { get; set; }
         public int invoice_id { get; set; }
+        public double invoice_total { get; set; }
         public string invoice_numberFull { get; set; }
         public bool isError { set; get; }
     }

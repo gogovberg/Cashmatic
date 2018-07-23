@@ -89,6 +89,7 @@ namespace CashmaticApp
                     globalData.invoice_id = ob.invoice_id;
                     globalData.invoice_numberFull = ob.invoice_numberFull;
                     globalData.invoice_pdf = ob.invoice_pdf;
+                    globalData.invoice_total = ob.invoice_total;
 
                     Debug.Log("CashmaticApp", "Request succsessfull.");
                     string pathToFile = string.Format("{0}\\{1}.pdf", pathTodirectory, Global.request_bill_id);
@@ -128,6 +129,7 @@ namespace CashmaticApp
                 request.AddParameter("paymentMethod", ob.ready2order.paymentMethod_id);
                 request.AddParameter("invoiceId", ob.invoice_id);
                 request.AddParameter("invoiceNumberFull", ob.invoice_numberFull);
+                request.AddParameter("invoice_total", ob.invoice_total);
                 request.AddParameter("merchantReceipt", Global.merchantReceipt);
 
                 string requestLog = string.Format("authorization:{0} \nbid:{1} \npaymentMethod:{2} \ninvoiceId:{3} \ninvoiceNumberFull:{4} \nmerchantReceipt:{5}",

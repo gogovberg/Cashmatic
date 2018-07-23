@@ -199,7 +199,7 @@ namespace CashmaticApp.Pages
 
         private void OnErogazioneChange(object source, FileSystemEventArgs e)
         {
-            Debug.Log("CashmaticApp", "OnCreatedNonerogato");
+            Debug.Log("CashmaticApp", "OnErogazioneChange");
             FileInfo file = new FileInfo(e.FullPath);
             while (Helper.isFileLocked(file))
             {

@@ -12,6 +12,7 @@
     <system:String x:Key="languageCz">Czech</system:String>
     <system:String x:Key="languageSk">Slovak</system:String>
     <system:String x:Key="paymentSummary">Povzetek plačila</system:String>
+    <system:String x:Key="paymentSummaryBack">Nazaj</system:String>
     <system:String x:Key="checkInDate">Prijava</system:String>
     <system:String x:Key="checkOutDate">Odjava</system:String>
     <system:String x:Key="basePrice">Osnovna cene</system:String>
@@ -49,6 +50,7 @@
     <system:String x:Key="titleForgetCard">In ne pozabite na račun!</system:String>
     <system:String x:Key="titleProblem">Prišlo je do napake pri transakciji</system:String>
     <system:String x:Key="subtitleProblem">z vašo plačilno kartico</system:String>
+    <system:String x:Key="titleAmounToPayCard">Znesek, ki ga je treba plačati:</system:String>
     <system:String x:Key="btnCancel">Prekliči</system:String>
     <system:String x:Key="statusOk">OK</system:String>
     <system:String x:Key="statusError">ERROR</system:String>

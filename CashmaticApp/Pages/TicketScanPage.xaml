@@ -23,8 +23,12 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Margin="10" FontSize="15" x:Name="tblTitle" Text="{DynamicResource titleWelcome}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#FF356499"></TextBlock>
-        <TextBlock Margin="10" FontSize="40" x:Name="tblSubtitle" Text="{DynamicResource titleScan}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FF356499" FontWeight="Bold"></TextBlock>
+        <Viewbox Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"  Stretch="Uniform">
+            <TextBlock Margin="10" FontSize="15" x:Name="tblTitle"  TextWrapping="Wrap" Text="{DynamicResource titleWelcome}"   Foreground="#FF356499"></TextBlock>
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Center"  Stretch="Uniform">
+            <TextBlock Margin="10"  FontSize="40"  x:Name="tblSubtitle"  Text="{DynamicResource titleScan}"   Foreground="#FF356499" FontWeight="Bold"></TextBlock>
+        </Viewbox>
         <MediaElement  x:Name="imgScanLogo" LoadedBehavior="Manual" UnloadedBehavior="Manual" Grid.Column="1" Grid.Row="2" Grid.RowSpan="4" MediaEnded="imgScanLogo_MediaEnded" ></MediaElement>
         
         <controls:CheckBoxImage Margin="60,15" x:Name="en"  FlagSource="/Images/gb.png"  LanguageBox="English"  Grid.Column="0" Grid.Row="2" Control_Click="Control_Click"  Style="{StaticResource CheckBoxImageStyle}"></controls:CheckBoxImage>
